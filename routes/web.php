@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventtController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,7 @@ Route::get('/contact', function () {
     return view('contact');
 });
 // events page
-Route::get('/events', function () {
-    return view('events');
-});
+Route::get('/events', [EventtController::class, 'showAll']);
 // single event page
 Route::get('/single-event/{id}', ['Eve>>>>']);
 
@@ -45,9 +44,9 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 });
-Route::get('/dashboard/events', function () {
-    return view('dashboard.events');
-});
+// Route::get('/dashboard/events', function () {
+//     return view('dashboard.events');
+// });
 Route::get('/test', function () {
     return view('test');
 });
@@ -61,6 +60,7 @@ Route::get('/callback', [UserController::class, 'handleGoogleCallback']);
 //github
 Route::get('/sign_in/github', [UserController::class, 'github']);
 Route::get('/sign_in/github/redirect', [UserController::class, 'githubRedirect']);
+Route::resource('/dashboard/events', EventtController::class);
 
 
 

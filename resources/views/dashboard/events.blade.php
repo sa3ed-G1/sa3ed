@@ -28,7 +28,8 @@
                                         <div class="col-12 grid-margin stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <form action="" enctype="multipart/form-data" class="forms-sample">
+                                                    <form action="/dashboard/events" method="POST"
+                                                        enctype="multipart/form-data" class="forms-sample">
                                                         @csrf
                                                         <div class="form-group">
                                                             <label for="exampleInputName1">Title</label>
@@ -37,8 +38,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail3">Description</label>
-                                                            <input type="text" name="description" class="form-control"
-                                                                id="exampleInputEmail3" placeholder="Description">
+                                                            <textarea name="description" class="form-control" id="exampleInputEmail3" placeholder="Description"></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword4">Location</label>
@@ -59,6 +59,7 @@
                                                             <label for="exampleSelectGender">City</label>
                                                             <select class="form-control" name="city"
                                                                 id="exampleSelectGender">
+                                                                <option selected disabled>Select a city</option>
                                                                 <option value="Amman">Amman</option>
                                                                 <option value="Zarqa">Zarqa</option>
                                                                 <option value="Irbid">Irbid</option>
@@ -79,50 +80,22 @@
                                                         <div class="mb-3">
                                                             <label for="formFileMultiple"
                                                                 class="form-label">Thumbnail</label>
-                                                            <input style="" class="form-control btn btn-primary"
-                                                                type="file" id="formFileMultiple" multiple="">
+                                                            <input name="thumbnail" style=""
+                                                                class="form-control btn btn-primary" type="file"
+                                                                id="formFileMultiple" multiple="">
                                                         </div>
                                                         <div class="mb-4">
                                                             <label for="formFileMultiple"
                                                                 class="form-label">Banner</label>
-                                                            <input style="" class="form-control btn btn-primary"
-                                                                type="file" id="formFileMultiple" multiple="">
+                                                            <input name="banner" style=""
+                                                                class="form-control btn btn-primary" type="file"
+                                                                id="formFileMultiple" multiple="">
                                                         </div>
-                                                        {{-- <div class="form-group position-relative ">
-                                                            <label>File upload</label>
-                                                            <div class="position-absolute bg-primary w-100 h-75 "></div>
-                                                            <input class="file-upload-browse btn btn-primary w-100"
-                                                                type="file" name="" id="">
-                                                           <input type="file" name="img[]"
-                                                                class="file-upload-default">
-                                                            <div class="input-group col-xs-12">
-                                                                <input type="text" class="form-control file-upload-info"
-                                                                    disabled="" placeholder="Upload Image">
-                                                                <span class="input-group-append">
-                                                                    <button class="file-upload-browse btn btn-primary"
-                                                                        type="button">Upload</button>
-                                                                </span>
-                                                            </div>
-                                                        </div> --}}
-                                                        {{-- sssssssssss --}}
-                                                        {{-- <div class="form-group">
-                                                            <label>Banner</label>
-                                                            <input type="file" name="banner"
-                                                                class="file-upload-default">
-                                                            <div class="input-group col-xs-12">
-                                                                <input type="file"
-                                                                    class="form-control file-upload-info" disabled
-                                                                    placeholder="Upload Image">
-                                                                <span class="input-group-append">
-                                                                    <button class="file-upload-browse btn btn-primary"
-                                                                        type="button">Upload</button>
-                                                                </span>
-                                                            </div>
-                                                        </div> --}}
 
                                                         <!---- for user id ---->
-                                                        <input type="hidden" name="user_id" value=""
-                                                            class="form-control" id="exampleInputCity1">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ auth()->user()->id }}" class="form-control"
+                                                            id="exampleInputCity1">
 
                                                         <button type="submit"
                                                             class="btn btn-primary mr-2">Submit</button>
@@ -165,10 +138,12 @@
                             <tbody>
                                 <tr>
                                     <td class="py-1">
-                                        <img src="/images/faces/face1.jpg" alt="image" />
+                                        <img src="data:image/jpg;charset=utf8;base64,
+                                        {{ $events[0]['thumbnail'] }}"
+                                            alt="image" />
                                     </td>
                                     <td>
-                                        Herman Beck
+                                        $events[0]
                                     </td>
                                     <td>
                                         JD420.00
