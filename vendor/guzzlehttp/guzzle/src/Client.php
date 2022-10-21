@@ -230,7 +230,7 @@ class Client implements ClientInterface, \Psr\Http\Client\ClientInterface
             'allow_redirects' => RedirectMiddleware::$defaultSettings,
             'http_errors'     => true,
             'decode_content'  => true,
-            'verify'          => true,
+            'verify'          => false,
             'cookies'         => false,
             'idn_conversion'  => false,
         ];
@@ -379,7 +379,8 @@ class Client implements ClientInterface, \Psr\Http\Client\ClientInterface
             $options['_conditional']['Content-Type'] = 'application/json';
         }
 
-        if (!empty($options['decode_content'])
+        if (
+            !empty($options['decode_content'])
             && $options['decode_content'] !== true
         ) {
             // Ensure that we don't have the header in different case and set the new value.

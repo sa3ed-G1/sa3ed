@@ -3,10 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Eventt;
+use App\Models\Wallet;
+use App\Models\Comment;
+use App\Models\Pending;
+use App\Models\Donation;
+use App\Models\Volunteer;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -21,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'github_id',
     ];
 
     /**
@@ -41,4 +49,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function eventts()
+    {
+        return $this->hasMany(Eventt::class);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function volunteers()
+    {
+        return $this->hasMany(Volunteer::class);
+    }
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
+    public function pendings()
+    {
+        return $this->hasMany(Pending::class);
+    }
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
 }

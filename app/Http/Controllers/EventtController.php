@@ -14,8 +14,10 @@ class EventtController extends Controller
      */
     public function index()
     {
-        //
+        $events = Eventt::all();
+        return view('dashboard.events', ['events' => $events]);
     }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +37,30 @@ class EventtController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $formFields = $request->validate([
+            "title" => "required",
+            "description" => "required",
+            "location" => "required",
+            "tags" => "required",
+            "date" => "required",
+            "city" => "required",
+            "duration" => "required",
+            "capacity" => "required",
+            "thumbnail" => "required",
+            "banner" => "required",
+            "user_id" => "required",
+        ]);
+
+        $formFields['thumbnail'] = base64_encode(file_get_contents($request->file('thumbnail')));
+        $formFields['banner'] = base64_encode(file_get_contents($request->file('banner')));
+
+        // dd($request->file('imageLink'));
+
+
+        Eventt::create($formFields);
+        return redirect("/dashboard/events");
+        // dd($request->all());
     }
 
     /**
@@ -82,4 +107,10 @@ class EventtController extends Controller
     {
         //
     }
+    public function showAll()
+    {
+        $events = Eventt::all();
+        return view('/events', ['events' => $events]);
+    }
+    
 }

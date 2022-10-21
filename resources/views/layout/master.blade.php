@@ -79,7 +79,7 @@
         <nav id="navbar" class="navbar main-nav">
             <div class="container">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="index.html">
+                    <a class="navbar-item" href="/">
                         <img src="images/logo.png" alt="logo">
                     </a>
                     <button role="button" class="navbar-burger burger" data-hidden="true" data-target="navigation">
@@ -92,54 +92,39 @@
                 <div class="navbar-menu mr-0" id="navigation">
                     <ul class="navbar-end">
                         <li class="navbar-item">
-                            <a class="navbar-link" href="index.html">Home</a>
+                            <a class="navbar-link" href="/">Home</a>
                         </li>
 
                         <li class="navbar-item">
-                            <a class="navbar-link" href="about.html">About</a>
+                            <a class="navbar-link" href="/about">About</a>
                         </li>
-
-                        <li class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">Causes<span class="ml-1">+</span></a>
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item" href="service.html">Causes</a>
-                                <a class="navbar-item" href="cause-single.html">Cause details</a>
-                            </div>
-                        </li>
-
-                        <li class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">Get Involved<span class="ml-1">+</span></a>
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item" href="donation.html">Donation</a>
-                                <a class="navbar-item" href="volunteer.html">Be a Volunteer</a>
-                            </div>
-                        </li>
-
-                        <li class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">Pages<span class="ml-1">+</span></a>
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item" href="event.html">Event</a>
-                                <a class="navbar-item" href="event-single.html">Event Single</a>
-                                <a class="navbar-item" href="confirmation.html">Confirmation</a>
-                                <a class="navbar-item" href="404.html">404</a>
-                            </div>
-                        </li>
-
-                        <li class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">Blog +</a>
-                            <div class="navbar-dropdown align-right">
-                                <a class="navbar-item" href="blog-grid.html">Blog Grid</a>
-                                <a class="navbar-item" href="blog-sidebar.html">Blog with Sidebar</a>
-                                <a class="navbar-item" href="blog-single.html">Blog Single</a>
-                            </div>
+                        <li class="navbar-item">
+                            <a class="navbar-link" href="/events">Events</a>
                         </li>
 
                         <li class="navbar-item">
-                            <a class="navbar-link" href="contact.html">Contact</a>
+                            <a class="navbar-link" href="/contact">Contact</a>
                         </li>
-                        <li class="navbar-item">
-                            <a class="navbar-link" href="contact.html">Register</a>
-                        </li>
+                        @auth
+                            <li class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link">User Name<span class="ml-1 icon"><i
+                                            class="fas fa-home"></i></span></a>
+                                <div class="navbar-dropdown">
+                                    <a class="navbar-item" href="/profile">Profile</a>
+                                    <a class="navbar-item" href="/logout">Logout</a>
+                                </div>
+                            </li>
+                            {{-- <li class="navbar-item">
+                                <a class="navbar-link" href="/logout">Profile</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a class="navbar-link" href="/logout">Logout</a>
+                            </li> --}}
+                        @else
+                            <li class="navbar-item">
+                                <a class="navbar-link" href="/register">Register</a>
+                            </li>
+                        @endauth
 
                     </ul>
                 </div>
@@ -147,7 +132,7 @@
         </nav>
     </header>
     <main>
-      
+
 
 
 
@@ -162,18 +147,18 @@
                 <div class="column is-4-desktop is-6-tablet">
                     <div class="footer-widget widget">
                         <h4 class="is-capitalize mb-4 text-white">Company</h4>
-                        <p>Flat 20, Reynolds Neck, North <br>Helenaville, FV77</p>
+                        <p>Flat 20, alabdalli <br>Amman-Jordan</p>
 
                         <ul class="list-unstyled footer-menu mt-4">
-                            <li><a href="#"><i class="icofont-phone"></i>+2(305) 587-3407</a></li>
-                            <li><a href="#"><i class="icofont-email"></i>info@example.com</a></li>
+                            <li><a href="#"><i class="icofont-phone"></i>+(969) 587-3407</a></li>
+                            <li><a href="#"><i class="icofont-email"></i>Sa3ed@gmail.com</a></li>
                         </ul>
                         <ul class="list-inline footer-socials">
-                            <li class="list-inline-item"><a href="https://www.facebook.com/themefisher"><i
+                            <li class="list-inline-item"><a href="https://www.facebook.com"><i
                                         class="icofont-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="https://twitter.com/themefisher"><i
+                            <li class="list-inline-item"><a href="https://twitter.com"><i
                                         class="icofont-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="https://www.pinterest.com/themefisher/"><i
+                            <li class="list-inline-item"><a href="https://www.linkedin.com"><i
                                         class="icofont-linkedin"></i></a></li>
                         </ul>
                     </div>
@@ -184,16 +169,16 @@
                         <h4 class="is-capitalize mb-4 text-white">Quick Links</h4>
 
                         <ul class="list-unstyled footer-menu lh-35">
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="about">About</a></li>
+                            <li><a href="services">Services</a></li>
+                            <li><a href="About">Team</a></li>
+                            <li><a href="Contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="column is-3-desktop is-6-tablet">
-                    <div class="footer-widget widget">
+                    {{-- <div class="footer-widget widget">
                         <h4 class="is-capitalize mb-4 text-white">Subscribe Us</h4>
                         <p class="mb-4">Subscribe to get latest news article and resources </p>
 
@@ -201,31 +186,31 @@
                             <input type="text" class="input mb-4 text-white" placeholder="Subscribe Now ...">
                             <a href="#" class="btn btn-main btn-small is-rounded">subscribe</a>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="widget footer-widget">
-                        <h4 class="is-capitalize mb-4 text-white">Gallery</h4>
+                        <h4 class="is-capitalize mb-4 text-white">Partners</h4>
 
                         <div class="gallery-wrap">
                             <div class="gallery-img">
-                                <img src="images/blog/gallery-1.jpg" alt="" class="">
+                                <img src="images/clients/client1.png" alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/blog/gallery-2.jpg" alt="" class="">
+                                <img src="images/clients/client2.png" alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/blog/gallery-3.jpg" alt="" class="">
+                                <img src="images/clients/client4.png" alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/blog/gallery-6.jpg" alt="" class="">
+                                <img src="images/clients/client4.png"alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/blog/gallery-5.jpg" alt="" class="">
+                                <img src="images/clients/client5.png"alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/blog/gallery-2.jpg" alt="" class="">
+                                <img src="images/clients/client6.png" alt="" class="">
                             </div>
                         </div>
                     </div>
@@ -236,8 +221,8 @@
                 <div class="columns is-justify-content-center">
                     <div class="column is-12">
                         <div class="copyright has-text-centered">
-                            <small>&copy; Copyright Reserved to WishFund by <a href="https://themefisher.com/"
-                                    target="_blank" class="text-color">Themefisher</a></small>
+                            <small>&copy; Copyright Reserved to Sa3ed by <a href="https://themefisher.com/"
+                                    target="_blank" class="text-color">Sa3ed team</a></small>
                         </div>
                     </div>
                 </div>
