@@ -20,8 +20,9 @@
                 @foreach ($events as $event)
                     <div class="column is-4-desktop is-6-tablet">
                         <div class="card event-item is-shadowless">
-                            <img src="https://csg.com.tr/assets/img/homepage/slider/hero-slider_3.jpg " class="w-100"
-                                alt="...">
+                            <img src="data:image/jpg;charset=utf8;base64,
+                            {{ $event['thumbnail'] }}"
+                                alt="image" class="w-100" alt="...">
                             {{-- {{$event->thumbnail}} --}}
                             <div class="card-body">
 

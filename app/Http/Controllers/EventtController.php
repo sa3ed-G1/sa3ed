@@ -17,11 +17,7 @@ class EventtController extends Controller
         $events = Eventt::all();
         return view('dashboard.events', ['events' => $events]);
     }
-    public function showAll()
-    {
-        $events = Eventt::all();
-        return view('/events', ['events' => $events]);
-    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -111,4 +107,10 @@ class EventtController extends Controller
     {
         //
     }
+    public function showAll()
+    {
+        $events = Eventt::all();
+        return view('/events', ['events' => $events]);
+    }
+    
 }

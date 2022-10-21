@@ -60,8 +60,8 @@ Route::get('/callback', [UserController::class, 'handleGoogleCallback']);
 //github
 Route::get('/sign_in/github', [UserController::class, 'github']);
 Route::get('/sign_in/github/redirect', [UserController::class, 'githubRedirect']);
-Route::resource('/dashboard/events', EventtController::class);
 
+Route::resource('/dashboard/events', EventtController::class);
 
 
 //Route for the adminDashboard with gate only for the role admin
