@@ -1,15 +1,16 @@
 @extends('dashboard.master')
 @section('content')
+    @inject('Ucontur', 'App\Http\Controllers\UserAdminController')
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="row">
                 <div class="col-md-12 grid-margin">
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                            <h3 class="font-weight-bold">Welcome Aamir</h3>
+                            <h3 class="font-weight-bold">Welcome {{ auth()->user()->name }}</h3>
                             <h6 class="font-weight-normal mb-0">All systems are running smoothly!</h6>
                         </div>
-                        <div class="col-12 col-xl-4">
+                        {{-- <div class="col-12 col-xl-4">
                             <div class="justify-content-end d-flex">
                                 <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
@@ -21,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -50,7 +51,7 @@
                             <div class="card card-tale">
                                 <div class="card-body">
                                     <p class="mb-4">Total Events</p>
-                                    <p class="fs-30 mb-2">56</p>
+                                    <p class="fs-30 mb-2">{{ $events->count() }}</p>
                                     <p>All over Jordan</p>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                             <div class="card card-dark-blue">
                                 <div class="card-body">
                                     <p class="mb-4">Total Donations</p>
-                                    <p class="fs-30 mb-2">1684.54</p>
+                                    <p class="fs-30 mb-2">{{ $donations->sum('amount') }}</p>
                                     <p>JOD</p>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                             <div class="card card-light-blue">
                                 <div class="card-body">
                                     <p class="mb-4">We have</p>
-                                    <p class="fs-30 mb-2">300</p>
+                                    <p class="fs-30 mb-2">{{ $users->where('is_vlounteer', 1)->count() }}</p>
                                     <p>Volunteer</p>
                                 </div>
                             </div>
@@ -79,7 +80,7 @@
                             <div class="card card-light-danger">
                                 <div class="card-body">
                                     <p class="mb-4">We have</p>
-                                    <p class="fs-30 mb-2">3056</p>
+                                    <p class="fs-30 mb-2">{{ $users->count() }}</p>
                                     <p>User</p>
                                 </div>
                             </div>
@@ -139,128 +140,89 @@
                                 data-ride="carousel">
                                 <div class="carousel-inner">
                                     {{-- carousel div start ** just dont foget the {{{active}}}  class --}}
+                                    @php
+                                        $active = 'active';
+                                    @endphp
+                                    @foreach ($events as $event)
+                                        <div class="carousel-item {{ $active }} ">
+                                            <div class="row">
+                                                <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                                                    <div class="ml-xl-4 mt-3">
+                                                        <p class="card-title">{{ $event->title }}</p>
+                                                        <h3 class="font-weight-500 mt-xl-4 text-primary">We raised</h3>
+                                                        <h1 class="text-primary">{{ $event->donations->sum('amount') }}</h1>
 
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                            <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                                                <div class="ml-xl-4 mt-3">
-                                                    <p class="card-title">Event Name</p>
-                                                    <h3 class="font-weight-500 mt-xl-4 text-primary">We raised</h3>
-                                                    <h1 class="text-primary">$34040</h1>
-                                                    <p class="mb-2 mb-xl-0">The total number of sessions within the date
-                                                        range. It is the period time a user is actively engaged with your
-                                                        website, page or app, etc</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-xl-9">
-                                                <div class="row">
-                                                    <div class="col-md-6 border-right">
-                                                        <div class="table-responsive mb-3 mb-md-0 mt-3">
-                                                            <table class="table table-borderless report-table">
-                                                                <tr>
-                                                                    <td class="text-muted">Azzam</td>
-                                                                    <td class="w-100 px-0">
-                                                                        <div class="progress progress-md mx-4">
-                                                                            <div class="progress-bar bg-danger"
-                                                                                role="progressbar" style="width: 100%"
-                                                                                aria-valuenow="95" aria-valuemin="0"
-                                                                                aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <h5 class="font-weight-bold mb-0">689 JOD</h5>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-muted">Ibra</td>
-                                                                    <td class="w-100 px-0">
-                                                                        <div class="progress progress-md mx-4">
-                                                                            <div class="progress-bar bg-danger"
-                                                                                role="progressbar" style="width: 80%"
-                                                                                aria-valuenow="95" aria-valuemin="0"
-                                                                                aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <h5 class="font-weight-bold mb-0">583 JOD</h5>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-muted">malek</td>
-                                                                    <td class="w-100 px-0">
-                                                                        <div class="progress progress-md mx-4">
-                                                                            <div class="progress-bar bg-danger"
-                                                                                role="progressbar" style="width: 64%"
-                                                                                aria-valuenow="95" aria-valuemin="0"
-                                                                                aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <h5 class="font-weight-bold mb-0">498 JOD</h5>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-muted">abeer</td>
-                                                                    <td class="w-100 px-0">
-                                                                        <div class="progress progress-md mx-4">
-                                                                            <div class="progress-bar bg-danger"
-                                                                                role="progressbar" style="width: 48%"
-                                                                                aria-valuenow="95" aria-valuemin="0"
-                                                                                aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <h5 class="font-weight-bold mb-0">368 JOD</h5>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-muted">Raneem</td>
-                                                                    <td class="w-100 px-0">
-                                                                        <div class="progress progress-md mx-4">
-                                                                            <div class="progress-bar bg-danger"
-                                                                                role="progressbar" style="width: 33.3%"
-                                                                                aria-valuenow="95" aria-valuemin="0"
-                                                                                aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <h5 class="font-weight-bold mb-0">297 JOD</h5>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="text-muted">Anzoor</td>
-                                                                    <td class="w-100 px-0">
-                                                                        <div class="progress progress-md mx-4">
-                                                                            <div class="progress-bar bg-danger"
-                                                                                role="progressbar" style="width: 16.6%"
-                                                                                aria-valuenow="95" aria-valuemin="0"
-                                                                                aria-valuemax="100"></div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <h5 class="font-weight-bold mb-0">181 JOD</h5>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 mt-3">
-                                                        <img src="../admin/images/dashboard/people.svg" alt="people">
+                                                    <div class="ml-xl-4 mt-3">
+                                                        <h3 class="font-weight-500 mt-xl-1 text-primary">Volunteers Helped
+                                                        </h3>
+                                                        <h1 class="text-primary">{{ $event->Volunteers->count() }}
+                                                        </h1>
+                                                        <p class="mb-2 mb-xl-0"></p>
+                                                    </div>
+                                                    <div class="ml-xl-4 mt-3">
 
+                                                        <p class="mb-2 mb-xl-0"><i class="icon-map mr-2"></i>
+                                                            {{ $event->city . ' | ' . $event->location }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-xl-9">
+                                                    <div class="row">
+                                                        <div class="col-md-6 border-right">
+                                                            <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                                                <table class="table table-borderless report-table">
+                                                                    @php
+                                                                        $av = 100 / $event->donations->count();
+                                                                        $num = 100;
+                                                                    @endphp
+                                                                    @foreach ($event->donations->sortByDesc('amount')->take(6) as $donation)
+                                                                        <tr>
+                                                                            <td class="text-muted">
+                                                                                {{ $donation->user->name }}</td>
+                                                                            <td class="w-100 px-0">
+                                                                                <div class="progress progress-md mx-4">
+                                                                                    <div class="progress-bar bg-success"
+                                                                                        role="progressbar"
+                                                                                        style="width: {{ $num }}%"
+                                                                                        aria-valuenow="95" aria-valuemin="0"
+                                                                                        aria-valuemax="100"></div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h5 class="font-weight-bold mb-0">
+                                                                                    {{ $donation->amount }} JOD
+                                                                                </h5>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        @php
+                                                                            $num = $num - $av;
+                                                                        @endphp
+                                                                    @endforeach
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mt-3">
+                                                            <img style="text-align: center" width="400px" height="300px"
+                                                                src="data:image/jpg;charset=utf8;base64, {{ $event['thumbnail'] }}"
+                                                                alt="people">
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        @php
+                                            $active = '';
+                                        @endphp
+                                    @endforeach
                                     {{-- carousel div end ** just dont foget the {{{active}}}  class --}}
                                 </div>
-                                <a class="carousel-control-prev" href="#detailedReports" role="button"
-                                    data-slide="prev">
+                                <a class="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#detailedReports" role="button"
-                                    data-slide="next">
+                                <a class="carousel-control-next" href="#detailedReports" role="button" data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
@@ -374,5 +336,4 @@
         </footer>
         <!-- partial -->
     </div>
-    
 @endsection

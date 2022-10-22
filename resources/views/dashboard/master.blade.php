@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="../admin/css/vertical-layout-light/style.css" />
     <!-- endinject -->
     <link rel="shortcut icon" href="../admin/images/favicon.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
     @yield('style')
 </head>
 
@@ -28,9 +30,9 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="../admin/images/logo.svg"
+                <a class="navbar-brand brand-logo mr-5" href="/dashboard"><img src="../admin/images/logo.svg"
                         class="mr-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../admin/images/logo-mini.svg"
+                <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="../admin/images/logo-mini.svg"
                         alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -184,7 +186,7 @@
                         <div class="collapse" id="requests">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/dashboard/requests">
+                                    <a class="nav-link" href="/dashboard/pendings">
                                         Manage Requests
                                     </a>
                                 </li>
@@ -240,6 +242,7 @@
     <!-- Custom js for this page-->
     <script src="../admin/js/dashboard.js"></script>
     <script src="../admin/js/Chart.roundedBarCharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <!-- End custom js for this page-->
     @yield('script')
 </body>

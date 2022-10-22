@@ -21,6 +21,8 @@ class AuthorizationController extends Controller
         Gate::allows('isAdmin') ? Response::allow() : abort(404);
         return 'authorized';
     }
+
+    
     
 
     /**

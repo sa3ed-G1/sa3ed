@@ -39,8 +39,8 @@
     <link rel="stylesheet" href="../plugins/slick-carousel/slick/slick.css">
     <link rel="stylesheet" href="../plugins/slick-carousel/slick/slick-theme.css">
     <link rel="stylesheet" href="../plugins/modal-video/modal-video.min.css">
-
-
+    
+    {{-- Sweet alert script --}}
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../css/style.css">
@@ -255,7 +255,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap">
     </script>
 
-
+    
 
     <script src="js/script.js"></script>
     @yield('script')
