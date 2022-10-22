@@ -14,7 +14,9 @@ class PendingController extends Controller
      */
     public function index()
     {
-        //
+        $events = Pending::all();
+
+        return view('dashboard.pendings', ['pendings' => $events]);
     }
 
     /**
@@ -67,9 +69,9 @@ class PendingController extends Controller
      * @param  \App\Models\Pending  $pending
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pending $pending)
+    public function update(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

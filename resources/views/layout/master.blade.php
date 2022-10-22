@@ -30,20 +30,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
 
     <!-- bootstrap.min css -->
-    <link rel="stylesheet" href="plugins/bulma/bulma.min.css">
+    <link rel="stylesheet" href="../plugins/bulma/bulma.min.css">
     <!-- Icon Font Css -->
-    <link rel="stylesheet" href="plugins/themify/css/themify-icons.css">
-    <link rel="stylesheet" href="plugins/icofont/icofont.css">
-    <link rel="stylesheet" href="plugins/magnific-popup/dist/magnific-popup.css">
+    <link rel="stylesheet" href="../plugins/themify/css/themify-icons.css">
+    <link rel="stylesheet" href="../plugins/icofont/icofont.css">
+    <link rel="stylesheet" href="../plugins/magnific-popup/dist/magnific-popup.css">
     <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="plugins/slick-carousel/slick/slick.css">
-    <link rel="stylesheet" href="plugins/slick-carousel/slick/slick-theme.css">
-    <link rel="stylesheet" href="plugins/modal-video/modal-video.min.css">
+    <link rel="stylesheet" href="../plugins/slick-carousel/slick/slick.css">
+    <link rel="stylesheet" href="../plugins/slick-carousel/slick/slick-theme.css">
+    <link rel="stylesheet" href="../plugins/modal-video/modal-video.min.css">
 
 
 
     <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     @yield('head')
 </head>
 
@@ -56,20 +56,20 @@
                 <div class="columns is-gapless is-justify-content-space-between is-align-items-center">
                     <div class="column is-6-desktop is-4-tablet has-text-left-desktop has-text-centered-mobile">
                         <div class="header-top-info">
-                            <a href="tel:+23-345-67890"><i class="icofont-phone mr-2"></i><span>+23-345-67890</span></a>
-                            <a href="mailto:support@gmail.com"><i
-                                    class="icofont-email mr-2"></i><span>support@gmail.com</span></a>
+                            <a href="tel:00962778086316"><i
+                                    class="icofont-phone mr-2"></i><span>+962-778-086-316</span></a>
+                            <a href="tel:00962786259075"><i
+                                    class="icofont-phone mr-2"></i><span>+962-786-25-9075</span></a>
+                            <a href="mailto:sa3ed1922@gmail.com"><i
+                                    class="icofont-email mr-2"></i><span>sa3ed1922@gmail.com</span></a>
                         </div>
                     </div>
                     <div class="column is-6-desktop is-8-tablet">
                         <div class="header-top-right has-text-right-tablet has-text-centered-mobile">
-                            <a href="https://www.facebook.com/themefisher" target="_blank"><i
+                            <a href="mailto:sa3ed1922@gmail.com" target=""><i class="fa-brands fa-google"></i></a>
+                            <a href="https://web.facebook.com/profile.php?id=100086828449609" target="_blank"><i
                                     class="icofont-facebook"></i></a>
-                            <a href="https://twitter.com/themefisher" target="_blank"><i
-                                    class="icofont-twitter"></i></a>
-                            <a href="https://github.com/themefisher/" target="_blank"><i class="icofont-github"></i></a>
-                            <a href="#" target="_blank"><i class="icofont-pinterest"></i></a>
-                            <a href="#" target="_blank"><i class="icofont-linkedin"></i></a>
+                            <a href="https://twitter.com/sa3ed_na" target="_blank"><i class="icofont-twitter"></i></a>
                             <a href="donation.html" class="top-btn">Donate Now</a>
                         </div>
                     </div>

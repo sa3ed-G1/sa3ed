@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Eventt;
 use Carbon\Carbon;
-use Illuminate\Console\Scheduling\Event;
-use Illuminate\Http\Request;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Eventt;
+use Illuminate\Http\Request;
+use Illuminate\Console\Scheduling\Event;
 
 class EventtController extends Controller
 {
@@ -165,5 +166,15 @@ class EventtController extends Controller
     {
         $events = Eventt::all();
         return view('/events', ['events' => $events]);
+    }
+    public function show_event($id)
+    {
+        $event = Eventt::find($id);
+
+        $managerId = $event->user_id;
+
+        $eventManager = User::find($managerId);
+
+        return view('single-event')->with('singleEvent', $event);
     }
 }

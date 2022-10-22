@@ -1,12 +1,15 @@
 @extends('layout.master')
 @section('content')
-    <section class="page-title bg-1">
+    <section
+        style="background-image:url('https://cdn.pixabay.com/photo/2015/10/29/14/38/web-1012467__340.jpg') no-repeat 50% 50%;
+background-size: cover;"
+        class="page-title jumbotron bg-1">
         <div class="container">
             <div class="columns">
                 <div class="column is-12">
                     <div class="block has-text-centered">
-                        <span class="text-white">Event Fundarising</span>
-                        <h1 class="is-capitalize text-lg">All Events</h1>
+                        <h1 class="is-capitalize text-md">Volunteering events</h1>
+                        <span class="text-white is-capitalize text-md">Become a volunteer now in your favorite field </span>
                     </div>
                 </div>
             </div>
@@ -19,11 +22,14 @@
             <div class="columns is-multiline is-justify-content-center">
                 @foreach ($events as $event)
                     <div class="column is-4-desktop is-6-tablet">
-                        <div class="card event-item is-shadowless">
-                            <img src="data:image/jpg;charset=utf8;base64,
-                            {{ $event['thumbnail'] }}"
-                                alt="image" class="w-100" alt="...">
-                            {{-- {{$event->thumbnail}} --}}
+                        <div class="card event-item is-shadowless" style="border-radius: 10px">
+
+
+                            <section
+                                style="background:url('data:image/jpg;charset=utf8;base64, {{ $event['thumbnail'] }}') no-repeat 50% 50%; background-size: cover;"
+                                class="page-title ">
+                            </section>
+
                             <div class="card-body">
 
                                 <h3 class="mb-4"><a href="event-single.html" class="is-block">{{ $event->title }}</a></h3>

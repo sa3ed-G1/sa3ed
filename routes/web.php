@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\Eventt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\EventtController;
+use App\Http\Controllers\PendingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,7 @@ use App\Http\Controllers\EventtController;
 // main pages ------------------------------------------------
 // home
 Route::get('/', function () {
+    $homeEvents =  Eventt::latest()->take(3)->get();
     return view('index');
 });
 // about
@@ -30,7 +34,7 @@ Route::get('/contact', function () {
 // events page
 Route::get('/events', [EventtController::class, 'showAll']);
 // single event page
-Route::get('/single-event/{id}', ['Eve>>>>']);
+Route::get('/single-event/{id}', [EventtController::class, 'show_event']);
 
 
 
@@ -62,6 +66,7 @@ Route::get('/sign_in/github', [UserController::class, 'github']);
 Route::get('/sign_in/github/redirect', [UserController::class, 'githubRedirect']);
 
 Route::resource('/dashboard/events', EventtController::class);
+Route::resource('/dashboard/pendings', PendingController::class);
 
 
 //Route for the adminDashboard with gate only for the role admin

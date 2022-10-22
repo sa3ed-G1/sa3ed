@@ -121,16 +121,16 @@
                                             {{ $user['email'] }}
                                         </td>
                                         <td>
-                                            {{ $user['eventts'] }}
+                                            {{ $user->volunteers->count() }}
                                         </td>
                                         <td>
-                                            {{ $user['wallet'] }}
+                                            {{ $user->wallet?->balance }}
                                         </td>
                                         <td>
-                                            <a href="editUser/{{ $user['id'] }}"><button
+                                            <a href="/editUser/{{ $user['id'] }}"><button
                                                     class="btn btn-inverse-primary btn-rounded btn-icon"><i
                                                         class="ti-pencil"></i></button></a>
-                                            <a href="editUser/{{ $user['id'] }}"><button
+                                            <a href="/editUser/{{ $user['id'] }}"><button
                                                     class="btn btn-inverse-danger btn-rounded btn-icon"><i
                                                         class="ti-trash"></i></button></a>
                                         </td>
