@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('dashboard/users', function () {
-    return view('dashboard.users');
-});
+Route::get('dashboard/users', [UserAdminController::class, 'index']);
+
+Route::post('dashboard/users', [UserAdminController::class, 'store']);
+
+Route::get('editUser/{id}', [UserAdminController::class, 'show']);
+
+Route::post('editUser/{id}', [UserAdminController::class, 'edit']);
