@@ -164,6 +164,7 @@ class EventtController extends Controller
     }
     public function showAll()
     {
+        return view('/events', ["events" => Eventt::malek(request(['search']))->get()]);
         $events = Eventt::all();
         return view('/events', ['events' => $events]);
     }
