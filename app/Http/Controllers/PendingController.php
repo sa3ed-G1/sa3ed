@@ -95,8 +95,13 @@ class PendingController extends Controller
      * @param  \App\Models\Pending  $pending
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pending $pending)
+    public function unassign($id)
     {
-        //
+        $pending = Pending::find($id);
+        $user = User::find($pending->user_id);
+        $user->role = "user";
+        $user->save();
+        $pending->forceDelete();
+        return redirect('/dashboard/pendings');
     }
 }

@@ -45,8 +45,12 @@
                                 @foreach ($pendings as $pending)
                                     <tr>
                                         <td class="py-1">
-                                            <img src="data:image/jpg;charset=utf8;base64,
-                                        {{ $pending->user->image }}"
+                                            <img src="@if ($pending->user->google_id || $pending->user->github_id) {{ $pending->user['image'] }} 
+                                          
+                                                
+                                            @else
+                                            data:image/jpg;charset=utf8;base64,
+                                    {{ $pending->user['image'] }} @endif"
                                                 alt="image" />
                                         </td>
                                         <td>
@@ -62,7 +66,7 @@
                                         </td>
 
                                         <td>
-                                            {{ $pending->user->phone ? $pending->user->phone : 'no phone' }}
+                                            {{ $pending->message }}
                                         </td>
                                         <td>
 
@@ -82,12 +86,12 @@
 
 
                                                 <form class="is-flex" method="POST"
-                                                    action="/dashboard/events/{{ $pending->id }}">
+                                                    action="/dashboard/pendings/{{ $pending->id }}">
                                                     @csrf
                                                     @method('DElETE')
                                                     <button type="submit"
                                                         class="btn btn-inverse-danger btn-rounded btn-icon"
-                                                        onclick="return confirm('Are you sure you want to delete event?')"><i
+                                                        onclick="return confirm('Are you sure you want to delete request?')"><i
                                                             class="ti-trash"></i></button>
                                                 </form>
 
@@ -109,7 +113,7 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title" style="font-size:25px !important;">Managers Applications</h1>
+                    <h1 class="card-title" style="font-size:25px !important;">Managers List</h1>
                     {{-- <button class="btn btn-outline-info btn-icon-text" data-toggle="modal" data-target="#exampleModalCenter">
                             <i class="ti-plus btn-icon-prepend"></i>
                             <strong style="font-size:15px;">Create Event</strong>
@@ -142,13 +146,17 @@
                                     </th>
                                 </tr>
                             </thead>
-                            @inject('eve', 'App\Http\Controllers\EventtController')
+
                             <tbody>
                                 @foreach ($pendingsDone as $pending)
                                     <tr>
                                         <td class="py-1">
-                                            <img src="data:image/jpg;charset=utf8;base64,
-                                        {{ $pending->user->image }}"
+                                            <img src="@if ($pending->user->google_id || $pending->user->github_id) {{ $pending->user['image'] }} 
+                                          
+                                                
+                                            @else
+                                            data:image/jpg;charset=utf8;base64,
+                                    {{ $pending->user['image'] }} @endif"
                                                 alt="image" />
                                         </td>
                                         <td>
@@ -164,34 +172,20 @@
                                         </td>
 
                                         <td>
-                                            {{ $pending->user->phone ? $pending->user->phone : 'no phone' }}
+                                            {{ $pending->message }}
                                         </td>
                                         <td>
 
                                             <div style="display: flex !important; column-gap: 1rem; ">
-                                                <form class="is-flex" method="POST"
-                                                    action="/dashboard/pendings/{{ $pending->id }}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input name="user_id" hidden value="{{ $pending->user_id }}"
-                                                        type="text">
-                                                    <input name="id" hidden value="{{ $pending->id }}"
-                                                        type="text">
-                                                    <button type="submit"
-                                                        class="btn btn-inverse-success btn-rounded btn-icon "
-                                                        onclick="return confirm('Are you sure you want to assign as a manager?')"><i
-                                                            class="ti-medall-alt"></i></button>
-                                                </form>
 
-
-                                                <form class="is-flex" method="POST"
-                                                    action="/dashboard/events/{{ $pending->id }}">
+                                                <form class="is-flex" method="get"
+                                                    action="/dashboard/events/unassign/{{ $pending->id }}">
                                                     @csrf
-                                                    @method('DElETE')
+
                                                     <button type="submit"
                                                         class="btn btn-inverse-danger btn-rounded btn-icon"
-                                                        onclick="return confirm('Are you sure you want to delete event?')"><i
-                                                            class="ti-trash"></i></button>
+                                                        onclick="return confirm('Are you sure you want to unassign manager?')"><i
+                                                            class="ti-face-sad"></i></button>
                                                 </form>
 
                                             </div>

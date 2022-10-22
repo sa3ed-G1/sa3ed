@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\User;
+use App\Models\Eventt;
+use App\Models\Wallet;
+use App\Models\Comment;
+use App\Models\Pending;
+use App\Models\Donation;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
@@ -114,20 +119,31 @@ class UserAdminController extends Controller
         return redirect("/dashboard/users")->with('updateUser', "Success , You Updated The User");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Eventt  $eventt
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy(Eventt $eventt)
+    public function viewDash()
+    {
+        $users = User::all();
+        $vlounteers = Volunteer::all();
+        $events = Eventt::all();
+        $donations = Donation::all();
+        $pendings = Pending::all();
+        $wallets = Wallet::all();
+        $comments = Comment::all();
+        // $topDonors = Eventt::orderBy('amount', 'DESC')->latest()->take(7)->get();
+        return view('dashboard.index', [
+            'users' => $users,
+            'vlounteers' => $vlounteers,
+            'events' => $events,
+            'donations' => $donations,
+            'pendings' => $pendings,
+            'wallets' => $wallets,
+            'comments' => $comments,
+        ]);
+    }
+    // public function topDonors($event)
     // {
-    //     //
-    // }
-    // public function showAll()
-    // {
-    //     $events = Eventt::all();
-    //     return view('/events', ['events' => $events]);
+    //     $donations = $event->donations;
+    //     $sortedDonors = $donations->sortByDesc('amount');
+    //     dd($sortedDonors);
     // }
 
     public function donate(Request $request, $id)
