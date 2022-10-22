@@ -28,6 +28,15 @@ class Eventt extends Model
         'banner',
         'user_id',
     ];
+    public function scopeMalek($query, array $filters)
+    {
+
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%')
+                ->orWhere('city', 'like', '%' . request('search') . '%');
+        }
+    }
     public function donations()
     {
         return $this->hasMany(Donation::class);
