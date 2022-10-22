@@ -50,8 +50,18 @@
                         <div
                             class="is-flex-tablet is-justify-content-space-around is-align-items-center has-text-centered border-top pt-4 mt-6">
                             <h4 class="my-4">Be a part of noble work</h4>
-                            <a href="donation.html" class="btn btn-main-2 is-rounded">Donate Now</a>
-                            <a href="donation.html" class="btn btn-main-2 is-rounded">Volunteer Now</a>
+                            <!-- Button trigger modal -->
+                            <button type="button" id='btnDonate' class="btn btn-main-2 is-rounded" data-bs-toggle="modal"
+                                data-bs-target="#donateModal">
+                                Donate Now
+                            </button>
+
+                            <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                Volunteer Now
+                            </button>
+                            {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Donate Now</a> --}}
+                            {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Volunteer Now</a> --}}
                         </div>
 
                         <div class="share-option mt-5 clearfix py-5">
@@ -72,4 +82,72 @@
             </div>
         </div>
     </section>
+
+    <div class="modal" id="modalDonate">
+        <div class="modal-background deleteModalDonate"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Donation</p>
+                <button class="delete deleteModalDonate" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <form action="/donation/{{ $singleEvent->id }}" method="post">
+                    @csrf
+                    <label for="amount">Donation Amount : </label>
+                    <input type="number" name="amount" id="amount">
+                    {{-- {{ url() }} --}}
+                    <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Donate</button>
+                <button class="button deleteModalDonate">Cancel</button>
+            </footer>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="modalVolunteer">
+        <div class="modal-background deleteModalVolunteer"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Are You Sure To Become A Volunteer</p>
+                <button class="delete deleteModalVolunteer" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <form action="/volunteer/{{ $singleEvent->id }}" method="post">
+                    @csrf
+                    <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+            </section>
+            <footer class="modal-card-foot">
+                <button type="submit" class="button is-success">Become A Volunteer</button>
+                <button class="button deleteModalVolunteer">Cancel</button>
+            </footer>
+            </form>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        document.querySelector('#btnDonate').onclick = function() {
+            document.querySelector('#modalDonate').classList.add('is-active');
+        }
+        let deleteDonateModal = document.querySelectorAll('.deleteModalDonate');
+        [...deleteDonateModal].forEach(element => {
+            element.onclick = function() {
+                document.querySelector('#modalDonate').classList.remove('is-active');
+            }
+        });
+
+        document.querySelector('#btnVolunteer').onclick = function() {
+            document.querySelector('#modalVolunteer').classList.add('is-active');
+        }
+        let deleteVolunteerModal = document.querySelectorAll('.deleteModalVolunteer');
+        [...deleteVolunteerModal].forEach(element => {
+            element.onclick = function() {
+                document.querySelector('#modalVolunteer').classList.remove('is-active');
+            }
+        });
+    </script>
 @endsection

@@ -21,3 +21,7 @@ Route::post('dashboard/users', [UserAdminController::class, 'store']);
 Route::get('editUser/{id}', [UserAdminController::class, 'show']);
 
 Route::post('editUser/{id}', [UserAdminController::class, 'edit']);
+
+Route::post('/donation/{id}', [UserAdminController::class, 'donate']);
+
+Route::post('/volunteer/{id}', [UserAdminController::class, 'volunteer']);
