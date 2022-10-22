@@ -7,11 +7,14 @@ use App\Models\Comment;
 use App\Models\Donation;
 use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Eventt extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $fillable = [
         'title',
         'description',
@@ -40,5 +43,22 @@ class Eventt extends Model
     public function volunteers()
     {
         return $this->hasMany(Volunteer::class);
+    }
+    protected $dates = ['date'];
+
+    public function nextAnniversary(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $dateNew = $this->dateNew;
+                $dateNew->setYear(now()->year);
+
+                if ($dateNew->isPast()) {
+                    $dateNew->addYear();
+                }
+
+                return $dateNew;
+            }
+        );
     }
 }

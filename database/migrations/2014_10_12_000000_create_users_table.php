@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('github_id')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

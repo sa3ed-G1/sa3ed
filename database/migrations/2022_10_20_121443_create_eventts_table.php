@@ -26,6 +26,7 @@ return new class extends Migration
             $table->binary('thumbnail')->nullable();
             $table->binary('banner')->nullable();
             $table->boolean('publish')->default('1');
+            $table->softDeletes();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

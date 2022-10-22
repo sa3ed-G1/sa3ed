@@ -99,7 +99,7 @@
 
                                                         <button type="submit"
                                                             class="btn btn-primary mr-2">Submit</button>
-                                                        <button class="btn btn-danger">Cancel</button>
+
                                                     </form>
                                                 </div>
                                             </div>
@@ -135,33 +135,230 @@
                                     </th>
                                 </tr>
                             </thead>
+                            @inject('eve', 'App\Http\Controllers\EventtController')
                             <tbody>
-                                <tr>
-                                    <td class="py-1">
-                                        <img src="data:image/jpg;charset=utf8;base64,
-                                        {{ $events[0]['thumbnail'] }}"
-                                            alt="image" />
-                                    </td>
-                                    <td>
-                                        $events[0]
-                                    </td>
-                                    <td>
-                                        JD420.00
-                                    </td>
-                                    <td>
-                                        69
-                                    </td>
-                                    <td>
-                                        May 15, 2015
-                                    </td>
-                                    <td>
-                                        <a href=""><button class="btn btn-inverse-primary btn-rounded btn-icon"><i
-                                                    class="ti-pencil"></i></button></a>
-                                        <a href=""><button class="btn btn-inverse-danger btn-rounded btn-icon"
-                                                onclick=" return confirm('Are you sure you want to delete event?')"><i
-                                                    class="ti-trash"></i></button></a>
-                                    </td>
-                                </tr>
+                                @foreach ($events as $event)
+                                    <tr>
+                                        <td class="py-1">
+                                            <img src="data:image/jpg;charset=utf8;base64,
+                                        {{ $event['thumbnail'] }}"
+                                                alt="image" />
+                                        </td>
+                                        <td>
+                                            {{ $event->user->name }}
+                                        </td>
+                                        <td>
+                                            {{ $event->donations->sum('amount') }}
+                                        </td>
+                                        <td>
+                                            {{ $event->volunteers->count() . '/' . $event->capacity }}
+                                        </td>
+
+                                        <td>
+                                            @if ($eve->daysLeft($event->date) == 1)
+                                                Tomorrow
+                                            @elseif ($eve->daysLeft($event->date) == 0)
+                                                Today
+                                            @elseif ($eve->daysLeft($event->date) < 0)
+                                                Finished
+                                            @else
+                                                {{ $eve->daysLeft($event->date) . ' Days Left' }}
+                                            @endif
+
+
+                                        </td>
+                                        <td>
+
+                                            {{-- modal for row --}}
+                                            <div class="container">
+                                                <div class="modal fade" id="exampleModalCenter{{ $event->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="w-lg-75 w-sm-100 modal-dialog modal-dialog-centered "
+                                                        role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Create
+                                                                    Event</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body ">
+                                                                <div class="col-12 grid-margin stretch-card">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <form
+                                                                                action="/dashboard/events/{{ $event->id }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data"
+                                                                                class="forms-sample">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleInputName1">Title</label>
+                                                                                    <input type="text" name="title"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputName1"
+                                                                                        placeholder="Title"
+                                                                                        value="{{ $event->title }}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleInputEmail3">Description</label>
+                                                                                    <textarea name="description" class="form-control" id="exampleInputEmail3" placeholder="Description">{{ $event->description }}</textarea>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleInputPassword4">Location</label>
+                                                                                    <input type="text" name="location"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputPassword4"
+                                                                                        placeholder="Location"
+                                                                                        value="{{ $event->location }}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleInputPassword4">Tags</label>
+                                                                                    <input type="text" name="tags"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputPassword4"
+                                                                                        placeholder="Tags"
+                                                                                        value="{{ $event->tags }}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleInputPassword4">Date</label>
+                                                                                    <input type="datetime-local"
+                                                                                        name="date"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputPassword4"
+                                                                                        placeholder="Date"
+                                                                                        value="{{ $eve->parseDate($event->date) }}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleSelectGender">City</label>
+                                                                                    <select class="form-control"
+                                                                                        name="city"
+                                                                                        id="exampleSelectGender">
+
+                                                                                        <option
+                                                                                            @if ($event->city == 'Amman') selected @endif
+                                                                                            value="Amman">
+                                                                                            Amman
+                                                                                        </option>
+                                                                                        <option
+                                                                                            @if ($event->city == 'Zarqa') selected @endif
+                                                                                            value="Zarqa">Zarqa
+                                                                                        </option>
+                                                                                        <option
+                                                                                            @if ($event->city == 'Irbid') selected @endif
+                                                                                            value="Irbid">Irbid
+                                                                                        </option>
+
+
+
+                                                                                    </select>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label
+                                                                                        for="exampleInputPassword4">Duration</label>
+                                                                                    <input type="text" name="duration"
+                                                                                        class="form-control"
+                                                                                        id="exampleInputPassword4"
+                                                                                        placeholder="event duration / Hour"
+                                                                                        value="{{ $event->duration }}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="Input1">Capacity</label>
+                                                                                    <input type="number" name="capacity"
+                                                                                        class="form-control"
+                                                                                        id="Input1"
+                                                                                        placeholder="Capacity"
+                                                                                        value="{{ $event->capacity }}">
+                                                                                </div>
+                                                                                {{-- sssssssssssss --}}
+
+                                                                                <div class="mb-3 ">
+                                                                                    <div class="block">
+
+                                                                                        <label for="formFileMultiple"
+                                                                                            class="form-label ">Thumbnail</label>
+                                                                                    </div>
+                                                                                    <div class="block">
+
+                                                                                        <input name="thumbnail"
+                                                                                            style=""
+                                                                                            class="form-control btn btn-primary ml-1 "
+                                                                                            type="file"
+                                                                                            id="formFileMultiple"
+                                                                                            multiple="">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-4">
+                                                                                    <div class="block ">
+                                                                                        <label for="formFileMultiple"
+                                                                                            class="form-label">Banner</label>
+                                                                                    </div>
+                                                                                    <div class="block">
+                                                                                        <input name="banner"
+                                                                                            style=""
+                                                                                            class="form-control btn btn-primary ml-1"
+                                                                                            type="file"
+                                                                                            id="formFileMultiple"
+                                                                                            multiple="">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!---- for user id ---->
+                                                                                <input type="hidden" name="user_id"
+                                                                                    value="{{ $event->user_id }}"
+                                                                                    class="form-control"
+                                                                                    id="exampleInputCity1">
+                                                                                <input type="hidden" name="id"
+                                                                                    value="{{ $event->id }}"
+                                                                                    class="form-control"
+                                                                                    id="exampleInputCity1">
+
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary mr-2">Submit</button>
+
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- modal for row --}}
+
+
+                                            <div style="display: flex !important; column-gap: 1rem; ">
+                                                <button data-toggle="modal"
+                                                    data-target="#exampleModalCenter{{ $event->id }}"
+                                                    class="btn btn-inverse-primary btn-rounded btn-icon "><i
+                                                        class="ti-pencil"></i></button>
+
+                                                <form class="is-flex" method="POST"
+                                                    action="/dashboard/events/{{ $event->id }}">
+                                                    @csrf
+                                                    @method('DElETE')
+                                                    <button type="submit"
+                                                        class="btn btn-inverse-danger btn-rounded btn-icon"
+                                                        onclick="return confirm('Are you sure you want to delete event?')"><i
+                                                            class="ti-trash"></i></button>
+                                                </form>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
