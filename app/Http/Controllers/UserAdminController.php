@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Donation;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Http\Request;
 
 class UserAdminController extends Controller
@@ -92,7 +94,7 @@ class UserAdminController extends Controller
             "email" => "required",
             "role" => "required",
         ]);
-        dd($request->file);
+        // dd($request->file);
         if ($request->image) {
             $formFields['image'] = base64_encode(file_get_contents($request->file('image')));
             $user->name = $formFields['name'];
@@ -127,4 +129,27 @@ class UserAdminController extends Controller
     //     $events = Eventt::all();
     //     return view('/events', ['events' => $events]);
     // }
+
+    public function donate(Request $request, $id)
+    {
+        $donation = new Donation;
+
+        $donation->user_id = $request->user_id;
+        $donation->eventt_id = $id;
+        $donation->amount = $request->amount;
+        $donation->payment_info = "Cash";
+        $donation->save();
+
+        return redirect('single-event/' . $id)->with('donate', 'Thanks For Donation');
+    }
+    public function volunteer(Request $request, $id)
+    {
+        $volunteer = new Volunteer;
+
+        $volunteer->user_id = $request->user_id;
+        $volunteer->eventt_id = $id;
+        $volunteer->save();
+
+        return redirect('single-event/' . $id)->with('volunteer', 'You Volunteer In This Event Now');
+    }
 }
