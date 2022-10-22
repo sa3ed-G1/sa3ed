@@ -156,7 +156,7 @@ class EventtController extends Controller
      * @param  \App\Models\Eventt  $eventt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
 
         Eventt::find($id)->delete();
