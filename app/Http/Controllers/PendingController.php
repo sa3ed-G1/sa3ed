@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pending;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PendingController extends Controller
 {
@@ -14,9 +17,12 @@ class PendingController extends Controller
      */
     public function index()
     {
-        $events = Pending::all();
+        $pendings = Pending::where('status', 0)->get();
+        $pendingsDone = Pending::where('status', 1)->get();
 
-        return view('dashboard.pendings', ['pendings' => $events]);
+
+
+        return view('dashboard.pendings', ['pendings' => $pendings, 'pendingsDone' => $pendingsDone]);
     }
 
     /**
@@ -71,7 +77,16 @@ class PendingController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request);
+
+        $user = User::find($request->user_id);
+        $user->role = 'manager';
+        $user->save();
+        $pending =  Pending::find($request->id);
+        $pending->status = 1;
+        $pending->save();
+        // $pending->delete();
+
+        return Redirect('/dashboard/pendings');
     }
 
     /**

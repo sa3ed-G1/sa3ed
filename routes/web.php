@@ -19,9 +19,10 @@ use App\Http\Controllers\PendingController;
 */
 // main pages ------------------------------------------------
 // home
+
 Route::get('/', function () {
-    $homeEvents =  Eventt::latest()->take(3)->get();
-    return view('index');
+    $homeEvent = Eventt::latest()->take(3)->get();
+    return view('index')->with('threeEvent', $homeEvent);
 });
 // about
 Route::get('/about', function () {
@@ -66,6 +67,7 @@ Route::get('/sign_in/github', [UserController::class, 'github']);
 Route::get('/sign_in/github/redirect', [UserController::class, 'githubRedirect']);
 
 Route::resource('/dashboard/events', EventtController::class);
+Route::get('/dashboard/events/delete/{id}', [EventtController::class, 'destroy']);
 Route::resource('/dashboard/pendings', PendingController::class);
 
 

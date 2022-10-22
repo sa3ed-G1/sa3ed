@@ -345,15 +345,17 @@
                                                     class="btn btn-inverse-primary btn-rounded btn-icon "><i
                                                         class="ti-pencil"></i></button>
 
-                                                <form class="is-flex" method="POST"
-                                                    action="/dashboard/events/{{ $event->id }}">
-                                                    @csrf
-                                                    @method('DElETE')
-                                                    <button type="submit"
-                                                        class="btn btn-inverse-danger btn-rounded btn-icon"
-                                                        onclick="return confirm('Are you sure you want to delete event?')"><i
-                                                            class="ti-trash"></i></button>
-                                                </form>
+
+                                                {{-- <button id="delete"
+                                                    class="btn btn-inverse-danger btn-rounded btn-icon "><i
+                                                        class="ti-trash"></i></button> --}}
+
+
+                                                <button value="{{ $event->id }}" type="submit" id="delete"
+                                                    class="btn btn-inverse-danger btn-rounded btn-icon"><i
+                                                        class="ti-trash"></i>
+                                                </button>
+
                                             </div>
 
                                         </td>
@@ -368,4 +370,41 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    {{-- delete button (event) sweet alert  --}}
+    <script>
+        let btn = document.querySelectorAll('#delete');
+        // let btn = document.getElementById('delete');
+
+        btn.forEach(btn => {
+            btn.onclick = function() {
+                // btn.preventDefault();
+                console.log(btn);
+                swal({
+                        title: "Are you sure you want to delete this event?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "No, cancel!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            // swal("Deleted!", "Event has been deleted", "success");
+                            // let val = document.querySelectorAll('btn > input');
+                            console.log(btn.value);
+                            // setTimeout((e) => {
+                            window.location.href = `/dashboard/events/delete/${btn.value}`;
+                            // }, 5000);
+                        } else {
+                            swal("Cancelled", "Your Event is safe ;)", "error");
+                        }
+                    });
+            }
+        });
+    </script>
 @endsection

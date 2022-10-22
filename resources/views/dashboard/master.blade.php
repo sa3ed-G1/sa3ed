@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="../admin/css/vertical-layout-light/style.css" />
     <!-- endinject -->
     <link rel="shortcut icon" href="../admin/images/favicon.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
     @yield('style')
 </head>
 
@@ -240,6 +242,7 @@
     <!-- Custom js for this page-->
     <script src="../admin/js/dashboard.js"></script>
     <script src="../admin/js/Chart.roundedBarCharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <!-- End custom js for this page-->
     @yield('script')
 </body>
