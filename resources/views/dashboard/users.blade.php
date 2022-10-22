@@ -46,8 +46,12 @@
                                 @foreach ($managers as $manager)
                                     <tr>
                                         <td class="py-1">
-                                            <img src="data:image/jpg;charset=utf8;base64,
-                                            {{ $manager['image'] }}"
+                                            <img src="@if ($manager->google_id || $manager->github_id) {{ $manager['image'] }} 
+                                          
+                                                
+                                            @else
+                                            data:image/jpg;charset=utf8;base64,
+                                    {{ $manager['image'] }} @endif"
                                                 alt="image" />
                                         </td>
                                         <td>
@@ -110,8 +114,14 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td class="py-1">
-                                            <img src="data:image/jpg;charset=utf8;base64,
-                                            {{ $user['image'] }}"
+                                            <img src="
+                                             @if ($user->google_id || $user->github_id) {{ $user['image'] }} 
+                                          
+                                                
+                                            @else
+                                            data:image/jpg;charset=utf8;base64,
+                                    {{ $user['image'] }} @endif
+                                            "
                                                 alt="image" />
                                         </td>
                                         <td>

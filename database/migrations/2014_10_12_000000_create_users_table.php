@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->integer('github_id')->nullable();
             $table->string('password')->nullable();
+            $table->boolean('is_volunteer')->nullable()->default(0);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

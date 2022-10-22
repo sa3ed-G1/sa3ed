@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\EventtController;
 use App\Http\Controllers\PendingController;
+use App\Http\Controllers\DonationController;
+use App\Http\Controllers\UserAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,12 +48,8 @@ Route::post('/signup', [UserController::class, 'store']);
 Route::get('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
-// Route::get('/dashboard/events', function () {
-//     return view('dashboard.events');
-// });
+Route::get('/dashboard', [UserAdminController::class, 'viewDash']);
+
 Route::get('/test', function () {
     return view('test');
 });
@@ -68,8 +66,10 @@ Route::get('/sign_in/github/redirect', [UserController::class, 'githubRedirect']
 
 Route::resource('/dashboard/events', EventtController::class);
 Route::get('/dashboard/events/delete/{id}', [EventtController::class, 'destroy']);
-Route::resource('/dashboard/pendings', PendingController::class);
 
+Route::resource('/dashboard/pendings', PendingController::class);
+Route::get('/dashboard/events/unassign/{id}', [PendingController::class, 'unassign']);
+Route::resource('/dashboard/donations', DonationController::class);
 
 //Route for the adminDashboard with gate only for the role admin
 // Route::get('/dashboard', [App\Http\Controllers\AuthorizationController::class, 'index'])->name('index')->middleware('can:isAdmin');
