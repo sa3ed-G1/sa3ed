@@ -253,27 +253,39 @@
             </div>
 
             <div class="columns is-multiline is-justify-content-center">
-                <div class="column is-4-desktop is-6-tablet">
-                    <div class="cause-item">
-                        <img src="images/about/image-1.jpg" class=" w-100" alt="...">
+                @foreach ($threeEvent as $event)
+                    <div class="column is-4-desktop is-6-tablet">
+                        <div class="cause-item card event-item is-shadowless" style="border-radius: 10px">
 
-                        <div class="card-body">
-                            <h3 class="mb-4"><a href="cause-single.html">Drawing murals for Al-Faisal School</a></h3>
+                            <section
+                                style="background:url('data:image/jpg;charset=utf8;base64, {{ $event->thumbnail }}') no-repeat 50% 50%; background-size: cover;"
+                                class="page-title ">
+                            </section>
 
-                            <ul class="list-inline border-bottom border-top py-3 mb-4">
-                                <li class="list-inline-item"><i
-                                        class="icofont-check text-color mr-2"></i>Location:<span>Zarqa-Jordan</span></li>
-                                <li class="list-inline-item"><i class="icofont-check text-color mr-2"></i>Date:
-                                    <span>28-11-2022</span>
-                                </li>
-                            </ul>
-                            <p class="card-text mb-5">To carry out activities aimed at promoting the community and solving
-                                its problems.</p>
+                            <div class="card-body">
+                                <h3 class="mb-4"><a href="/single-event/{{ $event->id }}">{{ $event->title }}</a>
+                                </h3>
 
-                            <a href="single-event" class="btn btn-main is-rounded">View Event</a>
+                                <p class="card-text mb-5">{{ substr($event->description, 0, 100) }}... <a
+                                        href="single-event/{{ $event->id }}" style="font-weight: 700">More</a></p>
+                                <ul class="list-inline border-bottom border-top py-3 mb-4">
+
+                                    <li class="list-inline-item"><i
+                                            class="icofont-check text-color mr-2"></i>Date:<span>{{ $event->date }}</span>
+                                    </li>
+                                    <li class="list-inline-item"><i
+                                            class="icofont-check text-color mr-2"></i>Location:<span>{{ substr($event->location, 0, 30) }}</span>
+                                    </li>
+                                    <li class="list-inline-item"><i
+                                            class="icofont-check text-color mr-2"></i>Organizer:<span>{{ $event->user->name }}</span>
+                                    </li>
+                                </ul>
+
+                                <a href="single-event/{{ $event->id }}" class="btn btn-main is-rounded">View Event</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
                 {{-- <div class="column is-4-desktop is-6-tablet">
 				<div class="cause-item">
