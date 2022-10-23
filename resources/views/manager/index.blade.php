@@ -6,15 +6,15 @@
         User Profile
     @endif
 @endsection
-@if (session('addEvent'))
-    <div class="alert alert-success"><strong>{{ session('addEvent') }}</strong></div>
-@endif
-@if (session('updateUser'))
-    <div class="alert alert-success"><strong>{{ session('updateUser') }}</strong></div>
-@endif
 
 @section('content')
-    <div class="container p-5">
+<div class="container p-5">
+        @if (session('addEvent'))
+            <div class="alert alert-success"><strong>{{ session('addEvent') }}</strong></div>
+        @endif
+        @if (session('updateUser'))
+            <div class="alert alert-success"><strong>{{ session('updateUser') }}</strong></div>
+        @endif
         <div class="main-body">
             <div class="container ">
                 <div class="main-body ">
@@ -29,14 +29,18 @@
                                         @else
                                         data:image/jpg;charset=utf8;base64,
                                             {{ $user->image }} @endif
-                                        "
+                                            "
+                                            w-100" alt="..."
+                                                    style=" height: 200px; object-fit:cover;"
+                                        
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
                                             <h2 class="mb-3 text-dark">{{ $user->name }}</h2>
-                                            <p class="text-secondary mb-1"></p>
+                                            @if(auth()->user()->role == 'manager')
+                                            <h6 class="text-dark mb-1">Events Manager</h6>
                                             {{-- <button class="btn btn-primary">Edit</button> --}}
-
                                         </div>
+                                        @endif
                                         <hr class="my-4">
 
                                     </div>
@@ -72,7 +76,7 @@
                                     </ul>
 
                                     <hr class="mt-1">
-
+                                    @if(auth()->user()->role == 'manager')
                                     <div class="d-flex flex-column align-items-center text-center">
                                         donations here
                                     </div>
@@ -88,9 +92,10 @@
                                             </li>
                                         @endforeach
                                     </ul>
-
-
                                     <hr class="my-4">
+                                    @endif
+
+
                                 </div>
                             </div>
                         </div>
@@ -304,8 +309,8 @@
                                 </div>
                             </div>
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <button type="submit" class="mt-5" style="background-color: black; color:#F89D35">
-                                <h4>Create</h4>
+                            <button type="submit" class="btn btn-main is-rounded mt-5" style="background-color: black;">
+                                <h4 style="color:#F89D35">Create</h4>
                             </button>
                         </form>
                     </div>
