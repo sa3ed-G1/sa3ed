@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 
+use App\Models\Wallet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,16 +50,17 @@ class UserController extends Controller
             'name' => 'required|alpha',
             'email' => 'required|unique:users',
             'password' => 'required|min:8|confirmed',
-
+            'image' => 'required',
         ]);
 
         $newUser = new User;
-
+        $newUser->image = base64_encode(file_get_contents($request->file('image')));
         $newUser->name = $request->name;
         $newUser->email = $request->email;
         $newUser->password = Hash::make($request->password);
         $newUser->save();
         Auth::login($newUser);
+        Wallet::create(['user_id'=> auth()->user()->id, 'balance' => 0, ]);
 
         return redirect('/');
     }

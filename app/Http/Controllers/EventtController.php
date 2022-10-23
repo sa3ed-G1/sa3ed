@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\User;
@@ -176,6 +177,7 @@ class EventtController extends Controller
 
         $eventManager = User::find($managerId);
 
-        return view('single-event')->with('singleEvent', $event);
+       $comment = Comment::where('eventt_id', $id)->get();
+        return view('single-event', ['comments' => $comment])->with('singleEvent', $event);
     }
 }

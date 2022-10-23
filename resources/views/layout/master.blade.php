@@ -109,7 +109,7 @@
                         </li>
                         @auth
                             <li class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">User Name<span class="ml-1 icon"><i
+                                <a class="navbar-link">{{auth()->user()->name}}<span class="ml-1 icon"><i
                                             class="fas fa-home"></i></span></a>
                                 <div class="navbar-dropdown">
                                     <a class="navbar-item" href="/profile">Profile</a>

@@ -64,23 +64,132 @@
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Volunteer Now</a> --}}
                         </div>
 
-                        <div class="share-option mt-5 clearfix py-5">
-                            <ul class="list-inline mb-0">
-                                <li class="list-inline-item"> <strong>Share Cause:</strong> </li>
-                                <li class="list-inline-item"><a href="#" target="_blank"><i
-                                            class="icofont-facebook mr-2"></i>Facebook</a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank"><i
-                                            class="icofont-twitter mr-2"></i>Twitter</a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank"><i
-                                            class="icofont-pinterest mr-2"></i>Pinterest</a></li>
-                                <li class="list-inline-item"><a href="#" target="_blank"><i
-                                            class="icofont-linkedin mr-2"></i>Linkedin</a></li>
-                            </ul>
+                        {{-- user Add comment --}}
+
+
+                        <section style="background-color: #f7f6f6;">
+                            <div class="container my-5 py-5 text-dark">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-10 col-lg-8 col-xl-6">
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <div class="d-flex flex-start w-100">
+
+                                                    <div class="w-100">
+                                                        <form action="/post-comment" method="POST">
+                                                            @csrf
+                                                            <h5 class="mb-2">Add a comment</h5>
+                                                            @error('comment')
+                                                                <small class="text-danger">{{ $message }}</small>
+                                                            @enderror
+
+                                                            <div class="form-outline">
+                                                                <textarea name="comment" class="form-control" id="textAreaExample" rows="4"></textarea>
+                                                                <label class="form-label" for="textAreaExample">What is your
+                                                                    comment?</label>
+                                                                <input name="eventt_id" type="hidden"
+                                                                    value=" {{ $singleEvent->id }} ">
+                                                                <input name="user_id" type="hidden"
+                                                                    value=" {{ auth()->user()->id }} ">
+                                                            </div>
+                                                            <div class="d-flex justify-content-end mt-3">
+                                                                <button style="background-color:#863bae; color:white"
+                                                                    type="submit" class="btn">
+                                                                    Send <i style="color:white"
+                                                                        class="fas fa-long-arrow-alt-right ms-1"></i>
+                                                                </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    {{-- </section> --}}
+
+
+                    {{-- they are in the same section --}}
+
+
+                    {{-- -------------------------------------------- users comments --------------------------------------- --}}
+
+                    {{-- <section style="background-color: #f7f6f6;"> --}}
+                    <div class="container my-5 py-5 text-dark">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 col-lg-10 col-xl-8">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h4 class="text-dark mb-0">Comments</h4>
+                                    <div class="card">
+                                    </div>
+                                </div>
+
+
+                                @foreach ($comments as $comment)
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-start">
+                                                <img class="rounded-circle shadow-1-strong me-3"
+                                                    src="
+                                                    @if ($comment->user->google_id || $comment->user->github_id) {{ $comment->user->image }}
+                                        @else
+                                        data:image/jpg;charset=utf8;base64,
+                                            {{ $comment->user->image }} @endif
+                                            "
+                                                    alt="avatar" width="90" height="auto" />
+                                                <div class="w-100 d-flex justify-content-between align-items-end">
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <h6 class="text-warning fw-bold mb-0">
+                                                            {{ $comment->user->name }}
+                                                            <p style="width:470px; height:auto;"
+                                                                class="text-dark ms-2 mb-2 d-fle flex-wrap">
+                                                                {{ $comment->comment }}
+                                                            </p>
+                                                        </h6>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        {{-- <p class="small mb-0" style="color: #aaa;">
+                                              <a href="#!" class="link-grey">Remove</a> •
+                                              <a href="#!" class="link-grey">Reply</a> •
+                                              <a href="#!" class="link-grey">Translate</a>
+                                            </p> --}}
+                                                        <div class="d-flex flex-row">
+                                                            {{-- <i class="far fa-check-circle text-primary"></i> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+    </section>
+
+
+
+    <div class="share-option mt-5 clearfix py-5">
+        <ul class="list-inline mb-0">
+            <li class="list-inline-item"> <strong>Share Cause:</strong> </li>
+            <li class="list-inline-item"><a href="#" target="_blank"><i
+                        class="icofont-facebook mr-2"></i>Facebook</a>
+            </li>
+            <li class="list-inline-item"><a href="#" target="_blank"><i
+                        class="icofont-twitter mr-2"></i>Twitter</a>
+            </li>
+            <li class="list-inline-item"><a href="#" target="_blank"><i
+                        class="icofont-pinterest mr-2"></i>Pinterest</a></li>
+            <li class="list-inline-item"><a href="#" target="_blank"><i
+                        class="icofont-linkedin mr-2"></i>Linkedin</a></li>
+        </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </section>
 
     <div class="modal" id="modalDonate">

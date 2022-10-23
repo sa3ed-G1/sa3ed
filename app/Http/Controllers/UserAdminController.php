@@ -44,20 +44,20 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $formFields = $request->validate([
             "name" => "required",
             "email" => "required",
             "password" => "required",
+            "phone" => "max:10",
             "role" => "required",
             "image" => "required",
         ]);
         $formFields['image'] = base64_encode(file_get_contents($request->file('image')));
         $formFields['password'] = bcrypt($formFields['password']);
         // dd($formFields);
-        User::create($formFields);
+        $id = User::create($formFields)->id;
+        Wallet::create(['user_id' => $id, 'balance' => 0,]);
         return redirect("/dashboard/users")->with('addUser', "Success , You Added New User");
-        // dd($request->all());
     }
 
     /**
@@ -68,8 +68,6 @@ class UserAdminController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('dashboard.editUser', ['user' => $user]);
     }
 
     /**
@@ -96,25 +94,19 @@ class UserAdminController extends Controller
         $formFields = $request->validate([
             "name" => "required",
             "email" => "required",
+            "phone" => "max:10",
             "role" => "required",
         ]);
         // dd($request->file);
         if ($request->image) {
             $formFields['image'] = base64_encode(file_get_contents($request->file('image')));
-            $user->name = $formFields['name'];
-            $user->email = $formFields['email'];
-            $user->role = $formFields['role'];
             $user->image = $formFields['image'];
-            $user->save();
-            // $user->update($formFields);
-        } else {
-            $user->name = $formFields['name'];
-            $user->email = $formFields['email'];
-            $user->role = $formFields['role'];
-            $user->save();
-            // $user->update($formFields);
         }
-        // dd($formFields);
+        $user->name = $formFields['name'];
+        $user->email = $formFields['email'];
+        $user->phone = $formFields['phone'];
+        $user->role = $formFields['role'];
+        $user->save();
         return redirect("/dashboard/users")->with('updateUser', "Success , You Updated The User");
     }
 
@@ -166,5 +158,11 @@ class UserAdminController extends Controller
         $volunteer->save();
 
         return redirect('single-event/' . $id)->with('volunteer', 'You Volunteer In This Event Now');
+    }
+
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+        return redirect('/dashboard/users');
     }
 }
