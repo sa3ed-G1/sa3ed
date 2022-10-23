@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\EventtController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PendingController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\UserAdminController;
