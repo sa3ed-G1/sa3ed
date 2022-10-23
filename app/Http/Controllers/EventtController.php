@@ -150,6 +150,7 @@ class EventtController extends Controller
         // Eventt::where('id', $request->id)->update($formFields);
         return redirect('/dashboard/events');
     }
+   
 
     /**
      * Remove the specified resource from storage.
@@ -177,7 +178,7 @@ class EventtController extends Controller
 
         $eventManager = User::find($managerId);
 
-       $comment = Comment::where('eventt_id', $id)->get();
+        $comment = Comment::where('eventt_id', $id)->get();
         return view('single-event', ['comments' => $comment])->with('singleEvent', $event);
     }
 }

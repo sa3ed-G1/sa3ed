@@ -81,3 +81,8 @@ Route::resource('/profile', ManagerController::class);
 // Route::get('/dashboard', [App\Http\Controllers\AuthorizationController::class, 'index'])->name('index')->middleware('can:isAdmin');
 // =====NEED A DASHBOARD==== tested done*
 Route::post('/post-comment', [CommentController::class, 'store']);
+Route::post('/apply', [ManagerController::class, 'apply']);
+// update event for manager
+Route::post('/manager/update', [ManagerController::class, 'updateEvent']);
+// end event for manager
+Route::post('//manager/end', [ManagerController::class, 'endEvent']);

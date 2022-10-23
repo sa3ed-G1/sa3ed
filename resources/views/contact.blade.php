@@ -5,14 +5,13 @@
             <div class="columns">
                 <div class="column is-12">
                     <div class="block has-text-centered">
-                        <span class="text-white">Contact Us</span>
-                        <h1 class="is-capitalize text-lg">Get in Touch</h1>
+                        <span class="text-white">Contact us</span>
+                        <h1 class="is-capitalize text-lg">Be an Event Host </h1>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <section class="section">
         <div class="container">
@@ -59,54 +58,43 @@
             </div>
         </div>
     </section>
-
-    <!-- contact form start -->
-    {{-- <section class="contact-wrap section-bottom">
+    <section class="section volunteer-section pt-0 ">
         <div class="container">
             <div class="columns is-multiline">
-                <div class="column is-12">
-                    <form id="contact-form" class="contact__form" method="post" action="mail.php">
-                        <span class="text-color">Send a message</span>
-                        <h3 class="text-md mb-5">Contact Form</h3>
-                        <!-- form message -->
-                        <div class="columns is-gapless">
-                            <div class="column is-12">
-                                <div class="message is-primary contact__msg" style="display: none">
-                                    <div class="message-body">
-                                        Your message was sent successfully.
-                                    </div>
-                                </div>
-                            </div>
+                <div class="column is-6-desktop is-6-tablet mt-5">
+                    <div class="member-benifit mt-5">
+                        <h4 class="mb-4"> Benefits </h4>
+                        <p class="mb-3">As a Manger you will get benefit from:</p>
+
+                        <ul class="list-unstyled member-benifits-list lh-35">
+                            <li><strong>Create Events</strong> - Encourage Volunteers to participate in your event<br> by
+                                using our points system</li>
+                            <li><strong>Recieve Donations</strong> - Recieve Donations directly through our<br> platform for
+                                your event .</li>
+                            <li><strong>Networking</strong> - talk to the right people when you need to.</li>
+                            <li><strong>Expertise </strong>- Explore other events from our differetnt organiaztions </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="column is-6-desktop is-6-tablet">
+                    <span class="text-color">Join With Us</span>
+                    <h2 class="mb-5 text-md"> We are here to help you<br> manage your event.</h2>
+                    <h6 class=" mb-1">Tell us about your organization</h6>
+                    <form action="/apply" method="POST" class="volunteer-form">
+                        @csrf
+                        <input name="user_id" value="{{ auth()->user()->id }}" type="hidden" class="input">
+                        <div class="mb-4">
+                            <textarea name="message" cols="35" rows="8" class="input" placeholder="Your Message" required></textarea>
                         </div>
-                        <!-- end message -->
-                        <div class="columns is-multiline">
-                            <div class="column is-6-desktop is-6-tablet">
-                                <label>Your Name *</label>
-                                <input name="name" type="text" class="input">
-                            </div>
-                            <div class="column is-6-desktop is-6-tablet">
-                                <label>Your Email *</label>
-                                <input name="email" type="email" class="input">
-                            </div>
-                            <div class="column is-6-desktop is-6-tablet">
-                                <label>Your Subject *</label>
-                                <input name="subjecte" type="text" class="input">
-                            </div>
-                            <div class="column is-6-desktop is-6-tablet">
-                                <label>Your Phone Number *</label>
-                                <input name="phone" type="number" class="input" min="0">
-                            </div>
-                            <div class="column is-12">
-                                <label>Your Message *</label>
-                                <textarea name="message" class="input" rows="6"></textarea>
-                            </div>
-                            <div class="column is-12">
-                                <button class="btn btn-main is-rounded" name="submit" type="submit">Send Message</button>
-                            </div>
-                        </div>
+                        @if (auth()->user()->pendings->where('user_id', auth()->user()->id)->count() > 0)
+                            <button disabled type="submit" class="btn btn-main-2 is-rounded mt-3">Already applied</button>
+                        @else
+                            <button type="submit" class="btn btn-main-2 is-rounded mt-3">Apply Now</button>
+                        @endif
                     </form>
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
 @endsection
