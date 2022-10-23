@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserAdminController;
 
 /*
@@ -27,3 +28,5 @@ Route::post('/donation/{id}', [UserAdminController::class, 'donate']);
 Route::post('/volunteer/{id}', [UserAdminController::class, 'volunteer']);
 
 Route::get('dashboard/users/delete/{id}', [UserAdminController::class, 'destroy']);
+
+Route::get('claimOffer/{id}' , [OfferController::class, 'add'] );
