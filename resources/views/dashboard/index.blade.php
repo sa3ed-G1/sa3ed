@@ -10,19 +10,7 @@
                             <h3 class="font-weight-bold">Welcome {{ auth()->user()->name }}</h3>
                             <h6 class="font-weight-normal mb-0">All systems are running smoothly!</h6>
                         </div>
-                        {{-- <div class="col-12 col-xl-4">
-                            <div class="justify-content-end d-flex">
-                                <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                                        <a class="dropdown-item" href="#">January - March</a>
-                                        <a class="dropdown-item" href="#">March - June</a>
-                                        <a class="dropdown-item" href="#">June - August</a>
-                                        <a class="dropdown-item" href="#">August - November</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -71,7 +59,7 @@
                             <div class="card card-light-blue">
                                 <div class="card-body">
                                     <p class="mb-4">We have</p>
-                                    <p class="fs-30 mb-2">{{ $users->where('is_vlounteer', 1)->count() }}</p>
+                                    <p class="fs-30 mb-2">{{ $users->where('is_volunteer', true)->count() }}</p>
                                     <p>Volunteer</p>
                                 </div>
                             </div>
@@ -88,50 +76,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-md-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-title">Order Details</p>
-                            <p class="font-weight-500">The total number of sessions within the date range. It is the period
-                                time a user is actively engaged with your website, page or app, etc</p>
-                            <div class="d-flex flex-wrap mb-5">
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Order value</p>
-                                    <h3 class="text-primary fs-30 font-weight-medium">12.3k</h3>
-                                </div>
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Orders</p>
-                                    <h3 class="text-primary fs-30 font-weight-medium">14k</h3>
-                                </div>
-                                <div class="mr-5 mt-3">
-                                    <p class="text-muted">Users</p>
-                                    <h3 class="text-primary fs-30 font-weight-medium">71.56%</h3>
-                                </div>
-                                <div class="mt-3">
-                                    <p class="text-muted">Downloads</p>
-                                    <h3 class="text-primary fs-30 font-weight-medium">34040</h3>
-                                </div>
-                            </div>
-                            <canvas id="order-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <p class="card-title">Sales Report</p>
-                                <a href="#" class="text-info">View all</a>
-                            </div>
-                            <p class="font-weight-500">The total number of sessions within the date range. It is the period
-                                time a user is actively engaged with your website, page or app, etc</p>
-                            <div id="sales-legend" class="chartjs-legend mt-4 mb-2"></div>
-                            <canvas id="sales-chart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card position-relative">
@@ -193,6 +138,7 @@
                                                                                     {{ $donation->amount }} JOD
                                                                                 </h5>
                                                                             </td>
+
                                                                         </tr>
 
                                                                         @php
@@ -250,18 +196,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Jacob</td>
-                                            <td>53275531</td>
-                                            <td>12 May 2017</td>
-                                            <td><label class="badge badge-danger">Pending</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Peter</td>
-                                            <td>53275534</td>
-                                            <td>16 May 2017</td>
-                                            <td><label class="badge badge-success">Completed</label></td>
-                                        </tr>
+                                        @foreach ($pendings as $pending)
+                                            <tr>
+                                                <td>{{ $pending->user?->name }}</td>
+                                                <td>{{ $pending->user?->phone ? $pending->user->phone : 'No Phone' }}</td>
+                                                <td>{{ $pending->created_at }}</td>
+                                                <td><label
+                                                        class="badge badge-{{ $pending->status == true ? 'success' : 'danger' }}">{{ $pending->status == true ? 'Completed' : 'Pending' }}</label>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
 
 
                                     </tbody>
@@ -281,35 +226,45 @@
                                         <tr>
                                             <th>User</th>
                                             <th>Email</th>
-                                            <th>Date</th>
+                                            <th>Joined us</th>
                                             <th>Role</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        <tr>
-                                            <td>Jacob</td>
-                                            <td>Jacob@go.com</td>
-                                            <td>5 May 2022</td>
-                                            <td><label class="badge badge-danger">Admin</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Messsy</td>
-                                            <td>Flash</td>
-                                            <td>5 May 2022</td>
-                                            <td><label class="badge badge-warning">Manager</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>John</td>
-                                            <td>Premier</td>
-                                            <td>5 May 2022</td>
-                                            <td><label class="badge badge-info">Volunteer</label></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Peter</td>
-                                            <td>After </td>
-                                            <td>5 May 2022</td>
-                                            <td><label class="badge badge-success">User</label></td>
-                                        </tr>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $user->name }}</td>
+                                                <td>
+                                                    @if ($user->google_id)
+                                                        <i class="ti-google text-info"></i>
+                                                    @elseif($user->github_id)
+                                                        <i class="ti-github"></i>
+                                                    @else
+                                                        {{ $user->email }}
+                                                    @endif
+                                                </td>
+                                                <td>{{ $user->created_at }}</td>
+                                                @if ($user->role == 'admin')
+                                                    <td><label class="badge badge-danger">Admin
+                                                        </label>
+                                                    </td>
+                                                @elseif($user->role == 'manager')
+                                                    <td><label class="badge badge-warning">Manager
+                                                        </label>
+                                                    </td>
+                                                @elseif($user->role == 'user' && $user->is_volunteer == true)
+                                                    <td><label class="badge badge-info">Volunteer
+                                                        </label>
+                                                    </td>
+                                                @else
+                                                    <td><label class="badge badge-success">User
+                                                        </label>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+
 
                                     </tbody>
                                 </table>
