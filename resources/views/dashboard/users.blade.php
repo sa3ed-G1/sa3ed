@@ -129,18 +129,21 @@
                                                                         </select>
                                                                     </div>
                                                                     {{-- sssssssssssss --}}
-                                                                    <div class="mb-3">
-                                                                        <label for="formFileMultiple"
-                                                                            class="form-label">Image</label>
-                                                                        <input name="image" style=""
-                                                                            class="form-control btn btn-primary"
-                                                                            type="file" id="formFileMultiple"
-                                                                            multiple="">
-                                                                    </div>
+                                                                    @if (!($manager->google_id || $manager->github_id))
+                                                                        <div class="mb-3">
+                                                                            <label for="formFileMultiple"
+                                                                                class="form-label">Image</label>
+                                                                            <input name="image" style=""
+                                                                                class="form-control btn btn-primary"
+                                                                                type="file" id="formFileMultiple"
+                                                                                multiple="">
+                                                                        </div>
+                                                                    @endif
                                                                     <button type="submit"
                                                                         class="btn btn-primary mr-2">Update</button>
-                                                                    <button class="btn btn-danger">Cancel</button>
                                                                 </form>
+                                                                <button class="btn btn-danger" data-dismiss="modal"
+                                                                    aria-label="Close">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -219,20 +222,25 @@
                                             {{ $user->wallet?->balance }}
                                         </td>
                                         <td>
-                                            <a href="/editUser/{{ $user['id'] }}"><button
-                                                    class="btn btn-inverse-primary btn-rounded btn-icon"><i
-                                                        class="ti-pencil"></i></button></a>
-                                            <a href="/editUser/{{ $user['id'] }}"><button
+                                            <button class="btn btn-inverse-primary btn-rounded btn-icon"
+                                                data-toggle="modal"
+                                                data-target="#exampleModalCenter{{ $user['id'] }}"><i
+                                                    class="ti-pencil"></i></button>
+                                            <button value="{{ $user->id }}" type="submit" id="delete"
+                                                class="btn btn-inverse-danger btn-rounded btn-icon"><i
+                                                    class="ti-trash"></i>
+                                            </button>
+                                            {{-- <a href="/editUser/{{ $user['id'] }}"><button
                                                     class="btn btn-inverse-danger btn-rounded btn-icon"><i
-                                                        class="ti-trash"></i></button></a>
+                                                        class="ti-trash"></i></button></a> --}}
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModalCenter{{ $user['id'] }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="w-lg-75 w-sm-100 modal-dialog modal-dialog-centered " role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Add User</h5>
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit User Info</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -242,56 +250,56 @@
                                                     <div class="col-12 grid-margin stretch-card">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <form action="/dashboard/users" method="POST"
-                                                                    enctype="multipart/form-data" class="forms-sample">
+                                                                <form action="/editUser/{{ $user['id'] }}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    class="forms-sample">
                                                                     @csrf
                                                                     <div class="form-group">
                                                                         <label for="exampleInputName1">Full Name</label>
                                                                         <input type="text" name="name"
                                                                             class="form-control" id="exampleInputName1"
-                                                                            placeholder="Full Name">
+                                                                            placeholder="Full Name"
+                                                                            value="{{ $user['name'] }}">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="exampleInputEmail3">Email</label>
                                                                         <input type="email" name="email"
                                                                             class="form-control" id="exampleInputEmail3"
-                                                                            placeholder="Email" />
+                                                                            placeholder="Email"
+                                                                            value="{{ $user['email'] }}" />
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="exampleInputEmail3">Phone Number</label>
+                                                                        <label for="exampleInputPhone3">Phone</label>
                                                                         <input type="text" name="phone"
-                                                                            class="form-control" id="exampleInputEmail3"
-                                                                            placeholder="Phone" />
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="exampleInputPassword">Password</label>
-                                                                        <input type="password" name="password"
-                                                                            class="form-control" id="exampleInputPassword"
-                                                                            placeholder="Password" />
+                                                                            class="form-control" id="exampleInputPhone3"
+                                                                            placeholder="Phone Number"
+                                                                            value="{{ $user['phone'] }}" />
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="exampleSelectGender">Role</label>
                                                                         <select class="form-control" name="role"
                                                                             id="exampleSelectGender">
-                                                                            <option selected disabled>Select a role</option>
-                                                                            <option value="user">User</option>
+                                                                            <option selected value="user">User</option>
                                                                             <option value="manager">Manager</option>
                                                                             <option value="admin">Admin</option>
                                                                         </select>
                                                                     </div>
                                                                     {{-- sssssssssssss --}}
-                                                                    <div class="mb-3">
-                                                                        <label for="formFileMultiple"
-                                                                            class="form-label">Image</label>
-                                                                        <input name="image" style=""
-                                                                            class="form-control btn btn-primary"
-                                                                            type="file" id="formFileMultiple"
-                                                                            multiple="">
-                                                                    </div>
+                                                                    @if (!($user->google_id || $user->github_id))
+                                                                        <div class="mb-3">
+                                                                            <label for="formFileMultiple"
+                                                                                class="form-label">Image</label>
+                                                                            <input name="image" style=""
+                                                                                class="form-control btn btn-primary"
+                                                                                type="file" id="formFileMultiple"
+                                                                                multiple="">
+                                                                        </div>
+                                                                    @endif
                                                                     <button type="submit"
-                                                                        class="btn btn-primary mr-2">Submit</button>
-                                                                    <button class="btn btn-danger">Cancel</button>
+                                                                        class="btn btn-primary mr-2">Update</button>
                                                                 </form>
+                                                                <button class="btn btn-danger" data-dismiss="modal"
+                                                                    aria-label="Close">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -360,8 +368,9 @@
                                             type="file" id="formFileMultiple" multiple="">
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                    <button class="btn btn-danger">Cancel</button>
+
                                 </form>
+                                <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -369,4 +378,42 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    {{-- delete button (event) sweet alert  --}}
+    <script>
+        let btn = document.querySelectorAll('#delete');
+        // let btn = document.getElementById('delete');
+        // console.log(btn);
+        btn.forEach(btn => {
+            btn.onclick = function() {
+                // btn.preventDefault();
+                console.log(btn);
+                swal({
+                        title: "Are you sure you want to delete this user?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "No, cancel!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm) {
+                        if (isConfirm) {
+                            // swal("Deleted!", "Event has been deleted", "success");
+                            // let val = document.querySelectorAll('btn > input');
+                            console.log(btn.value);
+                            // setTimeout((e) => {
+                            window.location.href = `/dashboard/users/delete/${btn.value}`;
+                            // }, 5000);
+                        } else {
+                            swal("Cancelled", "Your Event is safe ;)", "error");
+                        }
+                    });
+            }
+        });
+    </script>
 @endsection
