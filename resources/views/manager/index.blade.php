@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div class="container p-5">
+    <div class="container p-5">
         @if (session('addEvent'))
             <div class="alert alert-success"><strong>{{ session('addEvent') }}</strong></div>
         @endif
@@ -30,17 +30,15 @@
                                         data:image/jpg;charset=utf8;base64,
                                             {{ $user->image }} @endif
                                             "
-                                            w-100" alt="..."
-                                                    style=" height: 200px; object-fit:cover;"
-                                        
+                                            w-100" alt="..." style=" height: 200px; object-fit:cover;"
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
                                             <h2 class="mb-3 text-dark">{{ $user->name }}</h2>
-                                            @if(auth()->user()->role == 'manager')
-                                            <h6 class="text-dark mb-1">Events Manager</h6>
-                                            {{-- <button class="btn btn-primary">Edit</button> --}}
+                                            @if (auth()->user()->role == 'manager')
+                                                <h6 class="text-dark mb-1">Events Manager</h6>
+                                                {{-- <button class="btn btn-primary">Edit</button> --}}
+                                            @endif
                                         </div>
-                                        @endif
                                         <hr class="my-4">
 
                                     </div>
@@ -76,23 +74,23 @@
                                     </ul>
 
                                     <hr class="mt-1">
-                                    @if(auth()->user()->role == 'manager')
-                                    <div class="d-flex flex-column align-items-center text-center">
-                                        donations here
-                                    </div>
+                                    @if (auth()->user()->role == 'manager')
+                                        <div class="d-flex flex-column align-items-center text-center">
+                                            donations here
+                                        </div>
 
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($user->eventts as $event)
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0"><i class="fa-solid fa-hand-holding-dollar"
-                                                        style="size:20px "></i>{{ $event->title }}</h6>
-                                                <span class="text-secondary"><a
-                                                        href="https://www.ripbozo.com/">{{ $event->donations->sum('amount') }}</a></span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <hr class="my-4">
+                                        <ul class="list-group list-group-flush">
+                                            @foreach ($user->eventts as $event)
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                    <h6 class="mb-0"><i class="fa-solid fa-hand-holding-dollar"
+                                                            style="size:20px "></i>{{ $event->title }}</h6>
+                                                    <span class="text-secondary"><a
+                                                            href="https://www.ripbozo.com/">{{ $event->donations->sum('amount') }}</a></span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <hr class="my-4">
                                     @endif
 
 
@@ -150,22 +148,22 @@
                                     </div>
                                 </div>
                             </div>
-                            @if ($user->role == 'manager')
-                                <div class="is-flex is-justify-content-space-between">
-                                    <h2 class="text-dark">Your Events</h2>
-
+                            <div class="is-flex is-justify-content-space-between">
+                                <h2 class="text-dark">Your Events</h2>
+                                @if ($user->role == 'manager')
                                     <button class="btn" type="button" id="addeventbtn"
                                         style="background: #F89D35; border:none;" data-bs-toggle="modal"
                                         data-bs-target="#eventModal">Add Event
                                     </button>
+                                @endif
 
-                                </div>
-                                <div class="row">
+                            </div>
+                            <div class="row">
+                                @if (auth()->user()->role == 'manager')
                                     @foreach ($user->eventts as $event)
                                         <div class="column is-4-desktop is-6-tablet">
                                             <div class="cause-item">
-                                                <img src="data:image/jpg;charset=utf8;base64,
-                                    {{ $event->thumbnail }}"
+                                                <img src="data:image/jpg;charset=utf8;base64,{{ $event->thumbnail }}"
                                                     class=" w-100" alt="..."
                                                     style=" height: 200px; object-fit:cover;">
 
@@ -188,8 +186,36 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    {{-- user events go here --}}
-                            @endif
+                                    @foreach ($user->volunteers as $volunteer)
+                                        <div class="column is-4-desktop is-6-tablet">
+                                            <div class="cause-item">
+                                                <img src="data:image/jpg;charset=utf8;base64,{{ $volunteer->eventt->thumbnail }}"
+                                                    class=" w-100" alt="..."
+                                                    style=" height: 200px; object-fit:cover;">
+                                                <div class="card-body">
+                                                    <h3 class="mb-4"><a
+                                                            href="cause-single.html">{{ $volunteer->eventt->title }}</a>
+                                                    </h3>
+
+                                                    <ul class="list-inline border-bottom border-top py-3 mb-4">
+                                                        <li class="list-inline-item">
+                                                            Location:<span>{{ $volunteer->eventt->location }}</span></li>
+                                                        <li class="list-inline-item">Date:
+                                                            <span>{{ $volunteer->eventt->date }}</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="single-event/{{ $volunteer->eventt->id }}"
+                                                        class="btn btn-main is-rounded">View Event</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
+                            </div>
+
+                            {{-- user events go here --}}
+                            {{-- @endif --}}
                         </div>
 
 
