@@ -16,6 +16,38 @@
         </div>
     </section>
 
+    @auth
+
+        @if (auth()->user()->donations->where('eventt_id', $singleEvent->id)->count() > 0 && auth()->user()->role == 'user')
+            <div class="text-center pt-5">
+                <div class="mt-5"></div>
+                <h5 class="text-center is-capitalize text-md ">You Have Donated To This Event You Are Amazing!</h5>
+            </div>
+        @endif
+    @endauth
+    @auth
+
+        @if ($singleEvent->user_id == auth()->user()->id && $singleEvent->publish)
+            <div style="display: flex; justify-content: center; margin-top: 3rem; gap: 4rem;">
+                <button class="btn" type="button" id="addeventbtn" style="background: #F89D35; border:none;"
+                    data-bs-toggle="modal" data-bs-target="#eventModal">Edit Event
+                </button>
+                <button class="btn" type="button" id="endeventbtn" style="background: red; color: white; border:none;"
+                    data-bs-toggle="modal" data-bs-target="#eventModalenda">End Event
+                </button>
+            </div>
+        @else
+            <div style="display: flex; justify-content: center; margin-top: 3rem; gap: 4rem;">
+                <button class="btn" type="button" id="addeventbtn" style="background: #F89D35; border:none;"
+                    data-bs-toggle="modal" data-bs-target="#eventModal">Edit Event
+                </button>
+                <button disabled class="btn" type="button" id="endeventbtn"
+                    style="background: red; color: white; border:none;" data-bs-toggle="modal"
+                    data-bs-target="#eventModalenda">Event Ended
+                </button>
+            </div>
+        @endif
+    @endauth
 
     <section class="section cause-single">
         <div class="container">
@@ -23,15 +55,13 @@
                 <div class="column is-10-desktop">
                     <div class="single-details">
                         <img src="images/gallery/7.jpg" alt="" class=" w-100">
-
-
                         <div>
                             {{-- {{$singleEvent->image}} --}}
                             <img src="data:image/jpg;charset=utf8;base64, {{ $singleEvent['thumbnail'] }}" class="w-100"
                                 alt="...">
                         </div>
 
-                        <h2 class="my-5 text-lg">{{ $singleEvent->title }}</h2>
+                        <h2 id="evee" class="my-5 text-lg">{{ $singleEvent->title }}</h2>
                         <p class="mt-4">{{ $singleEvent->description }}</p>
                         <div class="d-flex justify-content-around">
                             <ul class="list-styled mt-5  gap-3 flex-wrap">
@@ -43,7 +73,8 @@
 
                             <ul class="list-styled mt-5  gap-3 flex-wrap">
                                 <li><span style="font-weight: 900">Date Start:</span> {{ $singleEvent->date }}</li>
-                                <li><span style="font-weight: 900">Capacity:</span> {{ $singleEvent->capacity }} Person</li>
+                                <li><span style="font-weight: 900">Capacity:</span>
+                                    {{ $singleEvent->volunteers->count() . ' / ' . $singleEvent->capacity }} Person</li>
                                 <li><span style="font-weight: 900">Tags:</span> {{ $singleEvent->tags }}</li>
                             </ul>
                         </div>
@@ -72,143 +103,123 @@
                                 </a>
                             @endguest
                             @auth
-                                <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
-                                    data-bs-toggle="modal" data-bs-target="#volunteerModal">
-                                    Volunteer Now
-                                </button>
+                                @if (auth()->user()->volunteers->where('eventt_id', $singleEvent->id)->count() > 0)
+                                    <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                        data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                        Already Joined
+                                    </button>
+                                @elseif ($singleEvent->volunteers->count() == $singleEvent->capacity)
+                                    <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                        data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                        Volunteers Are full
+                                    </button>
+                                @else
+                                    <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                        data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                        Volunteer Now
+                                    </button>
+                                @endif
                             @endauth
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Donate Now</a> --}}
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Volunteer Now</a> --}}
                         </div>
-
                         {{-- user Add comment --}}
-
-
-                        <section style="background-color: #f7f6f6;">
-                            <div class="container my-5 py-5 text-dark">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-10 col-lg-8 col-xl-6">
-                                        <div class="card">
-                                            <div class="card-body p-4">
-                                                <div class="d-flex flex-start w-100">
-
-                                                    <div class="w-100">
-                                                        <form action="/post-comment" method="POST">
-                                                            @csrf
-                                                            <h5 class="mb-2">Add a comment</h5>
-                                                            @error('comment')
-                                                                <small class="text-danger">{{ $message }}</small>
-                                                            @enderror
-
-                                                            <div class="form-outline">
-                                                                <textarea name="comment" class="form-control" id="textAreaExample" rows="4"></textarea>
-                                                                <label class="form-label" for="textAreaExample">What is your
-                                                                    comment?</label>
-                                                                <input name="eventt_id" type="hidden"
-                                                                    value=" {{ $singleEvent->id }} ">
-                                                                @auth
-                                                                    <input name="user_id" type="hidden"
-                                                                        value=" {{ auth()->user()->id }} ">
-                                                                @endauth
-                                                            </div>
-                                                            <div class="d-flex justify-content-end mt-3">
-                                                                <button style="background-color:#863bae; color:white"
-                                                                    type="submit" class="btn">
-                                                                    Send <i style="color:white"
-                                                                        class="fas fa-long-arrow-alt-right ms-1"></i>
-                                                                </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                     </div>
-                    {{-- </section> --}}
+                </div>
+            </div>
 
 
-                    {{-- they are in the same section --}}
+            {{-- they are in the same section --}}
 
 
-                    {{-- -------------------------------------------- users comments --------------------------------------- --}}
+            {{-- -------------------------------------------- users comments --------------------------------------- --}}
+            <div class="column is-12 mb-5">
+                <div class="comment-area">
+                    <h3 class="mb-5">{{ $comments->count() }} Comments</h3>
+                    <ul class="comment-tree list-unstyled">
+                        @foreach ($comments as $comment)
+                            <li class="mb-5">
+                                <div class="comment-area-box is-flex">
+                                    <img style="width: 50px; height: 50px ;" alt=""
+                                        src="{{ $comment->user->image }}" class="mr-4 rounded-circle ">
 
-                    {{-- <section style="background-color: #f7f6f6;"> --}}
-                    <div class="container my-5 py-5 text-dark">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-12 col-lg-10 col-xl-8">
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <h4 class="text-dark mb-0">Comments</h4>
-                                    <div class="card">
-                                    </div>
-                                </div>
-
-
-                                @foreach ($comments as $comment)
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-start">
-                                                <img class="rounded-circle shadow-1-strong me-3"
-                                                    src="
-                                                    @if ($comment->user->google_id || $comment->user->github_id) {{ $comment->user->image }}
-                                        @else
-                                        data:image/jpg;charset=utf8;base64,
-                                            {{ $comment->user->image }} @endif
-                                            "
-                                                    alt="avatar" width="90" height="auto" />
-                                                <div class="w-100 d-flex justify-content-between align-items-end">
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                                        <h6 class="text-warning fw-bold mb-0">
-                                                            {{ $comment->user->name }}
-                                                            <p style="width:470px; height:auto;"
-                                                                class="text-dark ms-2 mb-2 d-fle flex-wrap">
-                                                                {{ $comment->comment }}
-                                                            </p>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        {{-- <p class="small mb-0" style="color: #aaa;">
-                                              <a href="#!" class="link-grey">Remove</a> •
-                                              <a href="#!" class="link-grey">Reply</a> •
-                                              <a href="#!" class="link-grey">Translate</a>
-                                            </p> --}}
-                                                        <div class="d-flex flex-row">
-                                                            {{-- <i class="far fa-check-circle text-primary"></i> --}}
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div>
+                                        <div class="is-flex is-justify-content-space-between is-align-items-center">
+                                            <div>
+                                                <h5>{{ $comment->user->name }}</h5>
+                                                <span class="date-comm">{{ $comment->created_at }}</span>
                                             </div>
+
+
+                                        </div>
+
+                                        <div class="comment-content mt-3">
+                                            <p>{{ $comment->comment }}</p>
                                         </div>
                                     </div>
-                                @endforeach
+                                </div>
+                            </li>
+                        @endforeach
 
-                            </div>
+
+                    </ul>
+                </div>
+            </div>
+            {{-- new form --}}
+            <div class="column is-12">
+                <form action="/post-comment" method="POST">
+                    <input name="eventt_id" type="hidden" value=" {{ $singleEvent->id }} ">
+                    @auth
+                        <input name="user_id" type="hidden" value=" {{ auth()->user()->id }} ">
+                    @endauth
+                    @csrf
+                    <h3 class="mb-5">Leave a comment</h3>
+                    <div class="columns is-multiline">
+
+                        <div class="column is-12">
+                            <textarea class="input mb-3" name="comment" cols="30" style="height: 100px" rows="10"
+                                placeholder="Comment"></textarea>
+                            @error('comment')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="column is-12">
+                            @auth
+                                <button class="btn btn-main is-rounded" type="submit">Submit</button>
+                            @else
+                                <a href="/register"class="btn btn-main is-rounded">Sign in to leave a
+                                    comment</a>
+                            @endauth
                         </div>
                     </div>
-    </section>
+                </form>
+            </div>
 
 
 
-    <div class="share-option mt-5 clearfix py-5">
-        <ul class="list-inline mb-0">
-            <li class="list-inline-item"> <strong>Share Cause:</strong> </li>
-            <li class="list-inline-item"><a href="#" target="_blank"><i
-                        class="icofont-facebook mr-2"></i>Facebook</a>
-            </li>
-            <li class="list-inline-item"><a href="#" target="_blank"><i
-                        class="icofont-twitter mr-2"></i>Twitter</a>
-            </li>
-            <li class="list-inline-item"><a href="#" target="_blank"><i
-                        class="icofont-pinterest mr-2"></i>Pinterest</a></li>
-            <li class="list-inline-item"><a href="#" target="_blank"><i
-                        class="icofont-linkedin mr-2"></i>Linkedin</a></li>
-        </ul>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+            {{-- -------------------------------------------- users comments --------------------------------------- --}}
+            {{-- <section style="background-color: #f7f6f6;"> --}}
+
+
+
+
+            <div class="share-option mt-5 clearfix py-5">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item"> <strong>Share Cause:</strong> </li>
+                    <li class="list-inline-item"><a href="#" target="_blank"><i
+                                class="icofont-facebook mr-2"></i>Facebook</a>
+                    </li>
+                    <li class="list-inline-item"><a href="#" target="_blank"><i
+                                class="icofont-twitter mr-2"></i>Twitter</a>
+                    </li>
+                    <li class="list-inline-item"><a href="#" target="_blank"><i
+                                class="icofont-pinterest mr-2"></i>Pinterest</a></li>
+                    <li class="list-inline-item"><a href="#" target="_blank"><i
+                                class="icofont-linkedin mr-2"></i>Linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+
     </section>
 
     <div class="modal" id="modalDonate">
@@ -258,6 +269,163 @@
             </form>
         </div>
     </div>
+    {{-- modal edit-------------------------------------------------------------------- --}}
+    <div class="modal" id="eventModal">
+        <div class="modal-background deleteModalVolunteer1"></div>
+        <div class="modal-card">
+            {{-- <header class="modal-card-head">
+                <p class="modal-card-title">Create Volunteering Event</p>
+                <button class="delete deleteModalVolunteer" aria-label="close"></button>
+            </header> --}}
+            <section class="modal-card-body" style="background-color: #F89D35">
+                <div class="volunteer-form-wrap">
+
+                    <h2 class="mb-6 text-lg text-dark">Create Event</h2>
+                    <form method="POST" action="/manager/update" class="volunteer-form" enctype="multipart/form-data">
+                        <input name="id" type="hidden" value="{{ $singleEvent->id }}">
+                        @csrf
+                        <div class="mb-4">
+                            @error('Title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            <input value="{{ $singleEvent->title }}" name="title" type="text" class="input"
+                                placeholder="Title" />
+                        </div>
+                        <div class="is-flex ">
+                            <div class="mb-4 w-75 mr-3">
+                                @error('location')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <input value="{{ $singleEvent->location }}" name="location" type="text"
+                                    class="input" placeholder="Event Address" />
+                            </div>
+                            <div class="mb-4 w-25">
+                                @error('city')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <select class="input" name="city">
+                                    <option selected disabled>Select a city</option>
+                                    <option value="Amman">Amman</option>
+                                    <option value="Zarqa">Zarqa</option>
+                                    <option value="Irbid">Irbid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            @error('capacity')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            <input value="{{ $singleEvent->capacity }}" name="capacity" type="number" class="input"
+                                placeholder="Event Capacity" />
+                        </div>
+                        <div class="is-flex ">
+                            <div class="mb-4 mr-5">
+                                @error('date')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                {{-- <label for="">Date</label> --}}
+                                <input value="{{ $singleEvent->date }}" name="date" type="datetime-local"
+                                    class="input" id="eventdate" placeholder="Event date" />
+                            </div>
+                            <div class="mb-4">
+                                @error('duration')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <input value="{{ $singleEvent->duration }}" name="duration" type="number"
+                                    class="input" placeholder="Event Duration(hours)" />
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            @error('description')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            <textarea name="description" class="input" placeholder="Event Description">{{ $singleEvent->description }}</textarea>
+                        </div>
+                        <div class="mb-4">
+                            @error('tags')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            <input {{ $singleEvent->tags }} name="tags" type="text" class="input"
+                                placeholder="Event Tags" />
+                        </div>
+                        <div class="is-flex">
+                            <div class="file is-light mr-3">
+                                @error('thumbnail')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="thumbnail">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose Thumbnail
+                                        </span>
+                                    </span>
+
+                                </label>
+                            </div>
+                            <div class="file is-light">
+                                @error('banner')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <label class="file-label">
+                                    <input class="file-input" type="file" name="banner">
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Choose Banner
+                                        </span>
+                                    </span>
+
+                                </label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                        <button type="submit" class="btn btn-main is-rounded mt-5" style="background-color: black;">
+                            <h4 style="color:#F89D35">Create</h4>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    {{-- modal edit --}}
+    {{-- modal end-------------------------------------------------------------------- --}}
+    <div class="modal" id="eventModalenda">
+        <div class="modal-background deleteModalVolunteer2"></div>
+        <div class="modal-card">
+            {{-- <header class="modal-card-head">
+                <p class="modal-card-title">Create Volunteering Event</p>
+                <button class="delete deleteModalVolunteer" aria-label="close"></button>
+            </header> --}}
+            <section class="modal-card-body" style="background-color: #F89D35">
+                <div class="volunteer-form-wrap">
+
+                    <h2 class="mb-6 text-lg text-dark">End Event</h2>
+                    <form method="POST" action="/manager/end" class="volunteer-form" enctype="multipart/form-data">
+                        @csrf
+                        <input name="id" type="hidden" value="{{ $singleEvent->id }}">
+                        <div class="mb-4">
+                            @error('amount')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                            <h4 class="text-dark">How Many Points Do You Want To Send To Volunteers?</h4>
+                            <input value="{{ $singleEvent->title }}" name="amount" type="number" class="input mt-3"
+                                placeholder="amount" />
+                        </div>
+                        <button type="submit" class="btn btn-main is-rounded mt-5" style="background-color: red;">
+                            <h4 style="color:white">End</h4>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    {{-- modal end --}}
 @endsection
 
 @section('script')
@@ -279,6 +447,28 @@
         [...deleteVolunteerModal].forEach(element => {
             element.onclick = function() {
                 document.querySelector('#modalVolunteer').classList.remove('is-active');
+            }
+        });
+    </script>
+    <script>
+        document.querySelector('#addeventbtn').onclick = function() {
+            document.querySelector('#eventModal').classList.add('is-active');
+        }
+        let deleteVolunteerModal1 = document.querySelectorAll('.deleteModalVolunteer1');
+        [...deleteVolunteerModal1].forEach(element => {
+            element.onclick = function() {
+                document.querySelector('#eventModal').classList.remove('is-active');
+            }
+        });
+    </script>
+    <script>
+        document.querySelector('#endeventbtn').onclick = function() {
+            document.querySelector('#eventModalenda').classList.add('is-active');
+        }
+        let deleteVolunteerModal2 = document.querySelectorAll('.deleteModalVolunteer2');
+        [...deleteVolunteerModal2].forEach(element => {
+            element.onclick = function() {
+                document.querySelector('#eventModal').classList.remove('is-active');
             }
         });
     </script>

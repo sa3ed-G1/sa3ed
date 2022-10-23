@@ -139,6 +139,17 @@
                                             @endif
                                         </div>
                                     </div>
+                                    @if (auth()->user()->pendings->count() > 0 && auth()->user()->role == 'user')
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h5 class="mb-0 text-white">Manager Programme</h5>
+                                            </div>
+                                            <div class="col-sm-9 text-light">
+                                                Your application is in review...
+                                            </div>
+                                        </div>
+                                    @endif
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-12">
