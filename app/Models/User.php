@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Pending;
 use App\Models\Donation;
 use App\Models\Volunteer;
+use App\Models\Offer;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -74,5 +75,9 @@ class User extends Authenticatable
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
+    }
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
     }
 }
