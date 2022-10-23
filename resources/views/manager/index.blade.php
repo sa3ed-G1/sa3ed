@@ -39,8 +39,9 @@
                                             @if(auth()->user()->role == 'manager')
                                             <h6 class="text-dark mb-1">Events Manager</h6>
                                             {{-- <button class="btn btn-primary">Edit</button> --}}
+                                            @endif
                                         </div>
-                                        @endif
+                                        
                                         <hr class="my-4">
 
                                     </div>
