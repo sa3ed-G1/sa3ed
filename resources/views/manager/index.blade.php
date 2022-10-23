@@ -275,7 +275,7 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                     {{-- <label for="">Date</label> --}}
-                                    <input name="date" type="date" class="input" id="eventdate"
+                                    <input name="date" type="datetime-local" class="input" id="eventdate"
                                         placeholder="Event date" />
                                 </div>
                                 <div class="mb-4">
