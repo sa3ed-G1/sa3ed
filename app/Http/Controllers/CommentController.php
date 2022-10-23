@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
@@ -35,7 +36,27 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate(
+            ['comment' => 'required'],
+            ['comment.required' => 'Write a comment before submit !!']
+        );
+
+        $newComment = new Comment();
+        $newComment->comment = $request->comment;
+        $newComment->eventt_id = $request->eventt_id;
+        $newComment->user_id = $request->user_id;
+
+        $newComment->save();
+
+        $allComments = Comment::all();
+
+
+        // dd($allComments);
+        // return redirect(1,'comments' , $allComments);
+        return Redirect::back()->withErrors('');
+        // return back()->withInput(['msg' => $allComments, 'msg_type' => $msg_type]);
+        // return back()->with(['comments'=> $allComments])->withErrors('');
     }
 
     /**

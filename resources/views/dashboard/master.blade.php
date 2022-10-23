@@ -53,36 +53,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"
-                            data-toggle="dropdown">
-                            <i class="icon-bell mx-0"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                            aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">
-                                Notifications
-                            </p>
 
-
-                            <div class="dropdown-item preview-item">
-                                <div class="preview-thumb   nail">
-                                    <div class="preview-icon bg-info">
-                                        <i class="ti-user mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-normal">
-                                        user req
-                                    </h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        when he applied date
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="{{ auth()->user()->image }}" alt="profile" />
@@ -90,17 +61,17 @@
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
 
+                            <a href="/" class="dropdown-item">
+                                <i class="ti-home text-primary"></i>
+                                Website
+                            </a>
                             <a href="/logout" class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
+                                <i class="ti-power-off text-danger"></i>
                                 Logout
                             </a>
                         </div>
                     </li>
-                    {{-- <li class="nav-item nav-settings d-none d-lg-flex">
-                        <a class="nav-link" href="#">
-                            <i class="icon-ellipsis"></i>
-                        </a>
-                    </li> --}}
+
                 </ul>
 
             </div>

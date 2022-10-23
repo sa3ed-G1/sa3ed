@@ -25,3 +25,5 @@ Route::post('editUser/{id}', [UserAdminController::class, 'edit']);
 Route::post('/donation/{id}', [UserAdminController::class, 'donate']);
 
 Route::post('/volunteer/{id}', [UserAdminController::class, 'volunteer']);
+
+Route::get('dashboard/users/delete/{id}', [UserAdminController::class, 'destroy']);

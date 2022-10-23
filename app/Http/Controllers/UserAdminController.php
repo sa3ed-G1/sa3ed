@@ -56,7 +56,7 @@ class UserAdminController extends Controller
         $formFields['password'] = bcrypt($formFields['password']);
         // dd($formFields);
         $id = User::create($formFields)->id;
-        Wallet::create(['user_id'=> $id, 'balance' => 0, ]);
+        Wallet::create(['user_id' => $id, 'balance' => 0,]);
         return redirect("/dashboard/users")->with('addUser', "Success , You Added New User");
     }
 
@@ -94,7 +94,7 @@ class UserAdminController extends Controller
         $formFields = $request->validate([
             "name" => "required",
             "email" => "required",
-            "phone" => "required",
+            "phone" => "max:10",
             "role" => "required",
         ]);
         // dd($request->file);
@@ -158,5 +158,11 @@ class UserAdminController extends Controller
         $volunteer->save();
 
         return redirect('single-event/' . $id)->with('volunteer', 'You Volunteer In This Event Now');
+    }
+
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+        return redirect('/dashboard/users');
     }
 }

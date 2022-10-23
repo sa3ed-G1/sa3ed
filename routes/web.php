@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Models\Eventt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -77,3 +78,4 @@ Route::resource('/profile', ManagerController::class);
 //Route for the adminDashboard with gate only for the role admin
 // Route::get('/dashboard', [App\Http\Controllers\AuthorizationController::class, 'index'])->name('index')->middleware('can:isAdmin');
 // =====NEED A DASHBOARD==== tested done*
+Route::post('/post-comment', [CommentController::class, 'store']);
