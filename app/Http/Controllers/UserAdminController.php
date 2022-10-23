@@ -56,7 +56,7 @@ class UserAdminController extends Controller
         $formFields['password'] = bcrypt($formFields['password']);
         // dd($formFields);
         $id = User::create($formFields)->id;
-        Wallet::create(['user_id'=> $id, 'balance' => 0, ]);
+        Wallet::create(['user_id' => $id, 'balance' => 0,]);
         return redirect("/dashboard/users")->with('addUser', "Success , You Added New User");
     }
 
