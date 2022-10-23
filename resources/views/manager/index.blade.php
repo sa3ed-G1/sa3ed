@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div class="container p-5">
+    <div class="container p-5">
         @if (session('addEvent'))
             <div class="alert alert-success"><strong>{{ session('addEvent') }}</strong></div>
         @endif
@@ -30,17 +30,15 @@
                                         data:image/jpg;charset=utf8;base64,
                                             {{ $user->image }} @endif
                                             "
-                                            w-100" alt="..."
-                                                    style=" height: 200px; object-fit:cover;"
-                                        
+                                            w-100" alt="..." style=" height: 200px; object-fit:cover;"
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
                                             <h2 class="mb-3 text-dark">{{ $user->name }}</h2>
-                                            @if(auth()->user()->role == 'manager')
-                                            <h6 class="text-dark mb-1">Events Manager</h6>
-                                            {{-- <button class="btn btn-primary">Edit</button> --}}
+                                            @if (auth()->user()->role == 'manager')
+                                                <h6 class="text-dark mb-1">Events Manager</h6>
+                                                {{-- <button class="btn btn-primary">Edit</button> --}}
+                                            @endif
                                         </div>
-                                        @endif
                                         <hr class="my-4">
 
                                     </div>
@@ -76,23 +74,23 @@
                                     </ul>
 
                                     <hr class="mt-1">
-                                    @if(auth()->user()->role == 'manager')
-                                    <div class="d-flex flex-column align-items-center text-center">
-                                        donations here
-                                    </div>
+                                    @if (auth()->user()->role == 'manager')
+                                        <div class="d-flex flex-column align-items-center text-center">
+                                            donations here
+                                        </div>
 
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($user->eventts as $event)
-                                            <li
-                                                class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                                <h6 class="mb-0"><i class="fa-solid fa-hand-holding-dollar"
-                                                        style="size:20px "></i>{{ $event->title }}</h6>
-                                                <span class="text-secondary"><a
-                                                        href="https://www.ripbozo.com/">{{ $event->donations->sum('amount') }}</a></span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <hr class="my-4">
+                                        <ul class="list-group list-group-flush">
+                                            @foreach ($user->eventts as $event)
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                                    <h6 class="mb-0"><i class="fa-solid fa-hand-holding-dollar"
+                                                            style="size:20px "></i>{{ $event->title }}</h6>
+                                                    <span class="text-secondary"><a
+                                                            href="https://www.ripbozo.com/">{{ $event->donations->sum('amount') }}</a></span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <hr class="my-4">
                                     @endif
 
 
@@ -249,7 +247,7 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                     {{-- <label for="">Date</label> --}}
-                                    <input name="date" type="date" class="input" id="eventdate"
+                                    <input name="date" type="datetime-local" class="input" id="eventdate"
                                         placeholder="Event date" />
                                 </div>
                                 <div class="mb-4">

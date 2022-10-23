@@ -60,7 +60,7 @@ class UserController extends Controller
         $newUser->password = Hash::make($request->password);
         $newUser->save();
         Auth::login($newUser);
-        Wallet::create(['user_id'=> auth()->user()->id, 'balance' => 0, ]);
+        Wallet::create(['user_id' => auth()->user()->id, 'balance' => 0,]);
 
         return redirect('/');
     }
@@ -113,7 +113,6 @@ class UserController extends Controller
         if ($finduser) {
 
             Auth::login($finduser);
-
             return redirect()->intended('/');
         } else {
 
@@ -125,10 +124,10 @@ class UserController extends Controller
             $newUser->google_id       = $user->id;
 
             $newUser->save();
-
             Auth::login($newUser);
+            Wallet::create(['user_id' => auth()->user()->id, 'balance' => 0,]);
 
-            // return redirect()->back();
+            // return redirect()->back()->inteded();
             return redirect()->intended('/');
         }
     }
@@ -179,6 +178,7 @@ class UserController extends Controller
             $signUser =  User::create($githubUserInfoSignup);
             session()->regenerate();
             auth()->login($signUser);
+            Wallet::create(['user_id' => auth()->user()->id, 'balance' => 0,]);
             return redirect('dashboard');
         }
     }
