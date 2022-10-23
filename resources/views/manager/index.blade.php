@@ -148,22 +148,22 @@
                                     </div>
                                 </div>
                             </div>
-                            @if ($user->role == 'manager')
-                                <div class="is-flex is-justify-content-space-between">
-                                    <h2 class="text-dark">Your Events</h2>
-
+                            <div class="is-flex is-justify-content-space-between">
+                                <h2 class="text-dark">Your Events</h2>
+                                @if ($user->role == 'manager')
                                     <button class="btn" type="button" id="addeventbtn"
                                         style="background: #F89D35; border:none;" data-bs-toggle="modal"
                                         data-bs-target="#eventModal">Add Event
                                     </button>
+                                @endif
 
-                                </div>
-                                <div class="row">
+                            </div>
+                            <div class="row">
+                                @if (auth()->user()->role == 'manager')
                                     @foreach ($user->eventts as $event)
                                         <div class="column is-4-desktop is-6-tablet">
                                             <div class="cause-item">
-                                                <img src="data:image/jpg;charset=utf8;base64,
-                                    {{ $event->thumbnail }}"
+                                                <img src="data:image/jpg;charset=utf8;base64,{{ $event->thumbnail }}"
                                                     class=" w-100" alt="..."
                                                     style=" height: 200px; object-fit:cover;">
 
@@ -186,8 +186,36 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    {{-- user events go here --}}
-                            @endif
+                                    @foreach ($user->volunteers as $volunteer)
+                                        <div class="column is-4-desktop is-6-tablet">
+                                            <div class="cause-item">
+                                                <img src="data:image/jpg;charset=utf8;base64,{{ $volunteer->eventt->thumbnail }}"
+                                                    class=" w-100" alt="..."
+                                                    style=" height: 200px; object-fit:cover;">
+                                                <div class="card-body">
+                                                    <h3 class="mb-4"><a
+                                                            href="cause-single.html">{{ $volunteer->eventt->title }}</a>
+                                                    </h3>
+
+                                                    <ul class="list-inline border-bottom border-top py-3 mb-4">
+                                                        <li class="list-inline-item">
+                                                            Location:<span>{{ $volunteer->eventt->location }}</span></li>
+                                                        <li class="list-inline-item">Date:
+                                                            <span>{{ $volunteer->eventt->date }}</span>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="single-event/{{ $volunteer->eventt->id }}"
+                                                        class="btn btn-main is-rounded">View Event</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
+                            </div>
+
+                            {{-- user events go here --}}
+                            {{-- @endif --}}
                         </div>
 
 
