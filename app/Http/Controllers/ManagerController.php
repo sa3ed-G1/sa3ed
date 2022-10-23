@@ -68,7 +68,7 @@ class ManagerController extends Controller
         $formFields = $request->validate([
             "name" => "required",
             "email" => "required",
-            "phone" => "integer"
+            "phone" => "max:10"
         ]);
         // dd($request->file);
         if ($request->image) {
