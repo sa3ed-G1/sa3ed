@@ -129,7 +129,7 @@
                                             <h5 class="mb-0 text-white">Wallet Points</h5>
                                         </div>
                                         <div class="col-sm-9 text-light">
-                                            {{ $user->wallet->sum('balance') }}
+                                            {{ auth()->user()->wallet->balance }}
                                         </div>
                                     </div>
                                     <hr>
@@ -341,7 +341,7 @@
                                 @error('phone')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
-                                <input name="phone" value="{{ auth()->user()->phone }}" class="input"
+                                <input name="phone" type="tel" value="{{ auth()->user()->phone }}" class="input"
                                     placeholder="Phone Number" />
                             </div>
 

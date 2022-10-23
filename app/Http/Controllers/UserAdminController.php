@@ -44,19 +44,19 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $formFields = $request->validate([
             "name" => "required",
             "email" => "required",
             "password" => "required",
-            "phone" => "required",
+            "phone" => "max:10",
             "role" => "required",
             "image" => "required",
         ]);
         $formFields['image'] = base64_encode(file_get_contents($request->file('image')));
         $formFields['password'] = bcrypt($formFields['password']);
         // dd($formFields);
-        User::create($formFields);
+        $id = User::create($formFields)->id;
+        Wallet::create(['user_id'=> $id, 'balance' => 0, ]);
         return redirect("/dashboard/users")->with('addUser', "Success , You Added New User");
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 
+use App\Models\Wallet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,6 +60,7 @@ class UserController extends Controller
         $newUser->password = Hash::make($request->password);
         $newUser->save();
         Auth::login($newUser);
+        Wallet::create(['user_id'=> auth()->user()->id, 'balance' => 0, ]);
 
         return redirect('/');
     }
