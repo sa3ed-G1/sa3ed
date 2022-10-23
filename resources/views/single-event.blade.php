@@ -51,15 +51,32 @@
                             class="is-flex-tablet is-justify-content-space-around is-align-items-center has-text-centered border-top pt-4 mt-6">
                             <h4 class="my-4">Be a part of noble work</h4>
                             <!-- Button trigger modal -->
-                            <button type="button" id='btnDonate' class="btn btn-main-2 is-rounded" data-bs-toggle="modal"
-                                data-bs-target="#donateModal">
-                                Donate Now
-                            </button>
-
-                            <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
-                                data-bs-toggle="modal" data-bs-target="#volunteerModal">
-                                Volunteer Now
-                            </button>
+                            @guest
+                                <a href="/register">
+                                    <button type="button" class="btn btn-main-2 is-rounded">
+                                        Login to Donate
+                                    </button>
+                                </a>
+                            @endguest
+                            @auth
+                                <button type="button" id='btnDonate' class="btn btn-main-2 is-rounded" data-bs-toggle="modal"
+                                    data-bs-target="#donateModal">
+                                    Donate Now
+                                </button>
+                            @endauth
+                            @guest
+                                <a href="/register">
+                                    <button type="button" class="btn btn-main-2 is-rounded">
+                                        Login to volunteer
+                                    </button>
+                                </a>
+                            @endguest
+                            @auth
+                                <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                    data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                    Volunteer Now
+                                </button>
+                            @endauth
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Donate Now</a> --}}
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Volunteer Now</a> --}}
                         </div>
@@ -89,8 +106,10 @@
                                                                     comment?</label>
                                                                 <input name="eventt_id" type="hidden"
                                                                     value=" {{ $singleEvent->id }} ">
-                                                                <input name="user_id" type="hidden"
-                                                                    value=" {{ auth()->user()->id }} ">
+                                                                @auth
+                                                                    <input name="user_id" type="hidden"
+                                                                        value=" {{ auth()->user()->id }} ">
+                                                                @endauth
                                                             </div>
                                                             <div class="d-flex justify-content-end mt-3">
                                                                 <button style="background-color:#863bae; color:white"
@@ -206,7 +225,9 @@
                     <input type="number" name="amount" id="amount">
                     {{-- {{ url() }} --}}
                     <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    @auth
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    @endauth
             </section>
             <footer class="modal-card-foot">
                 <button type="submit" class="button is-success">Donate</button>
@@ -226,7 +247,9 @@
                 <form action="/volunteer/{{ $singleEvent->id }}" method="post">
                     @csrf
                     <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    @auth
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                    @endauth
             </section>
             <footer class="modal-card-foot">
                 <button type="submit" class="button is-success">Become A Volunteer</button>

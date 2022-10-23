@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Eventt;
 use App\Models\Donation;
+use App\Models\Volunteer;
 use App\Models\Wallet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ class ManagerController extends Controller
     {
         $user = auth()->user();
         $event = auth()->user()->eventts;
+        // $volunteer = auth()->user()->volunteer;
         $donations = auth()->user()->donations;
         // $manager = User::where('role', 'manager');
         return view('manager.index', ['user' => $user, 'event' => $event, 'donations' => $donations]);

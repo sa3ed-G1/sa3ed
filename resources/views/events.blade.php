@@ -29,8 +29,9 @@ background-size: cover;"
                     placeholder="Search" />
             </div> --}}
             <div class="input-group rounded w-100">
-                <input style="width:300px" type="search" class="form-control rounded" placeholder="Search by event name, city, duration"
-                    aria-label="Search" aria-describedby="search-addon" />
+                <input style="width:300px" type="search" class="form-control rounded"
+                    placeholder="Search by event name, city, duration" aria-label="Search"
+                    aria-describedby="search-addon" />
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="fas fa-search"></i>
                 </span>
@@ -52,7 +53,8 @@ background-size: cover;"
 
                             <div class="card-body">
 
-                                <h3 class="mb-4"><a href="event-single.html" class="is-block">{{ $event->title }}</a></h3>
+                                <h3 class="mb-4"><a href="single-event/{{ $event->id }}"
+                                        class="is-block">{{ $event->title }}</a></h3>
                                 <p>{{ substr($event->description, 0, 100) }}...</p>
                             </div>
                             <ul class="list-group list-group-flush">
