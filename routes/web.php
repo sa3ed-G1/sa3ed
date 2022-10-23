@@ -71,6 +71,8 @@ Route::resource('/dashboard/pendings', PendingController::class);
 Route::get('/dashboard/events/unassign/{id}', [PendingController::class, 'unassign']);
 Route::resource('/dashboard/donations', DonationController::class);
 
+Route::resource('/profile', ManagerController::class);
+
 //Route for the adminDashboard with gate only for the role admin
 // Route::get('/dashboard', [App\Http\Controllers\AuthorizationController::class, 'index'])->name('index')->middleware('can:isAdmin');
 // =====NEED A DASHBOARD==== tested done*
