@@ -7,6 +7,18 @@
             background-size: cover;
         }
     </style>
+    @if(session('addOffer'))
+        <script>
+            window.onload= function() {
+            Swal.fire(
+                'Thank you !',
+                'Your offer is confirmed, You will receive an SMS with your discount code shortly!',
+                'success' 
+                );
+            }
+
+        </script>
+    @endif
     <section class="page-title jumbotron bg-5">
         <div class="container ">
             <div class="columns">
@@ -21,11 +33,14 @@
         </div>
     </section>
     <div class="container ">
+        <h1>You Have {{auth()->user()->wallet->balance}} Points</h1>
         <div class="row my-5 ">
+            @foreach ($offers as $offer)
+            {{-- <h3>You Have {{!(auth()->user()->offer_users->where('offer_id', $offer['id'])->isEmpty())}} Points</h3> --}}
             <div class="card col-lg-4">
                 <div class="card-img-sec">
                     {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
-                    <img class="card-img-top" src="https://couponzimages.dsquares.com/orange/images/main/1572.jpg"
+                    <img class="card-img-top" src="{{$offer['image']}}"
                         alt="Card image">
                     <span class="img-tag img-tag-2"></span>
                     </a>
@@ -34,198 +49,24 @@
 
                     <div class="header-container">
 
-                        <h4 class="card-title ">Wazzup Dog - 50% discount</h4>
-
+                        <h4 class="card-title ">{{$offer['title']}}</h4>
                         <div class="share-button-sec">
-
                         </div>
-
-
-
-
                     </div>
-
-                    <p class="card-text pb-2">Get your sandwich for <b>100</b> points&nbsp;</p>
-
+                    <p class="card-text pb-2">{{$offer['description']}} for <b>{{$offer['point']}}</b> points&nbsp;</p>
                     {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                    <button onclick="claimDiscount()" type="button" class="btn btn-warning" id="btnClaim"><i
-                            class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
-
-                </div>
-
-            </div>
-            <div class="card col-lg-4 ">
-                <div class="card-img-sec">
-                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
-                    <img class="card-img-top" src="https://couponzimages.dsquares.com/orange/images/main/1571.jpg"
-                        alt="Card image">
-                    <span class="img-tag img-tag-2"></span>
+                    @if (auth()->user()->wallet->balance < $offer['point'] || !(auth()->user()->offer_users->where('offer_id', $offer['id'])->isEmpty())) 
+                        <button type="button" disabled class="btn btn-warning" id="btnClaim"><i class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
+                    @else
+                    <a href="claimOffer/{{$offer['id']}}">
+                        <button type="button" class="btn btn-warning" id="btnClaim"><i class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
                     </a>
-                </div>
-                <div class="card-body pt-3 pl-1">
-
-                    <div class="header-container">
-
-                        <h4 class="card-title ">Chipsy Jo 30% discount</h4>
-
-                        <div class="share-button-sec">
-
-                        </div>
-
-
-
-
+                    @endif
                     </div>
-
-                    <p class="card-text pb-2">Get your sandwich for <b>75</b> points&nbsp;</p>
-
-                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                    <button
-                        onclick=" Swal.fire(
-            'Thank you !',
-            'Your offer is confirmed, You will receive an SMS with your discount code shortly!','success' )"
-                        type="button" class="btn btn-warning" id="btnClaim"><i
-                            class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
-
-                </div>
-
-            </div>
-            <div class="card col-lg-4 ">
-                <div class="card-img-sec">
-                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
-                    <img class="card-img-top" src="https://couponzimages.dsquares.com/orange/images/main/450.jpg"
-                        alt="Card image">
-                    <span class="img-tag img-tag-2"></span>
-                    </a>
-                </div>
-                <div class="card-body pt-3 pl-1">
-
-                    <div class="header-container">
-
-                        <h4 class="card-title ">Creper - </h4>
-
-                        <div class="share-button-sec">
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <p class="card-text pb-2">Get your 50% discount for <b>100</b> points&nbsp;</p>
-
-                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                    <button
-                        onclick=" Swal.fire(
-            'Thank you !',
-            'Your offer is confirmed, You will receive an SMS with your discount code shortly!','success' )"
-                        type="button" class="btn btn-warning" id="btnClaim"><i
-                            class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
-
-                </div>
-
-            </div>
+            </div>             
+            @endforeach
         </div>
-        <div class="row my-5">
-
-            <div class="card col-lg-4">
-                <div class="card-img-sec">
-                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
-                    <img class="card-img-top" src="https://couponzimages.dsquares.com/orange/images/main/464.jpg"
-                        alt="Card image">
-                    <span class="img-tag img-tag-2"></span>
-                    </a>
-                </div>
-                <div class="card-body pt-3 pl-1">
-
-                    <div class="header-container">
-
-                        <h4 class="card-title ">Deep Dish</h4>
-
-                        <div class="share-button-sec">
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <p class="card-text pb-2">Buy 3 beef Tacos and get Taco for free <b>50</b> points&nbsp;</p>
-
-                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                    <button onclick="claimDiscount()" type="button" class="btn btn-warning" id="btnClaim"><i
-                            class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
-
-                </div>
-
-            </div>
-            <div class="card col-lg-4">
-                <div class="card-img-sec">
-                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
-                    <img class="card-img-top" src="https://couponzimages.dsquares.com/orange/images/main/548.jpg"
-                        alt="Card image">
-                    <span class="img-tag img-tag-2"></span>
-                    </a>
-                </div>
-                <div class="card-body pt-3 pl-1">
-
-                    <div class="header-container">
-
-                        <h4 class="card-title ">Get 20% off on Pizza Lover application</h4>
-
-                        <div class="share-button-sec">
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <p class="card-text pb-2">Get 20% off <b>37</b> points&nbsp;</p>
-
-                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                    <button onclick="claimDiscount()" type="button" class="btn btn-warning" id="btnClaim"><i
-                            class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
-
-                </div>
-
-            </div>
-            <div class="card col-lg-4">
-                <div class="card-img-sec">
-                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
-                    <img class="card-img-top" src="https://couponzimages.dsquares.com/orange/images/main/485.jpg"
-                        alt="Card image">
-                    <span class="img-tag img-tag-2"></span>
-                    </a>
-                </div>
-                <div class="card-body pt-3 pl-1">
-
-                    <div class="header-container">
-
-                        <h4 class="card-title ">Papaya Restaurant- Amman</h4>
-
-                        <div class="share-button-sec">
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <p class="card-text pb-2">Get 10% off on your breakfast meal <b>15</b> points&nbsp;</p>
-
-                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                    <button onclick="claimDiscount()" type="button" class="btn btn-warning" id="btnClaim"><i
-                            class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
-
-                </div>
-
-            </div>
-        </div>
+        
     </div>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

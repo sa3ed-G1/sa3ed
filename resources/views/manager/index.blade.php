@@ -131,8 +131,12 @@
                                         <div class="col-sm-3">
                                             <h5 class="mb-0 text-white">Wallet Points</h5>
                                         </div>
-                                        <div class="col-sm-9 text-light">
+                                        <div class="col-sm-9 text-white">
+                                            @if(auth()->user()->wallet->sum('balance') > 0)
                                             {{ auth()->user()->wallet->balance }}
+                                            @elseif(auth()->user()->wallet->sum('balance') == 0)
+                                            Participate in Events To Earn Points 
+                                            @endif
                                         </div>
                                     </div>
                                     @if (auth()->user()->pendings->count() > 0 && auth()->user()->role == 'user')
