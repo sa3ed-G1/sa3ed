@@ -163,7 +163,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/1.jpg" class="gallery-popup">
                                 <img src="https://www.ico.org.ae/content/images/thumbs/0003074_-.jpeg" alt=""
-                                    class=" w-100">
+                                    class=" w-100" style="height:400px;object-fit:cover;">
                             </a>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/2.jpg" class="gallery-popup">
                                 <img src="https://s3-eu-west-1.amazonaws.com/naua-live/project/preview-2201241137489QCZD.png"
-                                    alt="" class=" w-100">
+                                    alt="" class=" w-100"style="height:400px;object-fit:cover;" >
                             </a>
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/3.jpg" class="gallery-popup">
                                 <img src="https://i.pinimg.com/originals/54/ab/03/54ab037f994fa617022d5b97611f6e6d.jpg"
-                                    alt="" class=" w-100">
+                                    alt="" class=" w-100" style="height:400px;object-fit:cover;">
                             </a>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/4.jpg" class="gallery-popup">
                                 <img src="https://www.aljazeera.net/wp-content/uploads/2022/04/2323.jpeg?resize=1920%2C1440"
-                                    alt="" class=" w-100">
+                                    alt="" class=" w-100"style="height:400px;object-fit:cover;" >
                             </a>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/5.jpg" class="gallery-popup">
                                 <img src="https://www.cpf.jo/sites/default/files/styles/848x477/public/1_6.jpg?itok=bQY4aoPN"
-                                    alt="" class=" w-100">
+                                    alt="" class=" w-100"style="height:400px;object-fit:cover;">
                             </a>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/6.jpg" class="gallery-popup">
                                 <img src="https://www.albawaba.com/sites/default/files/styles/d08_standard/public/im/Syria2/Dohuk_Syrian-Kurdish_children_refugee.jpg?itok=tj2xdC69&mrf-size=m"
-                                    alt="" class=" w-100">
+                                    alt="" class=" w-100"style="height:400px;object-fit:cover;">
                             </a>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                         <div class="gallery-item">
                             <a href="images/gallery/9.jpg" class="gallery-popup">
                                 <img src="http://www.humanitygate.com/thumb.php?src=uploads//images/5ef1cd432683449c6d15a0baf5518ada.png&w=843&h=492&zc=1"
-                                    alt="" class=" w-100">
+                                    alt="" class=" w-100"style="height:400px;object-fit:cover;">
                             </a>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
     </section>
 
     <!-- Section About Start -->
-    <section class="section causes">
+    <section class="section causes pt-0" >
         <div class="container">
             <div class="columns is-justify-content-center">
                 <div class="column is-7-desktop is-8-tablet">
@@ -265,9 +265,6 @@
                             <div class="card-body">
                                 <h3 class="mb-4"><a href="/single-event/{{ $event->id }}">{{ $event->title }}</a>
                                 </h3>
-
-                                <p class="card-text mb-5">{{ substr($event->description, 0, 100) }}... <a
-                                        href="single-event/{{ $event->id }}" style="font-weight: 700">More</a></p>
                                 <ul class="list-inline border-bottom border-top py-3 mb-4">
 
                                     <li class="list-inline-item"><i
@@ -276,11 +273,12 @@
                                     <li class="list-inline-item"><i
                                             class="icofont-check text-color mr-2"></i>Location:<span>{{ substr($event->location, 0, 30) }}</span>
                                     </li>
-                                    <li class="list-inline-item"><i
+                                    {{-- <li class="list-inline-item"><i
                                             class="icofont-check text-color mr-2"></i>Organizer:<span>{{ $event->user->name }}</span>
-                                    </li>
+                                    </li> --}}
                                 </ul>
-
+                                <p class="card-text mb-5">{{ substr($event->description, 0, 100) }}... <a
+                                    href="single-event/{{ $event->id }}" style="font-weight: 700">More</a></p>
                                 <a href="single-event/{{ $event->id }}" class="btn btn-main is-rounded">View Event</a>
                             </div>
                         </div>

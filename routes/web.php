@@ -41,7 +41,9 @@ Route::get('/events', [EventtController::class, 'showAll']);
 // single event page
 Route::get('/single-event/{id}', [EventtController::class, 'show_event']);
 
-
+Route::get('/point', function () {
+    return view('point');
+});
 
 // main pages ------------------------------------------------
 Route::get('/register', [UserController::class, 'create']);
