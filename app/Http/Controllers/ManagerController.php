@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Eventt;
 use App\Models\Donation;
@@ -14,18 +15,17 @@ class ManagerController extends Controller
     public function index(User $user)
     {
         $user = auth()->user();
-        $event = auth()->user()->eventts();
-        $donations = auth()->user()->donations();
+        $event = auth()->user()->eventts;
+        $donations = auth()->user()->donations;
         // $manager = User::where('role', 'manager');
         return view('manager.index', ['user' => $user, 'event' => $event, 'donations' => $donations]);
     }
-    
+
     public function create()
     {
-        
     }
 
-   
+
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -40,28 +40,26 @@ class ManagerController extends Controller
             "thumbnail" => "required",
             "banner" => "required",
             "user_id" => "required",
-        ]); 
+        ]);
         $formFields['thumbnail'] = base64_encode(file_get_contents($request->file('thumbnail')));
         $formFields['banner'] = base64_encode(file_get_contents($request->file('banner')));
-        
+
         Eventt::create($formFields);
         return redirect("/profile")->with('addEvent', "You Successfully Added an Event!");
-    
     }
 
-   
+
     public function show($id)
     {
-        
     }
 
-   
+
     public function edit($id)
     {
         //
     }
 
-   
+
     public function update(Request $request, $id)
     {
         $user = User::find($id);
