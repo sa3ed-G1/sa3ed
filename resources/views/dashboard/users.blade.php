@@ -258,6 +258,12 @@
                                                                             placeholder="Email" />
                                                                     </div>
                                                                     <div class="form-group">
+                                                                        <label for="exampleInputEmail3">Phone Number</label>
+                                                                        <input type="text" name="phone"
+                                                                            class="form-control" id="exampleInputEmail3"
+                                                                            placeholder="Phone" />
+                                                                    </div>
+                                                                    <div class="form-group">
                                                                         <label for="exampleInputPassword">Password</label>
                                                                         <input type="password" name="password"
                                                                             class="form-control" id="exampleInputPassword"
