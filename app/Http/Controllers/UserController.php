@@ -181,7 +181,7 @@ class UserController extends Controller
             session()->regenerate();
             auth()->login($signUser);
             Wallet::create(['user_id' => auth()->user()->id, 'balance' => 0,]);
-            return redirect('dashboard');
+            return redirect()->intended('/');
         }
     }
 

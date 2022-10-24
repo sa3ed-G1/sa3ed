@@ -72,7 +72,7 @@
                             <a href="https://web.facebook.com/profile.php?id=100086828449609" target="_blank"><i
                                     class="icofont-facebook"></i></a>
                             <a href="https://twitter.com/sa3ed_na" target="_blank"><i class="icofont-twitter"></i></a>
-                            <a href="donation.html" class="top-btn">Donate Now</a>
+                            <a href="/events" class="top-btn">Donate Now</a>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/">
-                        <img src="images/logo.png" alt="logo">
+                        <img src="../images/logo.png" alt="logo">
                     </a>
                     <button role="button" class="navbar-burger burger" data-hidden="true" data-target="navigation">
                         <span aria-hidden="true"></span>
@@ -109,7 +109,7 @@
                         </li>
                         @auth
                             <li class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">{{auth()->user()->name}}<span class="ml-1 icon"><i
+                                <a class="navbar-link">{{ auth()->user()->name }}<span class="ml-1 icon"><i
                                             class="fas fa-home"></i></span></a>
                                 <div class="navbar-dropdown">
                                     <a class="navbar-item" href="/profile">Profile</a>
@@ -156,12 +156,12 @@
                             <li><a href="#"><i class="icofont-email"></i>Sa3ed@gmail.com</a></li>
                         </ul>
                         <ul class="list-inline footer-socials">
-                            <li class="list-inline-item"><a href="https://www.facebook.com"><i
+                            <li class="list-inline-item"><a target="_blank"
+                                    href="https://web.facebook.com/profile.php?id=100086828449609"><i
                                         class="icofont-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="https://twitter.com"><i
+                            <li class="list-inline-item"><a target="_blank" href="https://twitter.com/sa3ed_na"><i
                                         class="icofont-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="https://www.linkedin.com"><i
-                                        class="icofont-linkedin"></i></a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -171,10 +171,10 @@
                         <h4 class="is-capitalize mb-4 text-white">Quick Links</h4>
 
                         <ul class="list-unstyled footer-menu lh-35">
-                            <li><a href="about">About</a></li>
-                            <li><a href="services">Services</a></li>
-                            <li><a href="About">Team</a></li>
-                            <li><a href="Contact">Contact</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/events">Events</a></li>
+                            <li><a href="/about#team">Team</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
