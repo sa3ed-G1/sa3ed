@@ -15,18 +15,16 @@ use App\Http\Controllers\UserAdminController;
 |
 */
 
-Route::get('dashboard/users', [UserAdminController::class, 'index']);
 
-Route::post('dashboard/users', [UserAdminController::class, 'store']);
 
-Route::get('editUser/{id}', [UserAdminController::class, 'show']);
 
-Route::post('editUser/{id}', [UserAdminController::class, 'edit']);
+// Route::get('editUser/{id}', [UserAdminController::class, 'show']);
+
+
 
 Route::post('/donation/{id}', [UserAdminController::class, 'donate']);
 
 Route::post('/volunteer/{id}', [UserAdminController::class, 'volunteer']);
 
-Route::get('dashboard/users/delete/{id}', [UserAdminController::class, 'destroy']);
 
 Route::get('claimOffer/{id}' , [OfferController::class, 'add'] );

@@ -89,6 +89,11 @@ class PendingController extends Controller
         return Redirect('/dashboard/pendings');
     }
 
+    public function destroy($id)
+    {
+        Pending::find($id)->delete();
+        return back();  
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\User;
 use App\Models\Offer;
 use App\Models\Eventt;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Console\Scheduling\Event;
@@ -11,6 +13,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PendingController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\UserAdminController;
+use Illuminate\Routing\RouteBinding;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,23 +45,20 @@ Route::get('/events', [EventtController::class, 'showAll']);
 // single event page
 Route::get('/single-event/{id}', [EventtController::class, 'show_event']);
 
-Route::get('/point', function () {
+Route::get('/offers', function () {
     $offers = Offer::all();
     return view('point', ['offers' => $offers]);
-});
+})->middleware('auth');
 
 // main pages ------------------------------------------------
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->name('login');
 Route::post('/signup', [UserController::class, 'store']);
 
 Route::get('/logout', [UserController::class, 'logout']);
 Route::post('/login', [UserController::class, 'login']);
 
-Route::get('/dashboard', [UserAdminController::class, 'viewDash']);
 
-Route::get('/test', function () {
-    return view('test');
-});
+
 // google---------------------------
 // Redirect to Google Sign in
 Route::get('/redirect', [UserController::class, 'redirectToGoogle']);
@@ -70,12 +70,7 @@ Route::get('/callback', [UserController::class, 'handleGoogleCallback']);
 Route::get('/sign_in/github', [UserController::class, 'github']);
 Route::get('/sign_in/github/redirect', [UserController::class, 'githubRedirect']);
 
-Route::resource('/dashboard/events', EventtController::class);
-Route::get('/dashboard/events/delete/{id}', [EventtController::class, 'destroy']);
 
-Route::resource('/dashboard/pendings', PendingController::class);
-Route::get('/dashboard/events/unassign/{id}', [PendingController::class, 'unassign']);
-Route::resource('/dashboard/donations', DonationController::class);
 
 Route::resource('/profile', ManagerController::class);
 
@@ -83,8 +78,21 @@ Route::resource('/profile', ManagerController::class);
 // Route::get('/dashboard', [App\Http\Controllers\AuthorizationController::class, 'index'])->name('index')->middleware('can:isAdmin');
 // =====NEED A DASHBOARD==== tested done*
 Route::post('/post-comment', [CommentController::class, 'store']);
-Route::post('/apply', [ManagerController::class, 'apply']);
+Route::post('/apply', [ManagerController::class, 'apply'])->middleware("auth");
 // update event for manager
 Route::post('/manager/update', [ManagerController::class, 'updateEvent']);
 // end event for manager
-Route::post('//manager/end', [ManagerController::class, 'endEvent']);
+Route::post('/manager/end', [ManagerController::class, 'endEvent']);
+// admin Dashboard
+Route::middleware(['can:isAdmin'])->group(function () {
+    Route::resource('/dashboard/events', EventtController::class);
+    Route::get('/dashboard', [UserAdminController::class, 'viewDash']);
+    Route::get('/dashboard/events/delete/{id}', [EventtController::class, 'destroy']);
+    Route::resource('/dashboard/pendings', PendingController::class);
+    Route::resource('/dashboard/donations', DonationController::class);
+    Route::get('/dashboard/events/unassign/{id}', [PendingController::class, 'unassign']);
+    Route::get('dashboard/users', [UserAdminController::class, 'index']);
+    Route::post('dashboard/users', [UserAdminController::class, 'store']);
+    Route::get('dashboard/users/delete/{id}', [UserAdminController::class, 'destroy']);
+    Route::post('editUser/{id}', [UserAdminController::class, 'edit']);
+});

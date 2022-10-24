@@ -29,7 +29,7 @@
                                         @else
                                         data:image/jpg;charset=utf8;base64,
                                             {{ $user->image }} @endif
-                                            "
+                                            
                                             w-100" alt="..." style=" height: 200px; object-fit:cover;"
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
@@ -123,7 +123,7 @@
                                             <h5 class="mb-0 text-white">Phone</h5>
                                         </div>
                                         <div class="col-sm-9 text-light">
-                                            {{ $user->phone }}
+                                            {{ $user->phone ? $user->phone : 'Add phone Number' }}
                                         </div>
                                     </div>
                                     <hr>
@@ -132,10 +132,10 @@
                                             <h5 class="mb-0 text-white">Wallet Points</h5>
                                         </div>
                                         <div class="col-sm-9 text-white">
-                                            @if(auth()->user()->wallet->sum('balance') > 0)
-                                            {{ auth()->user()->wallet->balance }}
+                                            @if (auth()->user()->wallet->sum('balance') > 0)
+                                                {{ auth()->user()->wallet->balance }}
                                             @elseif(auth()->user()->wallet->sum('balance') == 0)
-                                            Participate in Events To Earn Points 
+                                                Participate in Events To Earn Points
                                             @endif
                                         </div>
                                     </div>

@@ -25,26 +25,19 @@
             </div>
         @endif
     @endauth
-    @auth
 
-        @if ($singleEvent->user_id == auth()->user()->id && $singleEvent->publish)
+    @auth
+        @if ($singleEvent->user_id == auth()->user()->id)
             <div style="display: flex; justify-content: center; margin-top: 3rem; gap: 4rem;">
                 <button class="btn" type="button" id="addeventbtn" style="background: #F89D35; border:none;"
                     data-bs-toggle="modal" data-bs-target="#eventModal">Edit Event
                 </button>
-                <button class="btn" type="button" id="endeventbtn" style="background: red; color: white; border:none;"
-                    data-bs-toggle="modal" data-bs-target="#eventModalenda">End Event
-                </button>
-            </div>
-        @else
-            <div style="display: flex; justify-content: center; margin-top: 3rem; gap: 4rem;">
-                <button class="btn" type="button" id="addeventbtn" style="background: #F89D35; border:none;"
-                    data-bs-toggle="modal" data-bs-target="#eventModal">Edit Event
-                </button>
-                <button disabled class="btn" type="button" id="endeventbtn"
+
+                <button @if (!$singleEvent->publish) disabled @endif class="btn" type="button" id="endeventbtn"
                     style="background: red; color: white; border:none;" data-bs-toggle="modal"
-                    data-bs-target="#eventModalenda">Event Ended
+                    data-bs-target="#eventModalenda">End Event
                 </button>
+
             </div>
         @endif
     @endauth
@@ -74,7 +67,7 @@
                             <ul class="list-styled mt-5  gap-3 flex-wrap">
                                 <li><span style="font-weight: 900">Date Start:</span> {{ $singleEvent->date }}</li>
                                 <li><span style="font-weight: 900">Capacity:</span>
-                                    {{ $singleEvent->volunteers->count() . ' / ' . $singleEvent->capacity }} Person</li>
+                                    {{ $singleEvent->volunteers->count() . ' / ' . $singleEvent->capacity }} Volunteers</li>
                                 <li><span style="font-weight: 900">Tags:</span> {{ $singleEvent->tags }}</li>
                             </ul>
                         </div>
@@ -90,10 +83,12 @@
                                 </a>
                             @endguest
                             @auth
-                                <button type="button" id='btnDonate' class="btn btn-main-2 is-rounded" data-bs-toggle="modal"
-                                    data-bs-target="#donateModal">
-                                    Donate Now
-                                </button>
+                                @if ($singleEvent->user_id != auth()->user()->id)
+                                    <button type="button" id='btnDonate' class="btn btn-main-2 is-rounded"
+                                        data-bs-toggle="modal" data-bs-target="#donateModal">
+                                        Donate Now
+                                    </button>
+                                @endif
                             @endauth
                             @guest
                                 <a href="/register">
@@ -103,22 +98,31 @@
                                 </a>
                             @endguest
                             @auth
-                                @if (auth()->user()->volunteers->where('eventt_id', $singleEvent->id)->count() > 0)
-                                    <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
-                                        data-bs-toggle="modal" data-bs-target="#volunteerModal">
-                                        Already Joined
-                                    </button>
-                                @elseif ($singleEvent->volunteers->count() == $singleEvent->capacity)
-                                    <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
-                                        data-bs-toggle="modal" data-bs-target="#volunteerModal">
-                                        Volunteers Are full
-                                    </button>
-                                @else
-                                    <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
-                                        data-bs-toggle="modal" data-bs-target="#volunteerModal">
-                                        Volunteer Now
-                                    </button>
+
+                                @if ($singleEvent->user_id != auth()->user()->id)
+                                    @if (auth()->user()->volunteers->where('eventt_id', $singleEvent->id)->count() > 0)
+                                        <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                            data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                            Already Joined
+                                        </button>
+                                    @elseif ($singleEvent->volunteers->count() == $singleEvent->capacity)
+                                        <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                            data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                            Volunteers Are full
+                                        </button>
+                                    @elseif(!$singleEvent->publish)
+                                        <button disabled type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                            data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                            Event Finished
+                                        </button>
+                                    @elseif(auth()->user()->role == 'manager')
+                                        <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
+                                            data-bs-toggle="modal" data-bs-target="#volunteerModal">
+                                            Volunteer Now
+                                        </button>
+                                    @endif
                                 @endif
+
                             @endauth
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Donate Now</a> --}}
                             {{-- <a href="donation.html" class="btn btn-main-2 is-rounded">Volunteer Now</a> --}}
@@ -141,7 +145,11 @@
                             <li class="mb-5">
                                 <div class="comment-area-box is-flex">
                                     <img style="width: 50px; height: 50px ;" alt=""
-                                        src="{{ $comment->user->image }}" class="mr-4 rounded-circle ">
+                                        src="@if ($comment->user->google_id || $comment->user->github_id) {{ $comment->user->image }}
+                                        @else
+                                        data:image/jpg;charset=utf8;base64,
+                                            {{ $comment->user->image }} @endif"
+                                        class="mr-4 rounded-circle ">
 
                                     <div>
                                         <div class="is-flex is-justify-content-space-between is-align-items-center">
@@ -232,8 +240,36 @@
             <section class="modal-card-body">
                 <form action="/donation/{{ $singleEvent->id }}" method="post">
                     @csrf
-                    <label for="amount">Donation Amount : </label>
-                    <input type="number" name="amount" id="amount">
+                    <div class="mb-3">
+                        <label style="display: block" for="name">Card Name </label>
+                        <input placeholder="Name" class="w-100" type="text" id="name">
+
+                    </div>
+                    <div class="mb-3">
+                        <label style="display: block" for="name">Card Number </label>
+                        <input placeholder="1234 5678 9000 1234" class="w-100" type="number" id="name">
+
+                    </div>
+                    <div style="display: flex">
+                        <div>
+
+                            <label style="display: block" for="name">Card Date </label>
+                            <input placeholder="xx/xx" type="number" id="name">
+                        </div>
+                        <div class="mx-5"></div>
+                        <div>
+
+                            <label style="display: block" for="name">CCV</label>
+                            <input placeholder="123" type="number" id="name">
+                        </div>
+
+
+                    </div>
+                    <div class="mt-5">
+
+                        <label style="display: block" for="amount">Donation Amount </label>
+                        <input required type="number" name="amount" id="amount">
+                    </div>
                     {{-- {{ url() }} --}}
                     <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
                     @auth
@@ -242,8 +278,8 @@
             </section>
             <footer class="modal-card-foot">
                 <button type="submit" class="button is-success">Donate</button>
-                <button class="button deleteModalDonate">Cancel</button>
             </footer>
+
             </form>
         </div>
     </div>
@@ -254,18 +290,18 @@
                 <p class="modal-card-title">Are You Sure To Become A Volunteer</p>
                 <button class="delete deleteModalVolunteer" aria-label="close"></button>
             </header>
-            <section class="modal-card-body">
-                <form action="/volunteer/{{ $singleEvent->id }}" method="post">
-                    @csrf
-                    <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
-                    @auth
-                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                    @endauth
-            </section>
-            <footer class="modal-card-foot">
-                <button type="submit" class="button is-success">Become A Volunteer</button>
-                <button class="button deleteModalVolunteer">Cancel</button>
-            </footer>
+
+            <form action="/volunteer/{{ $singleEvent->id }}" method="post">
+                @csrf
+                <input type="hidden" name="eventt_id" value="{{ $singleEvent->id }}">
+                @auth
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                @endauth
+
+                <footer class="modal-card-foot">
+                    <button type="submit" class="button is-success">Become A Volunteer</button>
+
+                </footer>
             </form>
         </div>
     </div>
@@ -280,7 +316,7 @@
             <section class="modal-card-body" style="background-color: #F89D35">
                 <div class="volunteer-form-wrap">
 
-                    <h2 class="mb-6 text-lg text-dark">Create Event</h2>
+                    <h2 class="mb-6 text-lg text-dark">Update Event</h2>
                     <form method="POST" action="/manager/update" class="volunteer-form" enctype="multipart/form-data">
                         <input name="id" type="hidden" value="{{ $singleEvent->id }}">
                         @csrf
@@ -288,6 +324,7 @@
                             @error('Title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
+                            <small>title</small>
                             <input value="{{ $singleEvent->title }}" name="title" type="text" class="input"
                                 placeholder="Title" />
                         </div>
@@ -296,6 +333,7 @@
                                 @error('location')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
+                                <small>location</small>
                                 <input value="{{ $singleEvent->location }}" name="location" type="text"
                                     class="input" placeholder="Event Address" />
                             </div>
@@ -303,11 +341,15 @@
                                 @error('city')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
+                                <small>City</small>
                                 <select class="input" name="city">
-                                    <option selected disabled>Select a city</option>
-                                    <option value="Amman">Amman</option>
-                                    <option value="Zarqa">Zarqa</option>
-                                    <option value="Irbid">Irbid</option>
+
+
+                                    <option @if ($singleEvent->city == 'Amman') selected @endif value="Amman">Amman</option>
+                                    <option @if ($singleEvent->city == 'Zarqa') selected @endif value="Zarqa">Zarqa
+                                    </option>
+                                    <option @if ($singleEvent->city == 'Irbid') selected @endif value="Irbid">Irbid
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -315,6 +357,7 @@
                             @error('capacity')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
+                            <small>Capacity</small>
                             <input value="{{ $singleEvent->capacity }}" name="capacity" type="number" class="input"
                                 placeholder="Event Capacity" />
                         </div>
@@ -324,6 +367,7 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                                 {{-- <label for="">Date</label> --}}
+                                <small>Date</small>
                                 <input value="{{ $singleEvent->date }}" name="date" type="datetime-local"
                                     class="input" id="eventdate" placeholder="Event date" />
                             </div>
@@ -331,6 +375,7 @@
                                 @error('duration')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
+                                <small>Duration</small>
                                 <input value="{{ $singleEvent->duration }}" name="duration" type="number"
                                     class="input" placeholder="Event Duration(hours)" />
                             </div>
@@ -339,13 +384,15 @@
                             @error('description')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
+                            <small>Description</small>
                             <textarea name="description" class="input" placeholder="Event Description">{{ $singleEvent->description }}</textarea>
                         </div>
                         <div class="mb-4">
                             @error('tags')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
-                            <input {{ $singleEvent->tags }} name="tags" type="text" class="input"
+                            <small>Tags</small>
+                            <input value=" {{ $singleEvent->tags }}" name="tags" type="text" class="input"
                                 placeholder="Event Tags" />
                         </div>
                         <div class="is-flex">
@@ -386,7 +433,7 @@
                         </div>
                         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                         <button type="submit" class="btn btn-main is-rounded mt-5" style="background-color: black;">
-                            <h4 style="color:#F89D35">Create</h4>
+                            <h4 style="color:#F89D35">Update</h4>
                         </button>
                     </form>
                 </div>
@@ -398,10 +445,6 @@
     <div class="modal" id="eventModalenda">
         <div class="modal-background deleteModalVolunteer2"></div>
         <div class="modal-card">
-            {{-- <header class="modal-card-head">
-                <p class="modal-card-title">Create Volunteering Event</p>
-                <button class="delete deleteModalVolunteer" aria-label="close"></button>
-            </header> --}}
             <section class="modal-card-body" style="background-color: #F89D35">
                 <div class="volunteer-form-wrap">
 
@@ -468,7 +511,7 @@
         let deleteVolunteerModal2 = document.querySelectorAll('.deleteModalVolunteer2');
         [...deleteVolunteerModal2].forEach(element => {
             element.onclick = function() {
-                document.querySelector('#eventModal').classList.remove('is-active');
+                document.querySelector('#eventModalenda').classList.remove('is-active');
             }
         });
     </script>

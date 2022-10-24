@@ -113,25 +113,24 @@ class UserAdminController extends Controller
 
     public function viewDash(User $user)
     {
-        if (Gate::authorize('isAdmin', $user)) {
-            $users = User::all();
-            $vlounteers = Volunteer::all();
-            $events = Eventt::all();
-            $donations = Donation::all();
-            $pendings = Pending::all();
-            $wallets = Wallet::all();
-            $comments = Comment::all();
-            // $topDonors = Eventt::orderBy('amount', 'DESC')->latest()->take(7)->get();
-            return view('dashboard.index', [
-                'users' => $users,
-                'vlounteers' => $vlounteers,
-                'events' => $events,
-                'donations' => $donations,
-                'pendings' => $pendings,
-                'wallets' => $wallets,
-                'comments' => $comments,
-            ]);
-        }
+        // Gate::authorize('isAdmin', $user);
+        $users = User::all();
+        $vlounteers = Volunteer::all();
+        $events = Eventt::all();
+        $donations = Donation::all();
+        $pendings = Pending::all();
+        $wallets = Wallet::all();
+        $comments = Comment::all();
+        // $topDonors = Eventt::orderBy('amount', 'DESC')->latest()->take(7)->get();
+        return view('dashboard.index', [
+            'users' => $users,
+            'vlounteers' => $vlounteers,
+            'events' => $events,
+            'donations' => $donations,
+            'pendings' => $pendings,
+            'wallets' => $wallets,
+            'comments' => $comments,
+        ]);
     }
     // public function topDonors($event)
     // {
@@ -156,9 +155,12 @@ class UserAdminController extends Controller
     {
         $volunteer = new Volunteer;
 
+
         $volunteer->user_id = $request->user_id;
         $volunteer->eventt_id = $id;
         $volunteer->save();
+
+        User::find($request->user_id)->update(['is_volunteer' => 1]);
 
         return redirect('single-event/' . $id)->with('volunteer', 'You Volunteer In This Event Now');
     }

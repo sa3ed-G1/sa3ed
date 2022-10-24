@@ -47,7 +47,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|alpha',
+            'name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:8|confirmed',
             'image' => 'required',
@@ -179,7 +179,7 @@ class UserController extends Controller
             session()->regenerate();
             auth()->login($signUser);
             Wallet::create(['user_id' => auth()->user()->id, 'balance' => 0,]);
-            return redirect('dashboard');
+            return redirect()->intended('/');
         }
     }
 
