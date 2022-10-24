@@ -13,6 +13,8 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PendingController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\UserAdminController;
+use App\Models\Donation;
+use App\Models\Volunteer;
 use Illuminate\Routing\RouteBinding;
 
 /*
@@ -29,8 +31,16 @@ use Illuminate\Routing\RouteBinding;
 // home
 
 Route::get('/', function () {
+    $numberOfProjects = Eventt::count('id');
+    $activeVolanteers = Volunteer::count('id');
+    $totalDonation = Donation::sum('amount');
+    // dd($totalDonation);
+
     $homeEvent = Eventt::latest()->take(3)->get();
-    return view('index')->with('threeEvent', $homeEvent);
+    return view('index')->with(['threeEvent' => $homeEvent, 
+                                'numberofprojects' => $numberOfProjects, 
+                                'numberofvolenteers'=> $activeVolanteers,
+                                 'totaldonations' => $totalDonation]);
 });
 // about
 Route::get('/about', function () {

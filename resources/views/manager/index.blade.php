@@ -85,6 +85,8 @@
                                         <table class="table table-hover">
                                             @forEach($user->eventts as $event)
                                             
+                                            @endforeach
+                                            
                                           </table>
 
                                         <hr class="my-4">

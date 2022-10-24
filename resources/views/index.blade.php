@@ -117,26 +117,26 @@
                 <div class="columns is-multiline">
                     <div class="column is-3-desktop is-6-tablet">
                         <div class="counter-item-2 pt-5">
-                            <span class="counter-stat  text-color">40</span>
+                            <span class="counter-stat  text-color">{{$numberofprojects}}</span>
                             <p>No. of projects</p>
                         </div>
                     </div>
                     <div class="column is-3-desktop is-6-tablet">
                         <div class="counter-item-2 pt-5">
-                            <span class="counter-stat has-text-weight-bold text-color">1,460</span>
+                            <span class="counter-stat has-text-weight-bold text-color"> {{$numberofvolenteers}} </span>
                             <p>Active Volunteer</p>
                         </div>
                     </div>
                     <div class="column is-3-desktop is-6-tablet">
                         <div class="counter-item-2 pt-5">
-                            <span class="counter-stat  text-color">10,000</span>
-                            <p>Donation amount</p>
+                            <span class="counter-stat  text-color">{{$totaldonations}}</span>
+                            <p>Donations amount</p>
                         </div>
                     </div>
                     <div class="column is-3-desktop is-6-tablet">
                         <div class="counter-item-2 pt-5">
-                            <span class="counter-stat text-color">1585</span>
-                            <p> People Helped</p>
+                            <span class="counter-stat text-color">235</span>
+                            <p>People Helped</p>
                         </div>
                     </div>
                 </div>
