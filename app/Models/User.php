@@ -32,6 +32,7 @@ class User extends Authenticatable
         'phone',
         'image',
         'github_id',
+        'is_volunteer',
     ];
 
     /**

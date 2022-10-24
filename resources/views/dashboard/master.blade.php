@@ -56,7 +56,11 @@
 
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <img src="{{ auth()->user()->image }}" alt="profile" />
+                            <img src="@if (auth()->user()->google_id || auth()->user()->github_id) {{ auth()->user()->image }}
+                            @else
+                            data:image/jpg;charset=utf8;base64,
+                                {{ auth()->user()->image }} @endif"
+                                alt="profile" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">

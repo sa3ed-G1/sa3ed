@@ -10,7 +10,7 @@
                         <h1 class="mb-5">New hope for <br>near future</h1>
                         <p class="mb-6">Your small contribution means a lot. Natus officia amet <br>accusamus repellat
                             magni reprehenderit dolorem.</p>
-                        <a href="#" target="_blank" class="btn btn-main is-rounded">Donate Now</a>
+                        <a href="/events" class="btn btn-main is-rounded">Donate Now</a>
                     </div>
                 </div>
             </div>
@@ -337,7 +337,7 @@
                     <div class="cta-content has-text-centered">
                         <i class="icofont-diamond text-lg text-color"></i>
                         <h2 class="text-white text-lg mb-6 mt-4">We can’t help everyone, but everyone can help someone</h2>
-                        <a href="donation" class="btn btn-main is-rounded">Make a donation</a>
+                        <a href="/events" class="btn btn-main is-rounded">Make a donation</a>
                     </div>
                 </div>
             </div>

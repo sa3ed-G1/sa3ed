@@ -118,7 +118,7 @@
     {{--  --}}
 
     <!--  Section Services Start -->
-    <section class="section team">
+    <section id="team" class="section team">
         <div class="container">
             <div class="columns is-desktop is-justify-content-center">
                 <div class="column is-7-desktop has-text-centered">
