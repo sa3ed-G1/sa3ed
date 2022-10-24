@@ -39,6 +39,10 @@ class AuthServiceProvider extends ServiceProvider
 
             return $user->role == 'manager';
         });
+        Gate::define('islogged', function ($user) {
+
+            return $user;
+        });
         //
     }
 }

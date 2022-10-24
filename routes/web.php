@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CommentController;
+use App\Models\Offer;
 use App\Models\Eventt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Console\Scheduling\Event;
 use App\Http\Controllers\EventtController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PendingController;
 use App\Http\Controllers\DonationController;
@@ -42,7 +43,8 @@ Route::get('/events', [EventtController::class, 'showAll']);
 Route::get('/single-event/{id}', [EventtController::class, 'show_event']);
 
 Route::get('/point', function () {
-    return view('point');
+    $offers = Offer::all();
+    return view('point', ['offers' => $offers]);
 });
 
 // main pages ------------------------------------------------
@@ -81,3 +83,8 @@ Route::resource('/profile', ManagerController::class);
 // Route::get('/dashboard', [App\Http\Controllers\AuthorizationController::class, 'index'])->name('index')->middleware('can:isAdmin');
 // =====NEED A DASHBOARD==== tested done*
 Route::post('/post-comment', [CommentController::class, 'store']);
+Route::post('/apply', [ManagerController::class, 'apply']);
+// update event for manager
+Route::post('/manager/update', [ManagerController::class, 'updateEvent']);
+// end event for manager
+Route::post('//manager/end', [ManagerController::class, 'endEvent']);

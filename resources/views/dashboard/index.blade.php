@@ -117,7 +117,7 @@
                                                             <div class="table-responsive mb-3 mb-md-0 mt-3">
                                                                 <table class="table table-borderless report-table">
                                                                     @php
-                                                                        $av = 100 / $event->donations->count();
+                                                                        $av = 100 / ($event->donations->count() == 0 ? 1 : $event->donations->count());
                                                                         $num = 100;
                                                                     @endphp
                                                                     @foreach ($event->donations->sortByDesc('amount')->take(6) as $donation)
