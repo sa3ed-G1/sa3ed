@@ -150,7 +150,6 @@ class EventtController extends Controller
         // Eventt::where('id', $request->id)->update($formFields);
         return redirect('/dashboard/events');
     }
-   
 
     /**
      * Remove the specified resource from storage.
@@ -164,9 +163,14 @@ class EventtController extends Controller
         Eventt::find($id)->delete();
         return redirect('/dashboard/events');
     }
-    public function showAll()
+    public function showAll(Request $request)
     {
-        return view('/events', ["events" => Eventt::malek(request(['search']))->get()]);
+        $search = $request->search;
+        $testt = Eventt::where('title' , 'like', '%'. $search . '%')->get();
+        if($search){
+            
+            return view('/events', ["events" => $testt]);
+        }
         $events = Eventt::all();
         return view('/events', ['events' => $events]);
     }
@@ -178,7 +182,7 @@ class EventtController extends Controller
 
         $eventManager = User::find($managerId);
 
-        $comment = Comment::where('eventt_id', $id)->get();
+       $comment = Comment::where('eventt_id', $id)->get();
         return view('single-event', ['comments' => $comment])->with('singleEvent', $event);
     }
 }
