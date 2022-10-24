@@ -86,7 +86,6 @@
                                         @if (auth()->user()->eventts->count() == 0)
                                             <h3 class="text-center text-dark">
                                                 You Have 0 Events
-
                                             </h3>
                                         @else
                                             <table style="background-color: #F89D35" class=" ">

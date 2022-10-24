@@ -202,7 +202,7 @@
                                 @error('phone')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
-                                <input name="phone" type="text" class="input" placeholder="Phone"/>
+                                <input name="phone" type="text" class="input" placeholder="Phone" />
                             </div>
                             <div class="mb-4">
                                 @error('password')
