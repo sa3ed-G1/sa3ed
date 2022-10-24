@@ -431,7 +431,9 @@
                                 </label>
                             </div>
                         </div>
-                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                        @auth
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                        @endauth
                         <button type="submit" class="btn btn-main is-rounded mt-5" style="background-color: black;">
                             <h4 style="color:#F89D35">Update</h4>
                         </button>
