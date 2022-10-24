@@ -132,14 +132,16 @@
                                             <h5 class="mb-0 text-white">Wallet Points</h5>
                                         </div>
                                         <div class="col-sm-6 text-white align-items-center">
-                                            @if(auth()->user()->wallet->sum('balance') > 0)
-                                            {{ auth()->user()->wallet->balance }}
+                                            @if (auth()->user()->wallet->sum('balance') > 0)
+                                                {{ auth()->user()->wallet->balance }}
                                             @elseif(auth()->user()->wallet->sum('balance') == 0)
-                                            Participate in Events To Earn Points    
+                                                Participate in Events To Earn Points
                                             @endif
-                                            <div class=" text-white">
-                                                <button class="btn" style="background: #F89D35; border: none; transform:scale(0.9); font-size: 15px; padding: -10px !important;"> <p>Claim Points</p></button>
-                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button class="btn" style="background: #F89D35;">
+                                                <p class="text-dark">Claim Points</p>
+                                            </button>
                                         </div>
                                     </div>
                                     @if (auth()->user()->pendings->count() > 0 && auth()->user()->role == 'user')
