@@ -22,74 +22,99 @@
                         <div class="col-lg-4">
                             {{-- User Column --}}
                             <div class="card mb-5" style="background:#F89D35 ">
-                                <div class="card-body hero is-fullheight">
+                                <div class="card-body hero ">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="
-                                        @if ($user->google_id || $user->github_id) {{ $user->image }}
+                                        @if (auth()->user()->google_id || auth()->user()->github_id) {{ auth()->user()->image }}
                                         @else
                                         data:image/jpg;charset=utf8;base64,
-                                            {{ $user->image }} @endif
-                                            
-                                            w-100"
+                                            {{ auth()->user()->image }} @endif "
                                             alt="..." style=" height: 200px; object-fit:cover;"
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
-                                            <h2 class="mb-3 text-dark">{{ $user->name }}</h2>
+                                            <h2 class="mb-3 text-dark">{{ auth()->user()->name }}</h2>
                                             @if (auth()->user()->role == 'manager')
-                                                  @if(auth()->user()->role == 'user')<h6  class="text-dark mb-1">User Profile</h6> @endif
-                                                  @if(auth()->user()->role == 'manager')<h6  class="text-dark mb-1">Manager Dashboard</h6> @endif
-                                                  @if(auth()->user()->role == 'admin')<h6  class="text-dark mb-1">Website Admin</h6> @endif
+                                                @if (auth()->user()->role == 'user')
+                                                    <h6 class="text-dark mb-1">User Profile</h6>
+                                                @endif
+                                                @if (auth()->user()->role == 'manager')
+                                                    <h6 class="text-dark mb-1">Manager Dashboard</h6>
+                                                @endif
+                                                @if (auth()->user()->role == 'admin')
+                                                    <h6 class="text-dark mb-1">Website Admin</h6>
+                                                @endif
                                             @endif
                                         </div>
 
-                                        
 
 
-                                        @if(auth()->user()->role == 'admin') 
-                                        <div class="mt-6">
-                                          
-                                        <a href="/dashboard"> <button class="btn btn-primary" style="background-color: #863BAE;">Admin Dashboard</button></a>
-                                          
-                                        </div>
-                                        @endif
+
+                                        @can('isAdmin')
+                                            <div class="mt-6">
+
+                                                <a href="/dashboard"> <button class="btn btn-primary"
+                                                        style="background-color: #863BAE;">Admin Dashboard</button></a>
+
+                                            </div>
+                                        @endcan
 
                                         <hr class="my-4">
 
                                     </div>
-                                    <ul class="list-group list-group-flush mt-5">
-                                        <li>
-                                           
-                                        </li>
-                                        <li>
-                                   
-                                        </li>
-                                    </ul>
+
 
                                     <hr class="mt-1">
-                                    @if (auth()->user()->role == 'manager')
-                                        <div class="d-flex flex-column align-items-center text-center">
-                                            donations here
-                                        </div>
+                                    @can('isManager')
+                                        {{-- <div class="d-flex flex-column align-items-center text-center">
+                                            <p>
+                                                donations here
+                                            </p>
+                                        </div> --}}
 
-                                        <ul class="list-group list-group-flush">
+                                        {{-- <ul class="list-group list-group-flush">
                                             @foreach ($user->eventts as $event)
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                     <h6 class="mb-0"><i class="fa-solid fa-hand-holding-dollar"
                                                             style="size:20px "></i>{{ $event->title }}</h6>
                                                     <span class="text-secondary">
-                                                        <a href="single-event/{{ $event->id }}">{{ $event->donations->sum('amount') }} JD</a></span>
+                                                        <a href="single-event/{{ $event->id }}">{{ $event->donations->sum('amount') }}
+                                                            JD</a></span>
                                                 </li>
                                             @endforeach
-                                        </ul>
+                                        </ul> --}}
+                                        @if (auth()->user()->eventts->count() == 0)
+                                            <h3 class="text-center text-dark">
+                                                You Have 0 Events
 
-                                        <table class="table table-hover">
-                                            @forEach($user->eventts as $event)
-                                            
-                                          </table>
+                                            </h3>
+                                        @else
+                                            <table style="background-color: #F89D35" class=" ">
 
-                                        <hr class="my-4">
-                                    @endif
+                                                <thead>
+                                                    <th></th>
+                                                    <th>Event</th>
+                                                    <th>Total Donations</th>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach (auth()->user()->eventts as $event)
+                                                        <tr>
+                                                            <td><i class="ti-heart"></i>&nbsp;</td>
+
+                                                            <td>{{ substr($event->title, 0, 15) }}</td>
+
+                                                            <td>{{ $event->donations->sum('amount') }} JOD</td>
+
+                                                        </tr>
+                                                    @endforeach
+
+                                                </tbody>
+                                            </table>
+                                            <hr class="my-4">
+                                        @endif
+                                    @endcan
+
 
 
                                 </div>
@@ -137,7 +162,9 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3 text-white align-items-center">
-                                          <a href="/point">  <button class="btn" style="background: #F89D35;"> <p>Claim Points</p></button></a>
+                                            <a href="/offers"> <button class="btn" style="background: #F89D35;">
+                                                    <p>Claim Points</p>
+                                                </button></a>
                                         </div>
                                     </div>
                                     @if (auth()->user()->pendings->count() > 0 && auth()->user()->role == 'user')
@@ -203,36 +230,38 @@
                                     @endforeach --}}
                                     <div class="row my-5 ">
                                         @foreach ($user->eventts as $event)
-                                        {{-- <h3>You Have {{!(auth()->user()->offer_users->where('offer_id', $offer['id'])->isEmpty())}} Points</h3> --}}
-                                        <div class="card col-lg-4">
-                                            <div class="card-img-sec">
-                                                {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
+                                            {{-- <h3>You Have {{!(auth()->user()->offer_users->where('offer_id', $offer['id'])->isEmpty())}} Points</h3> --}}
+                                            <div class="card col-lg-4">
+                                                <div class="card-img-sec">
+                                                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
                                                     <img src="data:image/jpg;charset=utf8;base64,{{ $event->thumbnail }}"
-                                                    class=" w-100" alt="..."
-                                                    style=" height: 200px; object-fit:cover;">
+                                                        class=" w-100" alt="..."
+                                                        style=" height: 200px; object-fit:cover;">
 
-                                                <span class="img-tag img-tag-2"></span>
-                                                </a>
+                                                    <span class="img-tag img-tag-2"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="card-body pt-3 pl-1">
+                                                    <div class="d-flex justify-content-between"">
+                                                        <div class="header-container">
+
+                                                            <h4 class="card-title ">{{ $event['title'] }}</h4>
+
+                                                        </div>
+                                                        <div class="share-button-sec">
+                                                            {{ $event['city'] }}
+                                                        </div>
+                                                    </div>
+                                                    <p class="card-text pb-2">{{ $event['description'] }} for
+                                                        <b>{{ $event['point'] }}</b> points&nbsp;
+                                                    </p>
+                                                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
+
+                                                    <a href="single-event/{{ $event->id }}"
+                                                        class="btn btn-main is-rounded">View Event</a>
+
+                                                </div>
                                             </div>
-                                            <div class="card-body pt-3 pl-1">
-                                               <div class="d-flex justify-content-between""> 
-                                                <div class="header-container">
-                            
-                                                    <h4 class="card-title ">{{$event['title']}}</h4>
-                                                    
-                                                </div>
-                                                <div class="share-button-sec">
-                                                 {{$event['city']}}
-                                                </div>
-                                            </div>
-                                                <p class="card-text pb-2">{{$event['description']}} for <b>{{$event['point']}}</b> points&nbsp;</p>
-                                                {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
-                                           
-                                                <a href="single-event/{{ $event->id }}"
-                                                    class="btn btn-main is-rounded">View Event</a>
-                                               
-                                                </div>
-                                        </div>             
                                         @endforeach
                                     </div>
                                 @else
@@ -455,7 +484,6 @@
                 </section>
             </div>
         </div>
-
     @endsection
     @section('script')
         <script>
