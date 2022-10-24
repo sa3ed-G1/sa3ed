@@ -115,7 +115,7 @@
                                             data-bs-toggle="modal" data-bs-target="#volunteerModal">
                                             Event Finished
                                         </button>
-                                    @elseif(auth()->user()->role == 'manager')
+                                    @else
                                         <button type="button" id='btnVolunteer' class="btn btn-main-2 is-rounded"
                                             data-bs-toggle="modal" data-bs-target="#volunteerModal">
                                             Volunteer Now
@@ -345,7 +345,8 @@
                                 <select class="input" name="city">
 
 
-                                    <option @if ($singleEvent->city == 'Amman') selected @endif value="Amman">Amman</option>
+                                    <option @if ($singleEvent->city == 'Amman') selected @endif value="Amman">Amman
+                                    </option>
                                     <option @if ($singleEvent->city == 'Zarqa') selected @endif value="Zarqa">Zarqa
                                     </option>
                                     <option @if ($singleEvent->city == 'Irbid') selected @endif value="Irbid">Irbid
