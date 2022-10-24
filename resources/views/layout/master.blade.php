@@ -82,7 +82,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/">
-                        <img src="../images/logo.png" alt="logo">
+                        <img style="transform: scale(1.865489513590)" src="../images/logo.png" alt="logo">
                     </a>
                     <button role="button" class="navbar-burger burger" data-hidden="true" data-target="navigation">
                         <span aria-hidden="true"></span>
@@ -197,13 +197,13 @@
 
                         <div class="gallery-wrap">
                             <div class="gallery-img">
-                                <img src="images/clients/client1.png" alt="" class="">
+                                <img src="images/clients/client1.jpg" alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/clients/client2.png" alt="" class="">
+                                <img src="images/clients/client2.jpg" alt="" class="">
                             </div>
                             <div class="gallery-img">
-                                <img src="images/clients/client4.png" alt="" class="">
+                                <img src="images/clients/client3.png" alt="" class="">
                             </div>
                             <div class="gallery-img">
                                 <img src="images/clients/client4.png"alt="" class="">
