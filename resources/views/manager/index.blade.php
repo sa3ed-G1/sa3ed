@@ -22,76 +22,98 @@
                         <div class="col-lg-4">
                             {{-- User Column --}}
                             <div class="card mb-5" style="background:#F89D35 ">
-                                <div class="card-body hero is-fullheight">
+                                <div class="card-body hero ">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="
-                                        @if ($user->google_id || $user->github_id) {{ $user->image }}
+                                        @if (auth()->user()->google_id || auth()->user()->github_id) {{ auth()->user()->image }}
                                         @else
                                         data:image/jpg;charset=utf8;base64,
-                                            {{ $user->image }} @endif
-                                            "
-                                            w-100" alt="..." style=" height: 200px; object-fit:cover;"
+                                            {{ auth()->user()->image }} @endif "
+                                            alt="..." style=" height: 200px; object-fit:cover;"
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
-                                            <h2 class="mb-3 text-dark">{{ $user->name }}</h2>
+                                            <h2 class="mb-3 text-dark">{{ auth()->user()->name }}</h2>
                                             @if (auth()->user()->role == 'manager')
-                                                <h6 class="text-dark mb-1">Events Manager</h6>
-                                                {{-- <button class="btn btn-primary">Edit</button> --}}
+                                                @if (auth()->user()->role == 'user')
+                                                    <h6 class="text-dark mb-1">User Profile</h6>
+                                                @endif
+                                                @if (auth()->user()->role == 'manager')
+                                                    <h6 class="text-dark mb-1">Manager Dashboard</h6>
+                                                @endif
+                                                @if (auth()->user()->role == 'admin')
+                                                    <h6 class="text-dark mb-1">Website Admin</h6>
+                                                @endif
                                             @endif
                                         </div>
+
+
+
+
+                                        @can('isAdmin')
+                                            <div class="mt-6">
+
+                                                <a href="/dashboard"> <button class="btn btn-primary"
+                                                        style="background-color: #863BAE;">Admin Dashboard</button></a>
+
+                                            </div>
+                                        @endcan
+
                                         <hr class="my-4">
 
                                     </div>
-                                    <ul class="list-group list-group-flush mt-5">
-                                        <li
-                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-globe me-2 icon-inline">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <line x1="2" y1="12" x2="22" y2="12">
-                                                    </line>
-                                                    <path
-                                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                                                    </path>
-                                                </svg>Website</h6>
-                                            <span class="text-secondary"><a
-                                                    href="https://www.ripbozo.com/">ripbozo.com</a></span>
-                                        </li>
-                                        <li
-                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-github me-2 icon-inline">
-                                                    <path
-                                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                                    </path>
-                                                </svg>Github</h6>
-                                            <span class="text-secondary">bootdey</span>
-                                        </li>
-                                    </ul>
+
 
                                     <hr class="mt-1">
-                                    @if (auth()->user()->role == 'manager')
-                                        <div class="d-flex flex-column align-items-center text-center">
-                                            donations here
-                                        </div>
+                                    @can('isManager')
+                                        {{-- <div class="d-flex flex-column align-items-center text-center">
+                                            <p>
+                                                donations here
+                                            </p>
+                                        </div> --}}
 
-                                        <ul class="list-group list-group-flush">
+                                        {{-- <ul class="list-group list-group-flush">
                                             @foreach ($user->eventts as $event)
                                                 <li
                                                     class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                                     <h6 class="mb-0"><i class="fa-solid fa-hand-holding-dollar"
                                                             style="size:20px "></i>{{ $event->title }}</h6>
-                                                    <span class="text-secondary"><a
-                                                            href="https://www.ripbozo.com/">{{ $event->donations->sum('amount') }}</a></span>
+                                                    <span class="text-secondary">
+                                                        <a href="single-event/{{ $event->id }}">{{ $event->donations->sum('amount') }}
+                                                            JD</a></span>
                                                 </li>
                                             @endforeach
-                                        </ul>
-                                        <hr class="my-4">
-                                    @endif
+                                        </ul> --}}
+                                        @if (auth()->user()->eventts->count() == 0)
+                                            <h3 class="text-center text-dark">
+                                                You Have 0 Events
+                                            </h3>
+                                        @else
+                                            <table style="background-color: #F89D35" class=" ">
+
+                                                <thead>
+                                                    <th></th>
+                                                    <th>Event</th>
+                                                    <th>Total Donations</th>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach (auth()->user()->eventts as $event)
+                                                        <tr>
+                                                            <td><i class="ti-heart"></i>&nbsp;</td>
+
+                                                            <td>{{ substr($event->title, 0, 15) }}</td>
+
+                                                            <td>{{ $event->donations->sum('amount') }} JOD</td>
+
+                                                        </tr>
+                                                    @endforeach
+
+                                                </tbody>
+                                            </table>
+                                            <hr class="my-4">
+                                        @endif
+                                    @endcan
+
 
 
                                 </div>
@@ -123,7 +145,7 @@
                                             <h5 class="mb-0 text-white">Phone</h5>
                                         </div>
                                         <div class="col-sm-9 text-light">
-                                            {{ $user->phone }}
+                                            {{ $user->phone ? $user->phone : 'Add phone Number' }}
                                         </div>
                                     </div>
                                     <hr>
@@ -138,10 +160,10 @@
                                                 Participate in Events To Earn Points
                                             @endif
                                         </div>
-                                        <div class="col-sm-3">
-                                            <button class="btn" style="background: #F89D35;">
-                                                <p class="text-dark">Claim Points</p>
-                                            </button>
+                                        <div class="col-sm-3 text-white align-items-center">
+                                            <a href="/offers"> <button class="btn" style="background: #F89D35;">
+                                                    <p>Claim Points</p>
+                                                </button></a>
                                         </div>
                                     </div>
                                     @if (auth()->user()->pendings->count() > 0 && auth()->user()->role == 'user')
@@ -180,7 +202,7 @@
                             </div>
                             <div class="row">
                                 @if (auth()->user()->role == 'manager')
-                                    @foreach ($user->eventts as $event)
+                                    {{-- @foreach ($user->eventts as $event)
                                         <div class="column is-4-desktop is-6-tablet">
                                             <div class="cause-item">
                                                 <img src="data:image/jpg;charset=utf8;base64,{{ $event->thumbnail }}"
@@ -204,7 +226,43 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
+                                    <div class="row my-5 ">
+                                        @foreach ($user->eventts as $event)
+                                            {{-- <h3>You Have {{!(auth()->user()->offer_users->where('offer_id', $offer['id'])->isEmpty())}} Points</h3> --}}
+                                            <div class="card col-lg-4">
+                                                <div class="card-img-sec">
+                                                    {{-- <a href="/webviews/deals/en/Deals/Details/50"> --}}
+                                                    <img src="data:image/jpg;charset=utf8;base64,{{ $event->thumbnail }}"
+                                                        class=" w-100" alt="..."
+                                                        style=" height: 200px; object-fit:cover;">
+
+                                                    <span class="img-tag img-tag-2"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="card-body pt-3 pl-1">
+                                                    <div class="d-flex justify-content-between"">
+                                                        <div class="header-container">
+
+                                                            <h4 class="card-title ">{{ $event['title'] }}</h4>
+
+                                                        </div>
+                                                        <div class="share-button-sec">
+                                                            {{ $event['city'] }}
+                                                        </div>
+                                                    </div>
+                                                    <p class="card-text pb-2">{{ $event['description'] }} for
+                                                        <b>{{ $event['point'] }}</b> points&nbsp;
+                                                    </p>
+                                                    {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
+
+                                                    <a href="single-event/{{ $event->id }}"
+                                                        class="btn btn-main is-rounded">View Event</a>
+
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 @else
                                     @foreach ($user->volunteers as $volunteer)
                                         <div class="column is-4-desktop is-6-tablet">
@@ -425,7 +483,6 @@
                 </section>
             </div>
         </div>
-
     @endsection
     @section('script')
         <script>

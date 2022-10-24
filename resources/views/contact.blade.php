@@ -83,15 +83,23 @@
                     <h6 class=" mb-1">Tell us about your organization</h6>
                     <form action="/apply" method="POST" class="volunteer-form">
                         @csrf
-                        <input name="user_id" value="{{ auth()->user()->id }}" type="hidden" class="input">
+                        <input name="user_id" value=" @auth {{ auth()->user()->id }} @endauth" type="hidden"
+                            class="input">
                         <div class="mb-4">
                             <textarea name="message" cols="35" rows="8" class="input" placeholder="Your Message" required></textarea>
                         </div>
-                        @if (auth()->user()->pendings->where('user_id', auth()->user()->id)->count() > 0)
-                            <button disabled type="submit" class="btn btn-main-2 is-rounded mt-3">Already applied</button>
+                        {{-- @if (!auth()->user())
+                            <a href="/register" type="submit" class="btn btn-main-2 is-rounded mt-3">Login to apply</a> --}}
+                        @auth
+                            @if (auth()->user()->pendings->where('user_id', auth()->user()->id)->count() > 0)
+                                <button disabled class="btn btn-main-2 is-rounded mt-3">Already
+                                    applied</button>
+                            @else
+                                <button type="submit" class="btn btn-main-2 is-rounded mt-3">Apply Now</button>
+                            @endif
                         @else
                             <button type="submit" class="btn btn-main-2 is-rounded mt-3">Apply Now</button>
-                        @endif
+                        @endauth
                     </form>
                 </div>
             </div>

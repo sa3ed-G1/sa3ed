@@ -47,8 +47,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|alpha',
+            'name' => 'required',
             'email' => 'required|unique:users',
+            'phone' => 'numeric|digits:10|starts_with:07',
             'password' => 'required|min:8|confirmed',
             'image' => 'required',
         ]);
@@ -57,6 +58,7 @@ class UserController extends Controller
         $newUser->image = base64_encode(file_get_contents($request->file('image')));
         $newUser->name = $request->name;
         $newUser->email = $request->email;
+        $newUser->phone = $request->phone;
         $newUser->password = Hash::make($request->password);
         $newUser->save();
         Auth::login($newUser);
@@ -179,7 +181,7 @@ class UserController extends Controller
             session()->regenerate();
             auth()->login($signUser);
             Wallet::create(['user_id' => auth()->user()->id, 'balance' => 0,]);
-            return redirect('dashboard');
+            return redirect()->intended('/');
         }
     }
 
