@@ -30,7 +30,8 @@
                                         data:image/jpg;charset=utf8;base64,
                                             {{ $user->image }} @endif
                                             
-                                            w-100" alt="..." style=" height: 200px; object-fit:cover;"
+                                            w-100"
+                                            alt="..." style=" height: 200px; object-fit:cover;"
                                             class="rounded-circle p-1 mb-5 bg-dark" width="210">
                                         <div class="mt-3">
                                             <h2 class="mb-3 text-dark">{{ $user->name }}</h2>
@@ -132,13 +133,16 @@
                                             <h5 class="mb-0 text-white">Wallet Points</h5>
                                         </div>
                                         <div class="col-sm-6 text-white align-items-center">
-                                            @if(auth()->user()->wallet->sum('balance') > 0)
-                                            {{ auth()->user()->wallet->balance }}
+                                            @if (auth()->user()->wallet->sum('balance') > 0)
+                                                {{ auth()->user()->wallet->balance }}
                                             @elseif(auth()->user()->wallet->sum('balance') == 0)
-                                            Participate in Events To Earn Points    
+                                                Participate in Events To Earn Points
                                             @endif
                                             <div class=" text-white">
-                                                <button class="btn" style="background: #F89D35; border: none; transform:scale(0.9); font-size: 15px; padding: -10px !important;"> <p>Claim Points</p></button>
+                                                <button class="btn"
+                                                    style="background: #F89D35; border: none; transform:scale(0.9); font-size: 15px; padding: -10px !important;">
+                                                    <p>Claim Points</p>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
