@@ -76,4 +76,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Wallet::class);
     }
+    public function offer_users()
+    {
+        return $this->hasMany(Offer_User::class);
+    }
 }

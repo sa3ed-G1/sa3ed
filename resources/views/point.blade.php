@@ -56,7 +56,7 @@
                         </p>
                         {{-- <a class="nav-icon d-md-none d-flex" href="/webviews/deals/en/Deals/Details/50"> <i class="fa fa-chevron-right " aria-hidden="true"></i> </a> --}}
                         @auth @if (auth()->user()->wallet->balance < $offer['point'] ||
-                            !auth()->user()->offer_users->where('offer_id', $offer['id'])->isEmpty())
+                            auth()->user()->offer_users->where('offer_id', $offer['id'])->count() > 0)
                             <button type="button" disabled class="btn btn-warning" id="btnClaim"><i
                                     class="fa loader-btn fa-circle-o-notch fa-spin"></i> Claim this Offer</button>
                         @else
