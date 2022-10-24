@@ -53,69 +53,33 @@
             <div class="clients-item-wrap mt-5">
                 <div class="columns is-multiline">
                     <div class="column is-3-desktop is-6-tablet">
-                        <a href="#" class="is-block has-text-centered">
-                            <img src="images/clients/client1.png" alt="" class=" ">
-                        </a>
+
+                        <img src="images/clients/client1.jpg" alt="" class=" ">
+
                     </div>
 
                     <div class="column is-3-desktop is-6-tablet">
-                        <a href="#" class="is-block has-text-centered">
-                            <img src="images/clients/client2.png" alt="" class="">
-                        </a>
+
+                        <img src="images/clients/client2.jpg" alt="" class="">
+
                     </div>
 
                     <div class="column is-3-desktop is-6-tablet">
-                        <a href="#" class="is-block has-text-centered">
-                            <img src="images/clients/client5.png" alt="" class="">
-                        </a>
+
+                        <img src="images/clients/client5.png" alt="" class="">
+
                     </div>
 
                     <div class="column is-3-desktop is-6-tablet">
-                        <a href="#" class="is-block has-text-centered">
-                            <img src="images/clients/client4.png" alt="" class="">
-                        </a>
+
+                        <img src="images/clients/client4.png" alt="" class="">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {{--  --}}
 
-    {{-- <section class="section feature pb-0">
-        <div class="container">
-            <div class="columns is-gapless is-multiline">
-                <div class="column is-4-desktop is-4-tablet">
-                    <div class="feature-inner">
-                        <i class="icofont-home"></i>
-                        <h4>Founded in 1962</h4>
-                        <p class="mb-4">Work Since 1987 with Pride!!</p>
-                        <p>Cum voluptas tenetur, voluptatibus mollitia odio sint, alias debitis quasi ut commodo consequat.
-                        </p>
-                    </div>
-                </div>
-                <div class="column is-4-desktop is-4-tablet">
-                    <div class="feature-inner">
-                        <i class="icofont-web"></i>
-                        <h4>Our History</h4>
-                        <p class="mb-4">Mission to make smile the world</p>
-                        <p>Cum voluptas tenetur, voluptatibus mollitia odio sint, alias debitis quasi ut commodo consequat.
-                        </p>
-                    </div>
-                </div>
-                <div class="column is-4-desktop is-4-tablet">
-                    <div class="feature-inner">
-                        <i class="icofont-users"></i>
-                        <h4>Large Community</h4>
-                        <p class="mb-4">Join our community & help others</p>
-                        <p>Cum voluptas tenetur, voluptatibus mollitia odio sint, alias debitis quasi ut commodo consequat.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section> --}}
-    {{--  --}}
 
     <!--  Section Services Start -->
     <section id="team" class="section team">
@@ -133,31 +97,20 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.1.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
-                                                aria-hidden="true"></i></a>
+                                        <a href="https://github.com/ibra-khm
+                                        "
+                                            target="_blank" class="bg-dark"><i class="ti-github" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Justin hammer</h4>
-                            <p>Student</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Ibrahim Khamaiseh</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -165,31 +118,20 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.2.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
-                                                aria-hidden="true"></i></a>
+                                        <a href="https://github.com/AnzorYarvas123
+                                        "
+                                            target="_blank" class="bg-dark"><i class="ti-github" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Jason roy</h4>
-                            <p>Businessman</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Anzor Yarvas</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -197,31 +139,19 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap ">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.3.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
-                                                aria-hidden="true"></i></a>
+                                        <a href="https://github.com/YousefK5" target="_blank" class="bg-dark"><i
+                                                class="ti-github" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Henry oswald</h4>
-                            <p>CO founder</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Yousef Suliman</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -229,31 +159,21 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.2.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
+                                        <a href="https://github.com/dareen323
+                                        "
+                                            target="_blank" class="bg-dark"><i class="ti-github"
                                                 aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Jason roy</h4>
-                            <p>Businessman</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Dareen Al-Hiasat</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -261,31 +181,21 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.1.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
+                                        <a href="https://github.com/Raneem-Hamid
+                                        "
+                                            target="_blank" class="bg-dark"><i class="ti-github"
                                                 aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Justin hammer</h4>
-                            <p>Student</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Raneem Hamid</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -293,31 +203,19 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap ">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.3.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
-                                                aria-hidden="true"></i></a>
+                                        <a href="https://github.com/Malek-ALdesougi" target="_blank" class="bg-dark"><i
+                                                class="ti-github" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Henry oswald</h4>
-                            <p>CO founder</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Malek Al-Desougi</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
@@ -325,136 +223,28 @@
                 <div class="column is-3-desktop is-6-tablet">
                     <div class="team-item-wrap ">
                         <div class="team-item is-relative">
-                            <img src="images/team/volunteer-img1.3.jpg" alt="" class=" w-100">
+                            <img src="images/team/person.png" alt="" class=" w-100">
                             <div class="team-img-hover">
                                 <ul class="team-social list-inline">
                                     <li class="list-inline-item">
-                                        <a href="#" class="facebook"><i class="icofont-facebook"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="twitter"><i class="icofont-twitter"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="instagram"><i class="icofont-instagram"
-                                                aria-hidden="true"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="#" class="linkedin"><i class="icofont-linkedin"
-                                                aria-hidden="true"></i></a>
+                                        <a href="https://github.com/AZZIE2000" target="_blank" class="bg-dark"><i
+                                                class="ti-github" aria-hidden="true"></i></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="team-item-content">
-                            <h4 class="mt-3 mb-0 is-capitalize">Henry oswald</h4>
-                            <p>CO founder</p>
+                            <h4 class="mt-3 mb-0 is-capitalize">Azzam M.Faraj</h4>
+                            <p>Full Stack Developer</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="column">
-                <div class="column lg-12">
-                    <div class="has-text-centered">
-                        {{-- <a href="volunteer.html" class="btn btn-main is-rounded">Become a volunteer</a> --}}
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
-    <!--  Section Services End -->
-    {{-- <div class="cta-block section">
-	<div class="container">
-		<div class="columns is-justify-content-center ">
-			<div class="column is-7-desktop is-12-tablet">
-				<div class="cta-content has-text-centered">
-					<i class="icofont-diamond text-lg text-color"></i>
-					<h2 class="text-white text-lg mb-6 mt-4">We can’t help everyone, but everyone can help someone</h2>
-					<a href="donation.html" class="btn btn-main is-rounded">Make a donation</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> --}}
-    {{-- 
-<section class="section gallery">
-	<div class="container">
-		<div class="columns is-justify-content-center">
-			<div class="column is-8-desktop is-10-tablet">
-				<div class="section-title has-text-centered">
-					<span class="text-color">Our Gallery</span>
-					<h2 class="mt-4 mb-5 is-relative content-title">We connect with people across different sectors. we take risksand we always keep learning.</h2>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="container">
-		<div class="gallery-wrap">
-			<div class="columns is-multiline">
-				<div class="column is-4-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/1.jpg" class="gallery-popup">
-							<img src="images/gallery/1.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-				<div class="column is-4-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/2.jpg" class="gallery-popup">
-							<img src="images/gallery/2.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-				<div class="column is-4-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/3.jpg" class="gallery-popup">
-							<img src="images/gallery/3.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-				<div class="column is-4-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/4.jpg" class="gallery-popup">
-							<img src="images/gallery/4.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-
-				<div class="column is-4-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/5.jpg" class="gallery-popup">
-							<img src="images/gallery/5.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-				<div class="column is-4-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/6.jpg" class="gallery-popup">
-							<img src="images/gallery/6.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-				<div class="column is-6-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/9.jpg" class="gallery-popup">
-							<img src="images/gallery/9.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-				<div class="column is-6-desktop is-12-tablet">
-					<div class="gallery-item">
-						<a href="images/gallery/8.jpg" class="gallery-popup">
-							<img src="images/gallery/8.jpg" alt="" class=" w-100">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> --}}
 
     <section>
         <div class="container">
