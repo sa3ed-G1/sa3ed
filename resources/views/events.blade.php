@@ -29,7 +29,7 @@ background-size: cover;"
                     placeholder="Search" />
             </div> --}}
             <div class="input-group rounded w-100">
-                <input style="width:300px" type="search" class="form-control rounded"
+                <input style="width:300px" type="search" name="search" class="form-control rounded"
                     placeholder="Search by event name, city, duration" aria-label="Search"
                     aria-describedby="search-addon" />
                 <span class="input-group-text border-0" id="search-addon">
