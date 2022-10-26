@@ -26,12 +26,12 @@
     @auth
         @if ($singleEvent->user_id == auth()->user()->id)
             <div style="display: flex; justify-content: center; margin-top: 3rem; gap: 4rem;">
-                <button class="btn" type="button" id="addeventbtn" style="background: #F89D35; border:none;"
+                <button class="btn" type="button" id="addeventbtn" style="background: #e4e0db; border:solid 1px #F89D35;"
                     data-bs-toggle="modal" data-bs-target="#eventModal">Edit Event
                 </button>
 
                 <button @if (!$singleEvent->publish) disabled @endif class="btn" type="button" id="endeventbtn"
-                    style="background: red; color: white; border:none;" data-bs-toggle="modal"
+                    style="background: #F89D35; color: white; border:none;" data-bs-toggle="modal"
                     data-bs-target="#eventModalenda">End Event
                 </button>
 

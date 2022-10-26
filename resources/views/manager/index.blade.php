@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             {{-- User Column --}}
-                            <div class="card mb-5" style="background:#F1A661 ">
+                            <div class="card mb-5" style="background:#F89D35 ">
                                 <div class="card-body hero ">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="
@@ -121,47 +121,47 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card mb-3">
-                                <div class="card-body rounded" style="background-color: #F1A661">
+                                <div class="card-body rounded" style="background-color: #f9f9f8;border:solid 1px #F89D35">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5 class="mb-0 text-white">Full Name</h5>
+                                            <h5 class="mb-0 text-dark">Full Name</h5>
                                         </div>
-                                        <div class="col-sm-9 text-light">
+                                        <div class="col-sm-9 text-dark">
                                             {{ $user->name }}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5 class="mb-0 text-white">Email</h5>
+                                            <h5 class="mb-0 text-dark">Email</h5>
                                         </div>
-                                        <div class="col-sm-9 text-light">
+                                        <div class="col-sm-9 text-dark">
                                             {{ $user->email }}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5 class="mb-0 text-white">Phone</h5>
+                                            <h5 class="mb-0 text-dark">Phone</h5>
                                         </div>
-                                        <div class="col-sm-9 text-light">
+                                        <div class="col-sm-9 text-dark">
                                             {{ $user->phone ? $user->phone : 'Add phone Number' }}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <h5 class="mb-0 text-white">Wallet Points</h5>
+                                            <h5 class="mb-0 text-dark">Wallet Points</h5>
                                         </div>
-                                        <div class="col-sm-6 text-white align-items-center">
+                                        <div class="col-sm-6 text-dark align-items-center">
                                             @if (auth()->user()->wallet->sum('balance') > 0)
                                                 {{ auth()->user()->wallet->balance }}
                                             @elseif(auth()->user()->wallet->sum('balance') == 0)
                                                 Participate in Events To Earn Points
                                             @endif
                                         </div>
-                                        <div class="col-sm-3 text-white align-items-center">
-                                            <a href="/offers"> <button class="btn" style="background: #FFF7E9;">
+                                        <div class="col-sm-3 text-dark align-items-center">
+                                            <a href="/offers"> <button class="btn" style="background: #F89D35;">
                                                     <p>Claim Points</p>
                                                 </button></a>
                                         </div>
@@ -170,7 +170,7 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <h5 class="mb-0 text-white">Manager Programme</h5>
+                                                <h5 class="mb-0 text-dark">Manager Programme</h5>
                                             </div>
                                             <div class="col-sm-9 text-light">
                                                 Your application is in review...
@@ -182,7 +182,7 @@
                                         <div class="col-sm-12">
 
                                             <button class="btn" type="button" id="edituserbtn"
-                                                style="background: #FFF5E4; border:none;" data-bs-toggle="modal"
+                                                style="background: #F89D35; border:none;" data-bs-toggle="modal"
                                                 data-bs-target="#editModal">Edit
                                             </button>
                                         </div>
@@ -194,7 +194,7 @@
                                 <h2 class="text-dark">Your Events</h2>
                                 @if ($user->role == 'manager')
                                     <button class="btn" type="button" id="addeventbtn"
-                                        style="background: #daa86e; border:none;" data-bs-toggle="modal"
+                                        style="background: #F89D35; border:none;" data-bs-toggle="modal"
                                         data-bs-target="#eventModal">Add Event
                                     </button>
                                 @endif

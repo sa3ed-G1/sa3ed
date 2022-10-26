@@ -139,13 +139,13 @@ input[type="tel"]:focus {
 }
 .btn-main:hover,
 .btn-small:hover {
-    background: #F1A661;
+    background: #f89d35;
     color: #fff;
-    border-color: #F1A661;
+    border-color: #f89d35;
 }
 
 .btn-main-2 {
-    background: #F1A661;
+    background: #f89d35;
     color: #fff;
     transition: all 0.2s ease;
 }
