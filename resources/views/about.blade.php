@@ -27,7 +27,7 @@
                 <div class="column is-8-desktop is-7-tablet">
                     <div class="about-item-content pl-5">
                         <h2 class="mb-5 content-title"> Welcome to Sa3ed Organization</h2>
-                        <p class="is-size-5 mb-4">Sa3ed Charite is the Jordan #1 fundraising site forcharitable causes.
+                        <p class="is-size-5 mb-4">Sa3ed Charity is the Jordan #1 fundraising site forcharitable causes.
                             Raise money for over 1.5 thousand charities.</p>
                         <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation

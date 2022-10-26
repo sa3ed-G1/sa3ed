@@ -269,7 +269,7 @@
                             </section>
 
                             <div class="card-body">
-                                <h3 class="mb-4"><a href="/single-event/{{ $event->id }}">{{ $event->title }}</a>
+                                <h3 class="mb-4"><a href="/single-event/{{ $event->id }}">{{substr( $event->title,0,30) }}..</a>
                                 </h3>
                                 <ul class="list-inline border-bottom border-top py-3 mb-4">
 
@@ -283,9 +283,9 @@
                                             class="icofont-check text-color mr-2"></i>Organizer:<span>{{ $event->user->name }}</span>
                                     </li> --}}
                                 </ul>
-                                <p class="card-text mb-5">{{ substr($event->description, 0, 100) }}... <a
+                                <p class="card-text mb-5">{{ substr($event->description, 0, 20) }}... <a
                                         href="single-event/{{ $event->id }}" style="font-weight: 700">More</a></p>
-                                <a href="single-event/{{ $event->id }}" class="btn btn-main is-rounded">View Event</a>
+                                <a href="single-event/{{ $event->id }}" class="btn btn-main is-rounded" >View Event</a>
                             </div>
                         </div>
                     </div>

@@ -64,7 +64,7 @@ background-size: cover;"
 
                             </ul>
                             {{-- we will make this a form  --}}
-                            <a href="single-event/{{ $event->id }}"
+                            <a href="/"
                                 class="btn btn-main-2 is-block has-text-centered">More Details</a>
                         </div>
                     </div>

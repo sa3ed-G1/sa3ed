@@ -1,15 +1,12 @@
 @extends('layout.master')
 @section('content')
-    <section
-        style="background:url('data:image/jpg;charset=utf8;base64, {{ $singleEvent['banner'] }}') no-repeat 50% 50%;
-        background-size: cover;"
-        class="page-title jumbotron bg-1">
+    <section class="page-title jumbotron bg-1">
         <div class="container">
             <div class="columns">
                 <div class="column is-12">
                     <div class="block has-text-centered">
                         <h1 class="is-capitalize text-md">Event Details</h1>
-                        <span class="text-white is-capitalize text-md">Be one of us in this event</span>
+                        <span class="text-white is-capitalize text-md">{{ $singleEvent->title }}</span>
                     </div>
                 </div>
             </div>
@@ -42,32 +39,33 @@
         @endif
     @endauth
 
-    <section class="section cause-single">
+    <section class="section cause-single p-5">
         <div class="container">
             <div class="columns is-multiline is-desktop is-justify-content-center">
                 <div class="column is-10-desktop">
                     <div class="single-details">
-                        <img src="images/gallery/7.jpg" alt="" class=" w-100">
-                        <div>
+                        {{-- <img src="images/gallery/7.jpg" alt="" class=" w-100"> --}}
+                       <center> <h2 class=" is-capitalize text-md mb-5" >{{ $singleEvent->title }}</h2></center>
+                        <div class="d-flex">
                             {{-- {{$singleEvent->image}} --}}
-                            <img src="data:image/jpg;charset=utf8;base64, {{ $singleEvent['thumbnail'] }}" class="w-100"
-                                alt="...">
-                        </div>
+                            <img src="data:image/jpg;charset=utf8;base64, {{ $singleEvent['thumbnail'] }}" class="w-25"
+                                alt="..." style="opacity: 0.9">
+                       
 
-                        <h2 id="evee" class="my-5 text-lg">{{ $singleEvent->title }}</h2>
-                        <p class="mt-4">{{ $singleEvent->description }}</p>
+                        <h2 id="evee" class="my-5 text-lg"></h2>
+                        <p class="m-4 w-25">{{ $singleEvent->description }}</p>
                         <div class="d-flex justify-content-around">
                             <ul class="list-styled mt-5  gap-3 flex-wrap">
                                 <li><span style="font-weight: 900">City:</span> {{ $singleEvent->city }}</li>
-                                <li><span style="font-weight: 900">Location:</span> {{ $singleEvent->location }}</li>
+                                {{-- <li><span style="font-weight: 900">Location:</span> {{ $singleEvent->location }}</li> --}}
                                 <li><span style="font-weight: 900">Event Duration:</span> {{ $singleEvent->duration }} H
                                 </li>
                             </ul>
-
+                        </div>
                             <ul class="list-styled mt-5  gap-3 flex-wrap">
                                 <li><span style="font-weight: 900">Date Start:</span> {{ $singleEvent->date }}</li>
                                 <li><span style="font-weight: 900">Capacity:</span>
-                                    {{ $singleEvent->volunteers->count() . ' / ' . $singleEvent->capacity }} Volunteers</li>
+                                    {{ $singleEvent->volunteers->count() . ' / ' . $singleEvent->capacity }} </li>
                                 <li><span style="font-weight: 900">Tags:</span> {{ $singleEvent->tags }}</li>
                             </ul>
                         </div>

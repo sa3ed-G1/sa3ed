@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             {{-- User Column --}}
-                            <div class="card mb-5" style="background:#F89D35 ">
+                            <div class="card mb-5" style="background:#F1A661 ">
                                 <div class="card-body hero ">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="
@@ -53,7 +53,7 @@
                                             <div class="mt-6">
 
                                                 <a href="/dashboard"> <button class="btn btn-primary"
-                                                        style="background-color: #863BAE;">Admin Dashboard</button></a>
+                                                        style="background-color: #FFF7E9;color:black;">Admin Dashboard</button></a>
 
                                             </div>
                                         @endcan
@@ -121,7 +121,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card mb-3">
-                                <div class="card-body rounded" style="background-color: #863BAE">
+                                <div class="card-body rounded" style="background-color: #F1A661">
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <h5 class="mb-0 text-white">Full Name</h5>
@@ -161,7 +161,7 @@
                                             @endif
                                         </div>
                                         <div class="col-sm-3 text-white align-items-center">
-                                            <a href="/offers"> <button class="btn" style="background: #F89D35;">
+                                            <a href="/offers"> <button class="btn" style="background: #FFF7E9;">
                                                     <p>Claim Points</p>
                                                 </button></a>
                                         </div>
@@ -182,7 +182,7 @@
                                         <div class="col-sm-12">
 
                                             <button class="btn" type="button" id="edituserbtn"
-                                                style="background: #F89D35; border:none;" data-bs-toggle="modal"
+                                                style="background: #FFF5E4; border:none;" data-bs-toggle="modal"
                                                 data-bs-target="#editModal">Edit
                                             </button>
                                         </div>
@@ -194,7 +194,7 @@
                                 <h2 class="text-dark">Your Events</h2>
                                 @if ($user->role == 'manager')
                                     <button class="btn" type="button" id="addeventbtn"
-                                        style="background: #F89D35; border:none;" data-bs-toggle="modal"
+                                        style="background: #daa86e; border:none;" data-bs-toggle="modal"
                                         data-bs-target="#eventModal">Add Event
                                     </button>
                                 @endif
@@ -241,7 +241,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="card-body pt-3 pl-1">
-                                                    <div class="d-flex justify-content-between"">
+                                                    <div class="d-flex justify-content-between">
                                                         <div class="header-container">
 
                                                             <h4 class="card-title ">{{ $event['title'] }}</h4>
@@ -265,7 +265,7 @@
                                     </div>
                                 @else
                                     @foreach ($user->volunteers as $volunteer)
-                                        <div class="column is-4-desktop is-6-tablet">
+                                        <div class="column is-6-desktop is-6-tablet">
                                             <div class="cause-item">
                                                 <img src="data:image/jpg;charset=utf8;base64,{{ $volunteer->eventt->thumbnail }}"
                                                     class=" w-100" alt="..."
@@ -424,7 +424,7 @@
         <div class="modal" id="editModal">
             <div class="modal-background deleteModalVolunteer2"></div>
             <div class="modal-card">
-                <section class="modal-card-body" style="background-color: #F89D35">
+                <section class="modal-card-body" style="background-color: #d0b290">
                     <div class="volunteer-form-wrap">
 
                         <h2 class="mb-6 text-lg text-dark">Edit Information</h2>

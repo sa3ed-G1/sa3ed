@@ -132,20 +132,20 @@ input[type="tel"]:focus {
 
 .btn-main,
 .btn-small {
-    background: #f89d35;
+    background: #fbfbfb;
     border-color: #f89d35;
-    color: #fff;
+    color: rgb(13, 5, 5);
     transition: all 0.2s ease;
 }
 .btn-main:hover,
 .btn-small:hover {
-    background: #863bae;
+    background: #F1A661;
     color: #fff;
-    border-color: #863bae;
+    border-color: #F1A661;
 }
 
 .btn-main-2 {
-    background: #863bae;
+    background: #F1A661;
     color: #fff;
     transition: all 0.2s ease;
 }
@@ -166,13 +166,13 @@ input[type="tel"]:focus {
 }
 
 .btn-solid-main-2 {
-    border: 2px solid #863bae;
+    border: 2px solid #F1A661;
     background: transparent;
-    color: #863bae;
+    color: #F1A661;
 }
 .btn-solid-main-2:hover {
-    border: 2px solid #863bae;
-    background: #863bae;
+    border: 2px solid #F1A661;
+    background: #F1A661;
     color: #fff;
 }
 
@@ -205,7 +205,7 @@ input[type="tel"]:focus {
 }
 
 .bg-gray {
-    background: #863bae;
+    background: #F1A661;
 }
 
 .bg-primary {
@@ -634,7 +634,7 @@ ul.list-styled {
     }
 }
 .header-top .top-btn:hover {
-    background: #863bae;
+    background: #F1A661;
 }
 .header-top .header-top-right a {
     margin: 0 10px;
@@ -765,12 +765,13 @@ ul.list-styled {
 }
 
 .slider {
-    background: url("https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/assets/2018/10/04-10-2018-Syria-UNICEF-UN0238042.jpg/image770x420cropped.jpg")
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url("https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80%22%22")
         no-repeat;
     background-size: cover;
     background-position: 10% 0%;
     padding: 100px 0;
     position: relative;
+ /* opacity: 0.9; */
 }
 .slider .block h1 {
     font-size: 80px;
@@ -881,7 +882,7 @@ ul.list-styled {
     top: 0px;
     width: 47%;
     height: 100%;
-    background: #863bae;
+    background: #f89d35;
 }
 
 .volunteer-content {
@@ -951,7 +952,7 @@ ul.list-styled {
 .video .video-block .videoplay {
     display: inline-block;
     background: #fff;
-    color: #863bae;
+    color: #F1A661;
     width: 80px;
     height: 80px;
     border-radius: 100%;
@@ -1115,7 +1116,7 @@ ul.list-styled {
 }
 
 .bg-counter-2 {
-    background: #863bae;
+    background: #F1A661;
 }
 
 .counter-item-2 .counter-stat {
@@ -1441,14 +1442,14 @@ ul.list-styled {
     border-radius: 3px;
 }
 .pagination .nav-links a:hover {
-    background: #863bae;
-    border-color: #863bae;
+    background: #F1A661;
+    border-color: #F1A661;
     color: #fff;
 }
 
 .pagination .nav-links a.current {
-    background: #863bae;
-    border-color: #863bae;
+    background: #F1A661;
+    border-color: #F1A661;
     color: #fff;
 }
 

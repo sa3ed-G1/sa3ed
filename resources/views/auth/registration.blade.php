@@ -142,7 +142,7 @@
 
 
 
-    <div style="background-color: #f89d35" class="volunteer section">
+    <div  class="volunteer section">
         <div class="container">
             <div class="columns is-multiline">
                 {{-- login form --}}
@@ -163,18 +163,15 @@
 
                                 <input name="passwordlogin" type="password" class="input" placeholder="Password" />
                             </div>
-                            <div class="d-flex is-align-items-end gap-4 ">
-
-                                <button type="submit" style="color:#863bae "
-                                    class="btn btn-secondary is-rounded mt-5">Login</button>
-                                <h6 class="pb-4">OR</h6>
-                                <a href="/redirect" style="color:#863bae "
-                                    class="btn btn-secondary w-25  is-rounded is-6 mt-5"><i class="fab fa-google"></i></a>
-                                <h6 class="pb-4">OR</h6>
-                                <a href="/sign_in/github" style="color:#863bae "
-                                    class="btn btn-secondary w-25  is-rounded is-6 mt-5"><i class="fab fa-github"></i></a>
-                                {{-- <a href="sign_in/github"><button type="button" class="button is-link is-floating mx-1"><i class="fab fa-github"></i> </button></a> --}}
-                            </div>
+                         <center>   <button type="submit" style="color:#111012;padding-left: 200px;padding-right: 200px;" class="btn btn-secondary is-rounded  mt-5">Login</button></center>
+                                    <div class="d-flex is-align-items-end  is-justify-content-center gap-4 ">
+                                       <a href="/redirect" style="color:#151216 "
+                                       class="btn btn-secondary w-25  is-rounded is-6 mt-5"><i class="fab fa-google"></i></a>
+                                       <h6 class="pb-4">OR</h6>
+                                         <a href="/sign_in/github" style="color:#090809 "
+                                        class="btn btn-secondary w-25  is-rounded is-6 mt-5"><i class="fab fa-github"></i></a>
+                                          {{-- <a href="sign_in/github"><button type="button" class="button is-link is-floating mx-1"><i class="fab fa-github"></i> </button></a> --}}
+                              </div>
                         </form>
                     </div>
                 </div>
